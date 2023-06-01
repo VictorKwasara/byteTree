@@ -7,19 +7,20 @@ import * as anchor from '@project-serum/anchor';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import { Connection, PublicKey } from '@solana/web3.js';
-import Link from 'next/link';
+import { Link } from '@mui/material';
+import NextLink from 'next/link';
 
 const PlantTree = () => {
 	return (
 		<Card className={styles.card}>
-			<Link href="/plant-tree">
+			<Link href='/plant-tree' component={NextLink} underline='none'>
 				<CardActionArea className={styles.card}>
-				<div className={styles.outter}></div>
-				<Typography variant='h3' className={styles.type}>
-					Plant a tree
-				</Typography>
-			</CardActionArea>
-			</Link>		
+					<div className={styles.outter}></div>
+					<Typography variant='h3' className={styles.type}>
+						Plant a tree
+					</Typography>
+				</CardActionArea>
+			</Link>
 		</Card>
 	);
 };
