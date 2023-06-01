@@ -1,0 +1,10 @@
+.outter {
+  /* background-color: rgb(226, 43, 156); */
+  width: 100% ;
+  height: 250px;
+  display: flex ;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px ;
+}
