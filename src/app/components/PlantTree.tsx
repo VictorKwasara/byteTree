@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Box,CardActionArea, Button, Card, Grid, Typography } from '@mui/material';
 // import usePdas from '../hooks/usePda';qqqq

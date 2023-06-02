@@ -1,0 +1,8 @@
+.box {
+  margin: 20px;
+  padding: 20px;
+  width: 45vw ;
+  max-width: 620px;
+  height: 400px;
+  background-color: brown;
+}

@@ -99,8 +99,6 @@ const CreateFarmer = () => {
 		.rpc();
 
 	console.log('Your transaction signature', tx);
-
-
  let farmState = await program.account.farm.fetchNullable(farm);
 
 				console.log('The farm is now ', farmState);
