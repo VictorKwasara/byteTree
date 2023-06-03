@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { Box,CardActionArea, Button, Card, Grid, Typography } from '@mui/material';
 // import usePdas from '../hooks/usePda';qqqq
@@ -15,7 +14,7 @@ import NextLink from 'next/link';
 const PlantTree = () => {
 	return (
 		<Card className={styles.card}>
-			<Link href='/plant-tree' component={NextLink} underline='none'>
+			<Link href='/select-cultivar' component={NextLink} underline='none'>
 				<CardActionArea className={styles.card}>
 					<div className={styles.outter}></div>
 					<Typography variant='h3' className={styles.type}>
