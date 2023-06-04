@@ -9,14 +9,14 @@ import Container from '@mui/material/Container';
 
 declare module '@mui/material/styles' {
 	interface Theme {
-		background: {
-			bg: string;
+		tertiary: {
+			main: string;
 		};
 	}
 	// allow configuration using `createTheme`
 	interface ThemeOptions {
-		background?: {
-			bg?: string;
+		tertiary?: {
+			main?: string;
 		};
 	}
 }
@@ -38,10 +38,9 @@ let theme = createTheme({
 			primary: '#0D0D0D',
 		},
 	},
-
-	// background: {
-	// 	bg: '#899BB0',
-	// },
+	tertiary: {
+		main: '#e84855',
+	},
 });
 // "#F34213"
 theme = responsiveFontSizes(theme);

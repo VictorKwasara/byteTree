@@ -8,7 +8,9 @@
   height:min(100px,10vh);
   overflow: hidden ;
   /* justify-content: space-around;  */
-  
+  /* background-image: linear-gradient(to top, #14372f, #165849, #137c64, #0ca280, #04c99b); */
+  /* background-image: linear-gradient(to top, rgba(137,155,176,.2), rgba(137,155,176,.8)); */
+  background-image: linear-gradient(to top, #f9f871, #f9f86f, #f8f76d, #f8f76b, #f7f669);
 }
 .toolbar {
   /* width: 100vw , */

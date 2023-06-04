@@ -1,9 +1,42 @@
 .outter {
-  /* display: flex ;
-  flex-direction: column;
+  display: flex ;
   align-items: center;
-  justify-content: center; */
+  justify-content: center;
   width:100%;
   min-height: 89vh;
-  background-color: brown;
+  /* background-color: brown; */
+  /* padding-left:50px; */
+}
+
+.card {
+  height: 200px;
+  background-color:#F9F871;
+  color: #e84855;
+  margin: auto;
+}
+
+.grid {
+  margin: auto ;
+  padding: 0;
+  margin: auto;
+}
+
+.ingrid{
+  /* background-color: black; */
+}
+
+.link {
+  text-decoration: none;
+  color: #08110F;
+  /* color: #e84855 */
+}
+
+.link:visited {
+  text-decoration: none;
+  color: #08110F;
+}
+
+.link:hover, .link:active {
+  text-decoration: none;
+  color: #e84855;
 }
