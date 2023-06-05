@@ -134,7 +134,7 @@ export type Tree = {
       ],
       "args": [
         {
-          "name": "name",
+          "name": "cultivarName",
           "type": "string"
         },
         {
@@ -1496,6 +1496,10 @@ export type Tree = {
         "kind": "struct",
         "fields": [
           {
+            "name": "creator",
+            "type": "publicKey"
+          },
+          {
             "name": "name",
             "type": "string"
           },
@@ -1509,6 +1513,14 @@ export type Tree = {
           },
           {
             "name": "initWidth",
+            "type": "u64"
+          },
+          {
+            "name": "initRootArea",
+            "type": "u64"
+          },
+          {
+            "name": "initLeafArea",
             "type": "u64"
           },
           {
@@ -1534,6 +1546,10 @@ export type Tree = {
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
           {
             "name": "cultivarName",
             "type": "string"
@@ -1595,6 +1611,10 @@ export type Tree = {
         "kind": "struct",
         "fields": [
           {
+            "name": "firstCheck",
+            "type": "bool"
+          },
+          {
             "name": "nitrogen",
             "type": "u64"
           },
@@ -1639,6 +1659,10 @@ export type Tree = {
       "code": 6000,
       "name": "CultivarNotInitialized",
       "msg": "The Cultivar account is not initialized!"
+    },
+    {
+      "code": 6001,
+      "name": "ClockError"
     }
   ]
 };
@@ -1779,7 +1803,7 @@ export const IDL: Tree = {
       ],
       "args": [
         {
-          "name": "name",
+          "name": "cultivarName",
           "type": "string"
         },
         {
@@ -3141,6 +3165,10 @@ export const IDL: Tree = {
         "kind": "struct",
         "fields": [
           {
+            "name": "creator",
+            "type": "publicKey"
+          },
+          {
             "name": "name",
             "type": "string"
           },
@@ -3154,6 +3182,14 @@ export const IDL: Tree = {
           },
           {
             "name": "initWidth",
+            "type": "u64"
+          },
+          {
+            "name": "initRootArea",
+            "type": "u64"
+          },
+          {
+            "name": "initLeafArea",
             "type": "u64"
           },
           {
@@ -3179,6 +3215,10 @@ export const IDL: Tree = {
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
           {
             "name": "cultivarName",
             "type": "string"
@@ -3240,6 +3280,10 @@ export const IDL: Tree = {
         "kind": "struct",
         "fields": [
           {
+            "name": "firstCheck",
+            "type": "bool"
+          },
+          {
             "name": "nitrogen",
             "type": "u64"
           },
@@ -3284,6 +3328,10 @@ export const IDL: Tree = {
       "code": 6000,
       "name": "CultivarNotInitialized",
       "msg": "The Cultivar account is not initialized!"
+    },
+    {
+      "code": 6001,
+      "name": "ClockError"
     }
   ]
 };

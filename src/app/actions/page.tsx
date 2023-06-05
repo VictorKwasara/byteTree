@@ -1,9 +1,9 @@
 'use client';
-import React from 'react';
-// import * as anchor from '@project-serum/anchor';
+import React, {useState} from 'react';
+import * as anchor from '@project-serum/anchor';
 import { Farmer, IDL } from '../../../public/programs/farmer';
-import { Connection,} from '@solana/web3.js';
-import { Box, Button,Card,Grid,Typography} from '@mui/material';
+import { Connection, PublicKey } from '@solana/web3.js';
+import { Box, Button,Card,Stack,Typography} from '@mui/material';
 import styles from './page.module.css';
 import {
 	AnchorWallet,
@@ -20,6 +20,13 @@ import PlantTree from '../components/PlantTree';
 import ViewTrees from '../components/ViewTrees';
 const connection = new Connection('https://api.devnet.solana.com');
 
+type farmerAccount = {
+	name: string;
+	address: PublicKey;
+	landCount: anchor.BN;
+	treeCount: anchor.BN;
+};
+
 const Actions = () => {
 	const {
 		select,
@@ -30,6 +37,7 @@ const Actions = () => {
 		signTransaction,
 		signAllTransactions,
 	} = useWallet();
+	const [farmer, setFarmer] = useState<farmerAccount>();
 
 	// const wallet =   useWallet()https://api.devnet.solana.comhttp://localhost:8899
 	
@@ -46,25 +54,24 @@ const Actions = () => {
 
 	// const program = new Program(IDL, programID, provider);
 	
-	const handleCreate = async () => {
-		
+	const searchFarmer = (farmerAccount: farmerAccount) => {
+		console.log('clicked');
+		setFarmer(farmerAccount);
 	};
 	return (
 		<Box className={styles.box}>
-			<Grid container spacing={2}>
-				<Grid item xs={12} md={6}>
-					<CreateCultivar/>
-				</Grid>
-				<Grid item xs={12} md={6}>					
-						<CreateFarmer/>				
-				</Grid>
-				<Grid item xs={12} md={6}>
-					<PlantTree/>
-				</Grid>
-				<Grid item xs={12} md={6}>
-				  <ViewTrees/>
-				</Grid>
-			</Grid>		
+			<CreateFarmer searchFarmer={searchFarmer} />
+			<Stack
+				className={styles.stack}
+				direction={{ xs: 'column', md: 'row' }}
+				spacing={{ xs: 1, sm: 2, md: 4 }}
+			>
+				<CreateCultivar />
+
+				<PlantTree />
+
+				<ViewTrees />
+			</Stack>
 		</Box>
 	);
 };

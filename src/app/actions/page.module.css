@@ -1,9 +1,17 @@
 .box{
   width: 100%;
-  height: auto;
+  height:100%;
   /* background-color: bisque; */
+  display: flex ;
+  align-items: center;
+  justify-content: center;
 }
 
 .name {
   width: 70% ;
+}
+
+.stack {
+  max-width: 1200px;
+  min-height: 85vh ;
 }

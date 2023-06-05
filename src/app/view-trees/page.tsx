@@ -52,8 +52,11 @@ const ViewTrees = () => {
 		const farmProgram = new PublicKey(
 			'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
 		);
+		// const farmerProgram = new PublicKey(
+		// 	'5LJq1WKXV2bdgsosp6wk2pgvk1Rhc75ffRLRXGZvPQWU'
+		// );
 		const farmerProgram = new PublicKey(
-			'5LJq1WKXV2bdgsosp6wk2pgvk1Rhc75ffRLRXGZvPQWU'
+			'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
 		);
 
 		const programID = new PublicKey(

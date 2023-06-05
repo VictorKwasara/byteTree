@@ -26,7 +26,7 @@ const SelectCultivar = () => {
 	count: anchor.BN;
 	scarcityPoints: anchor.BN;
    }[]>([]);
-  const [ready,setReady] = useState(false);
+  const [ready,setReady] = useState<boolean>(false);
   const w = useAnchorWallet();
 	
 
@@ -38,8 +38,12 @@ const SelectCultivar = () => {
  const farmProgram = new PublicKey(
 		'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
 	);
-	const farmerProgram = new PublicKey(
-		'5LJq1WKXV2bdgsosp6wk2pgvk1Rhc75ffRLRXGZvPQWU'
+	// const farmerProgram = new PublicKey(
+	// 	'5LJq1WKXV2bdgsosp6wk2pgvk1Rhc75ffRLRXGZvPQWU'
+	// );
+
+	const farmerProgram = new PublicKey(		
+		'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
 	);
 
 	const programID = new PublicKey(
@@ -68,10 +72,10 @@ const SelectCultivar = () => {
 					setCultivars(c2);
 				});
 				console.log('Cultivars is now', cultivars);
-				setReady(true);
+				setReady(!ready);
 			}
 		})();
-	}, [cultivars]); 
+	}, []); 
 
 	const handleCreate = async (
 		c: {
