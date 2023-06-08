@@ -1,27 +1,27 @@
 'use client';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import * as anchor from '@project-serum/anchor';
 import { Farmer, IDL } from '../../../public/programs/farmer';
 import { Connection, PublicKey } from '@solana/web3.js';
-import { Box, Button,Card,Stack,Typography} from '@mui/material';
+import { Box, Button, Card, Stack, Typography, Grid } from '@mui/material';
 import styles from './page.module.css';
 import {
 	AnchorWallet,
 	useWallet,
 	useAnchorWallet,
 } from '@solana/wallet-adapter-react';
-import {
-	Wallet,
-	AnchorProvider,
-} from '@project-serum/anchor';
+import { Wallet, AnchorProvider } from '@project-serum/anchor';
 import CreateFarmer from '../components/CreateFarmer';
 import CreateCultivar from '../components/CreateCultivar';
 import PlantTree from '../components/PlantTree';
 import ViewTrees from '../components/ViewTrees';
+import BuyLand from '../components/BuyLand';
+import BuySeed from '../components/BuySeed';
+import FarmerComponent from '../components/Farmer';
 const connection = new Connection('https://api.devnet.solana.com');
 
 type farmerAccount = {
-	name: string;
+	name: String;
 	address: PublicKey;
 	landCount: anchor.BN;
 	treeCount: anchor.BN;
@@ -37,10 +37,10 @@ const Actions = () => {
 		signTransaction,
 		signAllTransactions,
 	} = useWallet();
-	const [farmer, setFarmer] = useState<farmerAccount>();
+	const [farmer, setFarmer] = useState<farmerAccount | null>(null);
 
 	// const wallet =   useWallet()https://api.devnet.solana.comhttp://localhost:8899
-	
+
 	const w = useAnchorWallet();
 
 	const provider = new AnchorProvider(connection, w as Wallet, {
@@ -53,7 +53,7 @@ const Actions = () => {
 	// );
 
 	// const program = new Program(IDL, programID, provider);
-	
+
 	const searchFarmer = (farmerAccount: farmerAccount) => {
 		console.log('clicked');
 		setFarmer(farmerAccount);
@@ -61,19 +61,34 @@ const Actions = () => {
 	return (
 		<Box className={styles.box}>
 			<CreateFarmer searchFarmer={searchFarmer} />
-			<Stack
-				className={styles.stack}
-				direction={{ xs: 'column', md: 'row' }}
-				spacing={{ xs: 1, sm: 2, md: 4 }}
-			>
-				<CreateCultivar />
-
-				<PlantTree />
-
-				<ViewTrees />
-			</Stack>
+			<Grid container spacing={2} className={styles.grid}>
+				<Grid className={styles.ingrid} item xs={12} md={6}>
+					<CreateCultivar />
+				</Grid>
+				<Grid className={styles.ingrid} item xs={12} md={6}>
+					{(farmer)?
+						(<FarmerComponent
+						name={farmer?.name}
+						landCount={farmer?.landCount }
+						treeCount={farmer?.treeCount }
+					/>):( <></>)
+					 }
+				</Grid>
+				<Grid className={styles.ingrid} item xs={12} md={3}>
+					<PlantTree />
+				</Grid>
+				<Grid className={styles.ingrid} item xs={12} md={3}>
+					<ViewTrees />
+				</Grid>
+				<Grid className={styles.ingrid} item xs={12} md={3}>
+					<BuyLand/>
+				</Grid>
+				<Grid className={styles.ingrid} item xs={12} md={3}>
+					<BuySeed/>
+				</Grid>
+			</Grid>
 		</Box>
 	);
 };
 
-export default  Actions;
+export default Actions;

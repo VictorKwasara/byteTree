@@ -133,11 +133,6 @@ export type FruitMarket = {
           "isSigner": true
         },
         {
-          "name": "farmer",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "farm",
           "isMut": false,
           "isSigner": false
@@ -165,6 +160,11 @@ export type FruitMarket = {
         {
           "name": "fruitMint",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsAuthority",
+          "isMut": false,
           "isSigner": false
         },
         {
@@ -405,11 +405,6 @@ export const IDL: FruitMarket = {
           "isSigner": true
         },
         {
-          "name": "farmer",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
           "name": "farm",
           "isMut": false,
           "isSigner": false
@@ -437,6 +432,11 @@ export const IDL: FruitMarket = {
         {
           "name": "fruitMint",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsAuthority",
+          "isMut": false,
           "isSigner": false
         },
         {

@@ -1,0 +1,14 @@
+.box {
+  display: flex ;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* background-color: brown; */
+}
+
+.text1{
+  color:#f7f669;
+}
+.text2{
+  color:#79881D;
+}

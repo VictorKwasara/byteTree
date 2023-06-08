@@ -36,6 +36,16 @@ export type Tree = {
           "isSigner": false
         },
         {
+          "name": "seedsAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "tree",
           "isMut": true,
           "isSigner": false
@@ -47,7 +57,7 @@ export type Tree = {
         },
         {
           "name": "fruitMint",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -97,6 +107,11 @@ export type Tree = {
           "isSigner": false
         },
         {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "cultivarMeta",
           "isMut": true,
           "isSigner": false
@@ -113,6 +128,16 @@ export type Tree = {
         },
         {
           "name": "fruitMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsBalance",
           "isMut": true,
           "isSigner": false
         },
@@ -173,6 +198,11 @@ export type Tree = {
         {
           "name": "fruitMint",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "seedsAuthority",
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1705,6 +1735,16 @@ export const IDL: Tree = {
           "isSigner": false
         },
         {
+          "name": "seedsAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "tree",
           "isMut": true,
           "isSigner": false
@@ -1716,7 +1756,7 @@ export const IDL: Tree = {
         },
         {
           "name": "fruitMint",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false
         },
         {
@@ -1766,6 +1806,11 @@ export const IDL: Tree = {
           "isSigner": false
         },
         {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
           "name": "cultivarMeta",
           "isMut": true,
           "isSigner": false
@@ -1782,6 +1827,16 @@ export const IDL: Tree = {
         },
         {
           "name": "fruitMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsBalance",
           "isMut": true,
           "isSigner": false
         },
@@ -1842,6 +1897,11 @@ export const IDL: Tree = {
         {
           "name": "fruitMint",
           "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "seedsAuthority",
+          "isMut": true,
           "isSigner": false
         },
         {
