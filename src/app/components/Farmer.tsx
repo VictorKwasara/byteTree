@@ -11,13 +11,13 @@ const Farmer = (props:{
   return (
 		<Box className={styles.box}>
 			<Typography variant='h3' className={styles.text1}>
-				name: {props.name}
+				Welcome {props.name}
 			</Typography>
 			<Typography className={styles.text2} variant='h5'>
-				land: {props.landCount.toString()}
+				You have  {props.landCount.toString()} pieces of land
 			</Typography>
 			<Typography className={styles.text2} variant='h5'>
-				tree: {props.treeCount.toString()}
+			  You have planted  {props.treeCount.toString()} trees
 			</Typography>
 		</Box>
 	);

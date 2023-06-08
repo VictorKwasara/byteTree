@@ -19,7 +19,7 @@ const BuySeed = () => {
 	return (
 		<Card className={styles.card}>
 			<Link href='/select-cultivar' component={NextLink} underline='none'>
-				<CardActionArea className={styles.card}>
+				<CardActionArea className={styles.cardAction}>
 					<Typography variant="h5">Buy Seed</Typography>
 				</CardActionArea>
 			</Link>

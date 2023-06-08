@@ -5,6 +5,7 @@
   display: flex ;
   align-items: center;
   justify-content: center;
+  padding-top: 0;
 }
 
 .name {
@@ -12,8 +13,7 @@
 }
 
 .stack {
-  max-width: 1200px;
-  min-height: 85vh ;
+  border: 1px solid #3C6A48 ;
 }
 
 .display {
@@ -22,4 +22,8 @@
   background-color: blueviolet;
   width: 100%;
   height: auto;
+}
+
+.grid{
+  margin-top: -95px;
 }

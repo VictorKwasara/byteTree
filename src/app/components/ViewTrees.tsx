@@ -24,9 +24,11 @@ const ViewTrees = () => {
 			<Link href='/view-trees' component={NextLink} underline='none'>
 				<CardActionArea className={styles.card}>
 					<div className={styles.outter}></div>
-					<Typography variant='h3' className={styles.type}>
+					<Box className={styles.typeBox}>
+					<Typography variant='h4' color="text.secondary" className={styles.type}>
 						View my trees
 					</Typography>
+					</Box>					
 				</CardActionArea>
 			</Link>
 		</Card>

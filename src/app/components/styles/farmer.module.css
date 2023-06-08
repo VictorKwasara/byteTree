@@ -3,12 +3,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* background-color: brown; */
+  background-image: linear-gradient(to right top, #f9f871, #faf968, #fcfb5f, #fdfc54, #fffd49);
+  box-shadow: 0 3px 5px 3px #fffd49;
+  height: 300px;
+  border-radius: 0 0 5px 5px;
+  margin-top: 0 ;
 }
 
 .text1{
-  color:#f7f669;
+  /* color:#f7f669; */
 }
 .text2{
-  color:#79881D;
+  /* color:#79881D; */
 }

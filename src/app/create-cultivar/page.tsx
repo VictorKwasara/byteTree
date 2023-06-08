@@ -47,6 +47,10 @@ const provider = new AnchorProvider(connection, w as Wallet, {
 	commitment: 'confirmed',
 });
 
+const farmerProgram = new PublicKey(
+		'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
+);
+
 const farmProgram = new PublicKey('6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6');
 
 const programID = new PublicKey('EfYywm823JAajvTAHFv7wnKGi8M4R7BwqufaUEECxUxG');
@@ -56,7 +60,7 @@ let payer = program.provider;
 
 
 const handleCreate = async () => {
-	
+	let cultivarName = input.name.trim();
 	try {
 		if (payer.publicKey) {
 			// farm
@@ -64,6 +68,11 @@ const handleCreate = async () => {
 				[Buffer.from('farm')],
 				farmProgram
 				);
+
+			let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('farmer'), payer.publicKey.toBuffer()],
+					farmerProgram
+			);
 
 				console.log("farm", farm.toString());
 			
@@ -77,20 +86,18 @@ const handleCreate = async () => {
 			console.log('cultivarMeta', cultivarMeta.toString());
 			
 		let [cultivar] = anchor.web3.PublicKey.findProgramAddressSync(
-				[
-					Buffer.from('cultivar'),
-					cultivarMeta.toBuffer(),
-					Buffer.from(input.name),
-				],
-				program.programId
-			);
-
-			
+			[
+				Buffer.from('cultivar'),
+				cultivarMeta.toBuffer(),
+				Buffer.from(cultivarName),
+			],
+			program.programId
+		);			
 
 			console.log('cultivar', cultivar.toString());
 
 			let [fruitMint] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('fruitmint'), Buffer.from(input.name)],
+				[Buffer.from('fruitmint'), Buffer.from(cultivarName)],
 				program.programId
 			);
 			console.log('fruitMint', fruitMint.toString());
@@ -100,6 +107,19 @@ const handleCreate = async () => {
 				program.programId
 			);
 
+			 	let [seedsAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('seedsauthority'), payer.publicKey.toBuffer()],
+					program.programId
+				);
+
+			let [seedsBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+				[
+					Buffer.from('seedsbalance'),
+					seedsAuthority.toBuffer(),
+					Buffer.from(cultivarName),
+				],
+				program.programId
+			);
 			console.log('fruitMintauthority', fruitMintAuthority.toString());
 	  
 			let cultivarState;
@@ -116,16 +136,23 @@ const handleCreate = async () => {
 				+ input.initWidth
 			);
 			let tx = await program.methods
-					.createCultivar(input.name.trim(), new anchor.BN(input.initHeight), new anchor.BN(input.initWidth))
-					.accounts({
-						farm,
-						cultivarMeta,
-						cultivar,	
-						fruitMint,
-						fruitMintAuthority,
-						farmProgram,
-					})
-					.rpc();
+				.createCultivar(
+					cultivarName,
+					new anchor.BN(input.initHeight),
+					new anchor.BN(input.initWidth)
+				)
+				.accounts({
+					farm,
+					farmer,
+					cultivarMeta,
+					cultivar,
+					fruitMint,
+					fruitMintAuthority,
+					seedsBalance,
+					seedsAuthority,
+					farmProgram,
+				})
+				.rpc();
 
 				
 			console.log('create cultivar transaction', tx);

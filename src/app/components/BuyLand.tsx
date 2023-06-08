@@ -9,10 +9,11 @@ import NextLink from "next/link"
 const BuyLand = () => {
   return (
     <Card className={styles.card}>    
-			  <Link href='/select-cultivar' component={NextLink} underline='none'>
-				<CardActionArea className={styles.card}><Typography>BuyLand</Typography>
+			<Link href='/select-cultivar' component={NextLink} underline='none'>
+				<CardActionArea className={styles.cardArea}>
+					 <Typography variant="h5">Buy Land</Typography>
 				</CardActionArea>
-			 </Link>
+			</Link>
 		</Card>
   )
 }

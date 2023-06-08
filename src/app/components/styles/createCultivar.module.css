@@ -1,7 +1,7 @@
 .outter {
   /* background-color: rgb(226, 43, 156); */
   width: 100% ;
-  height: 250px;
+  height: auto;
   display: flex ;
   flex-direction: column;
   align-items: center;

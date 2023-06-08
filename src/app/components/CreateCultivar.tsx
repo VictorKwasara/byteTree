@@ -16,22 +16,27 @@ import NextLink from 'next/link';
 const CreateCultivar = () => {
 	return (
 		<div className={styles.outter}>
-			<Card sx={{ backgroundColor: '#fff' }}>
+			<Card>
 				<Link href='/create-cultivar' component={NextLink} underline='none'>
-					<CardActionArea color='#fff'>
+					<CardActionArea>
 						<CardMedia>
 							<Image
 								src='/d.jpg'
 								alt='a tree with a sunrise background'
-								width='200'
+								width='275'
 								height='140'
 							/>
 						</CardMedia>
 						<CardContent>
-							<Typography gutterBottom variant='h5' component='h5'>
+							<Typography
+								gutterBottom
+								variant='h5'
+								component='h5'
+								color='text.secondary'
+							>
 								Create a cultivar
 							</Typography>
-							<Typography variant='body2' color='text.secondary' component='p'>
+							<Typography variant='body2' color='secondary.main' component='p'>
 								You can create your own tree type, that other farmers can buy an
 								grow on their land.Give your tree a attributes that are unique.
 							</Typography>

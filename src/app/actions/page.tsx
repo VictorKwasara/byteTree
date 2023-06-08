@@ -3,7 +3,17 @@ import React, { useState } from 'react';
 import * as anchor from '@project-serum/anchor';
 import { Farmer, IDL } from '../../../public/programs/farmer';
 import { Connection, PublicKey } from '@solana/web3.js';
-import { Box, Button, Card, Stack, Typography, Grid } from '@mui/material';
+import {
+	Box,
+	Button,
+	Card,
+	Stack,
+	Typography,
+	MenuList,
+	Grid,
+	MenuItem,
+	Paper,
+} from '@mui/material';
 import styles from './page.module.css';
 import {
 	AnchorWallet,
@@ -62,17 +72,19 @@ const Actions = () => {
 		<Box className={styles.box}>
 			<CreateFarmer searchFarmer={searchFarmer} />
 			<Grid container spacing={2} className={styles.grid}>
-				<Grid className={styles.ingrid} item xs={12} md={6}>
-					<CreateCultivar />
+				<Grid className={styles.ingrid} item xs={12} md={12}>
+					{farmer ? (
+						<FarmerComponent
+							name={farmer?.name}
+							landCount={farmer?.landCount}
+							treeCount={farmer?.treeCount}
+						/>
+					) : (
+						<></>
+					)}
 				</Grid>
-				<Grid className={styles.ingrid} item xs={12} md={6}>
-					{(farmer)?
-						(<FarmerComponent
-						name={farmer?.name}
-						landCount={farmer?.landCount }
-						treeCount={farmer?.treeCount }
-					/>):( <></>)
-					 }
+				<Grid className={styles.ingrid} item xs={12} md={3}>
+					<CreateCultivar />
 				</Grid>
 				<Grid className={styles.ingrid} item xs={12} md={3}>
 					<PlantTree />
@@ -80,11 +92,19 @@ const Actions = () => {
 				<Grid className={styles.ingrid} item xs={12} md={3}>
 					<ViewTrees />
 				</Grid>
+				{/* <Grid className={styles.ingrid} item xs={12} md={2}>
+				</Grid> */}
 				<Grid className={styles.ingrid} item xs={12} md={3}>
-					<BuyLand/>
-				</Grid>
-				<Grid className={styles.ingrid} item xs={12} md={3}>
-					<BuySeed/>
+					<Paper spacing={1} className={styles.stack}>
+						<MenuList>
+							<MenuItem>
+								<BuyLand />
+							</MenuItem>
+							<MenuItem>
+								<BuySeed />
+							</MenuItem>
+						</MenuList>
+					</Paper>
 				</Grid>
 			</Grid>
 		</Box>

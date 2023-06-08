@@ -1,6 +1,13 @@
 'use client';
 import React, { useState } from 'react';
-import { Box,CardActionArea, Button, Card, Grid, Typography } from '@mui/material';
+import {
+	Box,
+	CardActionArea,
+	Button,
+	Card,
+	Grid,
+	Typography,
+} from '@mui/material';
 // import usePdas from '../hooks/usePda';qqqq
 import { Farmer, IDL } from '../../../public/programs/farmer';
 import styles from './styles/plantTree.module.css';
@@ -15,13 +22,20 @@ const PlantTree = () => {
 	return (
 		<Card className={styles.card}>
 			<Link href='/select-cultivar' component={NextLink} underline='none'>
-				<CardActionArea className={styles.card}>
+				<CardActionArea className={styles.cardAction}>
 					<div className={styles.outter}></div>
-					<Typography variant='h3' className={styles.type}>
-						Plant a tree
-					</Typography>
+					<Box className={styles.typeBox}>
+						<Typography variant='h4' color="text.secondary" className={styles.type}>
+							Plant a tree
+						</Typography>
+						<Typography variant='body1' color="secondary.main" component='p' className={styles.body}>
+							Select a cultivar, Buy the associated Seeds, Create a tree, Plant
+							the tree on your land
+						</Typography>
+					</Box>
 				</CardActionArea>
 			</Link>
+			
 		</Card>
 	);
 };

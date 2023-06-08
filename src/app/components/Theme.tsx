@@ -12,10 +12,16 @@ declare module '@mui/material/styles' {
 		tertiary: {
 			main: string;
 		};
+		yellow: {
+			main: string;
+		};
 	}
 	// allow configuration using `createTheme`
 	interface ThemeOptions {
 		tertiary?: {
+			main?: string;
+		};
+		yellow?: {
 			main?: string;
 		};
 	}
@@ -31,15 +37,24 @@ let theme = createTheme({
 			main: '#79881D',
 		},
 		background: {
-			default: '#899BB0',
-			paper: '#899BB0',
+			default: '#1D3C2F',
+			paper: '#1D3C2F',
 		},
+		// background: {
+		// 	default: '#899BB0',
+		// 	paper: '#899BB0',
+		// },
 		text: {
 			primary: '#0D0D0D',
+			secondary: '#F9F871',
+	
 		},
 	},
 	tertiary: {
 		main: '#e84855',
+	},
+	yellow: {
+		main: '#F9F871',
 	},
 });
 // "#F34213"
