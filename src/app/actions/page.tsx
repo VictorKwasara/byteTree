@@ -95,7 +95,7 @@ const Actions = () => {
 				{/* <Grid className={styles.ingrid} item xs={12} md={2}>
 				</Grid> */}
 				<Grid className={styles.ingrid} item xs={12} md={3}>
-					<Paper spacing={1} className={styles.stack}>
+					<Paper className={styles.stack}>
 						<MenuList>
 							<MenuItem>
 								<BuyLand />
