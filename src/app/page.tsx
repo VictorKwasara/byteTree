@@ -10,20 +10,26 @@ export default function Home() {
 			<div className={styles.image}></div>
 			<div className={styles.content}>
 				<Typography
-					variant='h1'
+					variant='h2'
 					component='h2'
 					align='center'
 					p={2}
 					m={2}
-					color='#899BB0'
+					color='primary.main'
 				>
-					Welcome To the Digital Tree Farm
+					{'Welcome To the Digital Tree Farm'.toLocaleUpperCase()}
 				</Typography>
-				<Typography variant='body1' align='center' m={2} paragraph>
+				<Typography
+					variant='h6'
+					align='center'
+					m={2}
+					paragraph
+					color='text.primary'
+				>
 					Plant A digital tree, Take care of it and earn potential rewards from
 					selling fruits
 				</Typography>
-				<Typography variant='body1' mb={2} paragraph>
+				<Typography variant='body1' mb={2} paragraph color='text.primary'>
 					Save the planet, by taking care of your tree and buying carbon credits
 				</Typography>
 				<Button
