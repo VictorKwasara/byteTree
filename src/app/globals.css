@@ -8,3 +8,27 @@ body,html {
   margin: 0;
   background-image: radial-gradient(circle, #08110f 30%, #11221e,#11221e, #15332c, #18443a, #1b5749);
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 1.1vw;
+  z-index: 200000000;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #F9F871;
+  z-index: 200000000;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #08110f;
+  z-index: 200000000;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #08110f;
+  z-index: 200000000;
+}

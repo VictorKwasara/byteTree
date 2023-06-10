@@ -16,7 +16,7 @@
   position:fixed;
   top: 0;
   left: 0;
-  width:100vw;
+  width:99vw;
   height: 100vh ;
   background-image: url("./images/cover.jpg");
   background-size: cover ;
