@@ -46,7 +46,7 @@
 }
 
 .link:hover {
-	/* text-decoration: underline ;  */
+	text-decoration: underline ; 
 	/* transform: scale(1.1) rotateZ(1.5deg); */
 	color: #1d212b;
 }
