@@ -19,11 +19,15 @@
 .display {
   display: flex ;
   flex-direction: column;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
   width: 100%;
   height: auto;
 }
 
 .grid{
   margin-top: -95px;
+}
+
+.label {
+  color: #08110F;
 }

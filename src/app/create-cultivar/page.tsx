@@ -1,7 +1,7 @@
 'use client';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Button, Box, Typography, TextField } from '@mui/material';
-import styles from "./page.module.css";
+import styles from './page.module.css';
 import * as anchor from '@project-serum/anchor';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
@@ -11,7 +11,7 @@ import Router from 'next/router';
 
 type cultivarAccount = {
 	name: string;
-	address: PublicKey|null;
+	address: PublicKey | null;
 	count: anchor.BN;
 	initHeight: anchor.BN;
 	initWidth: anchor.BN;
@@ -25,160 +25,159 @@ type inputs = {
 };
 
 const CreateCultivar = () => {
-const [input, setInput] = useState<inputs>({
-	name: "",
-	initWidth: 0,
-	initHeight: 0
-});
-const [cultivar, setCultivar] = useState<cultivarAccount>({
-	name: '',
-	address: null,
-	count: 0,
-	scarcityPoints: 0 ,
-	initWidth: 0,
-	initHeight: 0,
-	isInitialized: false,
-});
-const w = useAnchorWallet();
+	const [input, setInput] = useState<inputs>({
+		name: '',
+		initWidth: 0,
+		initHeight: 0,
+	});
+	const [cultivar, setCultivar] = useState<cultivarAccount>({
+		name: '',
+		address: null,
+		count: 0,
+		scarcityPoints: 0,
+		initWidth: 0,
+		initHeight: 0,
+		isInitialized: false,
+	});
+	const w = useAnchorWallet();
 
-const connection = new Connection('https://api.devnet.solana.com');
+	const connection = new Connection('https://api.devnet.solana.com');
 
-const provider = new AnchorProvider(connection, w as Wallet, {
-	commitment: 'confirmed',
-});
+	const provider = new AnchorProvider(connection, w as Wallet, {
+		commitment: 'confirmed',
+	});
 
-const farmerProgram = new PublicKey(
+	const farmerProgram = new PublicKey(
 		'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
-);
+	);
 
-const farmProgram = new PublicKey('6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6');
+	const farmProgram = new PublicKey(
+		'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
+	);
 
-const programID = new PublicKey('EfYywm823JAajvTAHFv7wnKGi8M4R7BwqufaUEECxUxG');
+	const programID = new PublicKey(
+		'EfYywm823JAajvTAHFv7wnKGi8M4R7BwqufaUEECxUxG'
+	);
 
-const program = new Program(IDL, programID, provider);
-let payer = program.provider;
+	const program = new Program(IDL, programID, provider);
+	let payer = program.provider;
 
-
-const handleCreate = async () => {
-	let cultivarName = input.name.trim();
-	try {
-		if (payer.publicKey) {
-			// farm
-			let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('farm')],
-				farmProgram
+	const handleCreate = async () => {
+		let cultivarName = input.name.trim();
+		try {
+			if (payer.publicKey) {
+				// farm
+				let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('farm')],
+					farmProgram
 				);
 
-			let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
+				let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('farmer'), payer.publicKey.toBuffer()],
 					farmerProgram
-			);
+				);
 
-				console.log("farm", farm.toString());
-			
+				console.log('farm', farm.toString());
 
-			// cultivar_meta
-			 let [cultivarMeta] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('cultivarmeta'), farm.toBuffer()],
-				farmProgram
-			);
+				// cultivar_meta
+				let [cultivarMeta] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('cultivarmeta'), farm.toBuffer()],
+					farmProgram
+				);
 
-			console.log('cultivarMeta', cultivarMeta.toString());
-			
-		let [cultivar] = anchor.web3.PublicKey.findProgramAddressSync(
-			[
-				Buffer.from('cultivar'),
-				cultivarMeta.toBuffer(),
-				Buffer.from(cultivarName),
-			],
-			program.programId
-		);			
+				console.log('cultivarMeta', cultivarMeta.toString());
 
-			console.log('cultivar', cultivar.toString());
+				let [cultivar] = anchor.web3.PublicKey.findProgramAddressSync(
+					[
+						Buffer.from('cultivar'),
+						cultivarMeta.toBuffer(),
+						Buffer.from(cultivarName),
+					],
+					program.programId
+				);
 
-			let [fruitMint] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('fruitmint'), Buffer.from(cultivarName)],
-				program.programId
-			);
-			console.log('fruitMint', fruitMint.toString());
+				console.log('cultivar', cultivar.toString());
 
-			let [fruitMintAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('fruitmintauthority')],
-				program.programId
-			);
+				let [fruitMint] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('fruitmint'), Buffer.from(cultivarName)],
+					program.programId
+				);
+				console.log('fruitMint', fruitMint.toString());
 
-			 	let [seedsAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
+				let [fruitMintAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('fruitmintauthority')],
+					program.programId
+				);
+
+				let [seedsAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('seedsauthority'), payer.publicKey.toBuffer()],
 					program.programId
 				);
 
-			let [seedsBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-				[
-					Buffer.from('seedsbalance'),
-					seedsAuthority.toBuffer(),
-					Buffer.from(cultivarName),
-				],
-				program.programId
-			);
-			console.log('fruitMintauthority', fruitMintAuthority.toString());
-	  
-			let cultivarState;
-
-			cultivarState = await program.account.cultivar.fetchNullable(cultivar);
-
-			if (cultivarState) {
-				alert('cultivar already exists');
-				return
-			}	
-
-		  console.log(
-				'The inputs are ' + input.name + input.initHeight,
-				+ input.initWidth
-			);
-			let tx = await program.methods
-				.createCultivar(
-					cultivarName,
-					new anchor.BN(input.initHeight),
-					new anchor.BN(input.initWidth)
-				)
-				.accounts({
-					farm,
-					farmer,
-					cultivarMeta,
-					cultivar,
-					fruitMint,
-					fruitMintAuthority,
-					seedsBalance,
-					seedsAuthority,
-					farmProgram,
-				})
-				.rpc();
-
-				
-			console.log('create cultivar transaction', tx);
-	
-			setTimeout(async () => {  }, 15000);
-			cultivarState = await program.account.cultivar.fetchNullable(cultivar);	
-		
-			if (cultivarState) {
-				console.log('the cultivar  is,', cultivarState);
-				alert(`The Cultivar Is Initialized,
-					 ${cultivarState},
-					`
+				let [seedsBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+					[
+						Buffer.from('seedsbalance'),
+						seedsAuthority.toBuffer(),
+						Buffer.from(cultivarName),
+					],
+					program.programId
 				);
-			}	
-			setInput({name:"",initHeight: 0 , initWidth:0}) ;
-			alert("Success") ;
+				console.log('fruitMintauthority', fruitMintAuthority.toString());
 
-		} else {
-			throw 'No pubkey provided';
+				let cultivarState;
+
+				cultivarState = await program.account.cultivar.fetchNullable(cultivar);
+
+				if (cultivarState) {
+					alert('cultivar already exists');
+					return;
+				}
+
+				console.log(
+					'The inputs are ' + input.name + input.initHeight,
+					+input.initWidth
+				);
+				let tx = await program.methods
+					.createCultivar(
+						cultivarName,
+						new anchor.BN(input.initHeight),
+						new anchor.BN(input.initWidth)
+					)
+					.accounts({
+						farm,
+						farmer,
+						cultivarMeta,
+						cultivar,
+						fruitMint,
+						fruitMintAuthority,
+						seedsBalance,
+						seedsAuthority,
+						farmProgram,
+					})
+					.rpc();
+
+				console.log('create cultivar transaction', tx);
+
+				setTimeout(async () => {}, 15000);
+				cultivarState = await program.account.cultivar.fetchNullable(cultivar);
+
+				if (cultivarState) {
+					console.log('the cultivar  is,', cultivarState);
+					alert(`The Cultivar Is Initialized,
+					 ${cultivarState},
+					`);
+				}
+				setInput({ name: '', initHeight: 0, initWidth: 0 });
+				alert('Success');
+			} else {
+				throw 'No pubkey provided';
+			}
+		} catch (e) {
+			console.log(e);
 		}
-	} catch (e) {
-		console.log(e);
-	}
-};
+	};
 
-  return (
+	return (
 		<div>
 			<Box
 				component='form'
@@ -189,23 +188,38 @@ const handleCreate = async () => {
 					'& .MuiTextField-root': { m: 2 },
 				}}
 			>
-				<Typography component='h3'>Enter your cultivar parameters</Typography>
-				<div>
+				<Typography variant='h5' color='secondary.main'>
+					Enter your cultivar parameters
+				</Typography>
+				<div className={styles.field}>
+					<label className={styles.label}>
+						<Typography variant='body1'>The name of the cultivar</Typography>
+					</label>
 					<TextField
-						color='info'
+						color='primary'
 						id='name'
+						defaultValue='Name'
 						label='Name'
 						value={input.name}
 						onChange={(e) => {
 							setInput({ ...input, name: e.target.value });
 						}}
+						sx={{ color: '#000' }}
+						inputProps={{
+							color: '#000',
+						}}
 						fullWidth
 						required
 					/>
 				</div>
-				<div>
+				<div className={styles.field}>
+					<label className={styles.label}>
+						<Typography variant='body1'>
+							The initial width of the Cultiver
+						</Typography>
+					</label>
 					<TextField
-						color='info'
+						color='primary'
 						id='initial-width'
 						label='Initial Width'
 						value={input.initWidth}
@@ -217,9 +231,16 @@ const handleCreate = async () => {
 						required
 					/>
 				</div>
-				<div>
+				<div className={styles.field}>
+					<label className={styles.label}>
+						{' '}
+						<Typography variant='body1'>
+							{' '}
+							The initial Height of the Cultiver
+						</Typography>
+					</label>
 					<TextField
-						color='info'
+						color='primary'
 						id='initial-height'
 						label='Initial Height'
 						value={input.initHeight}
@@ -232,6 +253,8 @@ const handleCreate = async () => {
 					/>
 				</div>
 				<Button
+					className={styles.button}
+					variant='contained'
 					onClick={(e) => {
 						e.preventDefault;
 						handleCreate();
@@ -242,6 +265,6 @@ const handleCreate = async () => {
 			</Box>
 		</div>
 	);
-}
+};
 
-export default CreateCultivar
+export default CreateCultivar;

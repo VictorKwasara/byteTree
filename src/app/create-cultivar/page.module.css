@@ -4,5 +4,14 @@
   width: 45vw ;
   max-width: 620px;
   height: 400px;
-  background-color: brown;
+  background-color: #F9F871;
+}
+
+.field {
+  padding-right: 30px;
+  /* background-color: #000 */
+}
+
+.button {
+  padding-left: 30px;
 }
