@@ -1,9 +1,10 @@
 .card {
-  width: 240px ;
+  width: 100% ;
   /* background-color: red ; */
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 296px;
 }
 .cardAction {
 

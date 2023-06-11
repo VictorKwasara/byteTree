@@ -91,19 +91,19 @@ const ViewTrees = () => {
 			      console.log('Treees', t);
 	
 				if (t) {
-					t.map((tr: any) => {
-						let tree = tr.account;
-						console.log('tree is ', tree);
-						let tree2: TreeType[] = trees;
-						tree2.push(tree);
-						setTrees(tree2);
-					});
-					console.log('Trees is now', trees);
+					// t.map((tr: any) => {
+					// 	let tree = tr.account;
+					// 	console.log('tree is ', tree);
+					// 	let tree2: TreeType[] = trees;
+					// 	tree2.push(tree);
+					// 	setTrees(tree2);
+					// });
+					// console.log('Trees is now', trees);
 					setReady(true);
 				}
 			}					
 			})();
-		}, [trees]);  
+		}, []);  
 	
 		return (
 			<Box className={styles.box}>

@@ -25,11 +25,11 @@ const CreateFarmer = (props: {
 }) => {
 	const [name, setName] = useState('');
 	const [isLoggedIn,setIsLoggedIn] = useState(false);
-	const [data, setData] = 
-	 useState<{
-		payer:PublicKey,
-		farmer: PublicKey
-	}|null>(null);
+	const [data, setData] = useState<{
+		payer: PublicKey;
+		farmerKey: PublicKey;
+		landPieces: number;
+	} | null>(null);
 
 	const w = useAnchorWallet();
 	const { connection } = useConnection();
@@ -40,6 +40,14 @@ const CreateFarmer = (props: {
 		commitment: 'confirmed',
 	});
 
+	const farmProgram = new PublicKey(
+		'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
+	);
+
+		const treeProgram = new PublicKey(
+			'EfYywm823JAajvTAHFv7wnKGi8M4R7BwqufaUEECxUxG'
+		);
+	//farmer program
 	const programID = new PublicKey(
 		'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
 	);
@@ -47,34 +55,73 @@ const CreateFarmer = (props: {
 	const program = new Program(IDL, programID, provider);
   let payer = program.provider;
 
-	useEffect(() => {		
-		if (payer.publicKey) {
+	useEffect(() => {				
+			(async () => {
+				if (payer.publicKey) {
 			console.log('Inside if satement');
+			 let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('farm')],
+					farmProgram
+				);
 			// farmer
 			let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('farmer'), payer.publicKey.toBuffer()],
 				program.programId
 			);
-			setData({
-				farmer: farmer,
-				payer: payer.publicKey,
-			});
-		}
+
+			 let [landMeta] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('landmeta'), farm.toBuffer()],
+					farmProgram
+				);
+
+			let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
+				program.programId
+			);
+		
+
+			let landP;
+	        landP = await program.account.landPiece.all([{					  
+						memcmp : {
+							offset: 8, // Starting from the 42nd byte.
+							bytes: farmer.toString(), // My base-58 encoded public key.
+						},
+					}]);
+					console.log("Land Piece Account Is now: ", landP) ;		
+
+					  // tree = await treeProgram.account.tree.all([
+						// 	{
+						// 		memcmp: {
+						// 			offset: 8, // Starting from the 42nd byte.
+						// 			bytes: payer.publicKey.toString(), // My base-58 encoded public key.
+						// 		},
+						// 	},
+						// ]);
+
+						setData({
+							farmerKey: farmer,
+							payer: payer.publicKey,
+							landPieces: landP.length,
+						});
+					}			
+			})() ;		
+		
 	},[payer.publicKey]);
 
 	useEffect(() => {		  
 		(async () => {		
 			if (data !== null) {
 				console.log('Inside if the data is', data);
-				let farmer = data.farmer;
+				let farmerKey = data.farmerKey;
 				let farmerState;
-				farmerState = await program.account.farmer.fetchNullable(farmer);
+				farmerState = await program.account.farmer.fetchNullable(farmerKey);
 				if (farmerState) {
 					props.searchFarmer({
 						name: farmerState.name,
 						address: farmerState.address,
 						landCount: farmerState.landCount,
 						treeCount: farmerState.treeCount,
+						
 					});
 					setIsLoggedIn(true);
 				}
@@ -86,16 +133,16 @@ const CreateFarmer = (props: {
 		let standard = name.trim().toLowerCase();
 		try {
 			if (data !== null) {
-				let farmer = data.farmer ;
+				let farmerKey = data.farmerKey ;
 				const tx = await program.methods
 					.initializeFarmer(standard)
 					.accounts({
-							farmer:data.farmer,
+							farmer:data.farmerKey,
 					})
 					.rpc();
 
 					setTimeout(async () => {
-						let farmerState = await program.account.farmer.fetchNullable(farmer);
+						let farmerState = await program.account.farmer.fetchNullable(farmerKey);
 						
 						if (farmerState) {
 					console.log('the farmer is,', farmerState);

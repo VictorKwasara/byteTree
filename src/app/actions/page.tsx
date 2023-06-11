@@ -23,9 +23,9 @@ import {
 import { Wallet, AnchorProvider } from '@project-serum/anchor';
 import CreateFarmer from '../components/CreateFarmer';
 import CreateCultivar from '../components/CreateCultivar';
+import ActionsCard from '../components/Actions';
 import PlantTree from '../components/PlantTree';
 import ViewTrees from '../components/ViewTrees';
-import BuyLand from '../components/BuyLand';
 import BuySeed from '../components/BuySeed';
 import FarmerComponent from '../components/Farmer';
 const connection = new Connection('https://api.devnet.solana.com');
@@ -35,6 +35,7 @@ type farmerAccount = {
 	address: PublicKey;
 	landCount: anchor.BN;
 	treeCount: anchor.BN;
+	
 };
 
 const Actions = () => {
@@ -78,6 +79,7 @@ const Actions = () => {
 							name={farmer?.name}
 							landCount={farmer?.landCount}
 							treeCount={farmer?.treeCount}
+							cultivarName={null}
 						/>
 					) : (
 						<></>
@@ -95,16 +97,7 @@ const Actions = () => {
 				{/* <Grid className={styles.ingrid} item xs={12} md={2}>
 				</Grid> */}
 				<Grid className={styles.ingrid} item xs={12} md={3}>
-					<Paper className={styles.stack}>
-						<MenuList>
-							<MenuItem>
-								<BuyLand />
-							</MenuItem>
-							<MenuItem>
-								<BuySeed />
-							</MenuItem>
-						</MenuList>
-					</Paper>
+					<BuySeed/>
 				</Grid>
 			</Grid>
 		</Box>

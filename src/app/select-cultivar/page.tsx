@@ -1,5 +1,5 @@
 'use client';
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
 	Button,
 	Box,
@@ -16,180 +16,108 @@ import { Connection, PublicKey, Keypair } from '@solana/web3.js';
 import { Tree, IDL } from '../../../public/programs/tree';
 import { Link } from '@mui/material';
 import NextLink from 'next/link';
-import {motion} from "framer-motion"
+import { motion } from 'framer-motion';
+import * as token from '@solana/spl-token';
 import { useRouter } from 'next/navigation';
+
+type cultivar = {
+	creator: PublicKey;
+	name: String;
+	count: anchor.BN;
+	initHeight: anchor.BN;
+	initWidth: anchor.BN;
+	initRootArea: anchor.BN;
+	initLeafArea: anchor.BN;
+	scarcityPoints: anchor.BN;
+	isInitialized: boolean;
+};
 
 const SelectCultivar = () => {
 	const router = useRouter();
-  const [cultivars,setCultivars] = useState<{
-  name: string,
-	count: anchor.BN;
-	scarcityPoints: anchor.BN;
-   }[]>([]);
-  const [ready,setReady] = useState<boolean>(false);
-  const w = useAnchorWallet();
-	
+
+	const [cultivars, setCultivars] = useState<cultivar[]>([]);
+
+	const [ready, setReady] = useState<boolean>(false);
+
+	const w = useAnchorWallet();
 
 	const connection = new Connection('https://api.devnet.solana.com');
 
 	const provider = new AnchorProvider(connection, w as Wallet, {
 		commitment: 'confirmed',
 	});
- const farmProgram = new PublicKey(
+	const farmProgram = new PublicKey(
 		'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
 	);
+
 	// const farmerProgram = new PublicKey(
 	// 	'5LJq1WKXV2bdgsosp6wk2pgvk1Rhc75ffRLRXGZvPQWU'
 	// );
 
-	const farmerProgram = new PublicKey(		
+	const farmerProgram = new PublicKey(
 		'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
 	);
 
+	// treeProgram
 	const programID = new PublicKey(
 		'EfYywm823JAajvTAHFv7wnKGi8M4R7BwqufaUEECxUxG'
 	);
 
-
 	const program = new Program(IDL, programID, provider);
 	let payer = program.provider;
 
-  useEffect(() => {
+	useEffect(() => {
 		(async () => {
 			let ct: any = await program.account.cultivar.all();
-			console.log('Cultivars', ct[0].account.name);
+
+			console.log('Cultivars', ct);
 
 			if (ct) {
 				ct.map((ctvr: any) => {
-					let c = ctvr.account;
-					console.log('c is ', c);
-					let c2: {
-						name: string;
-						count: anchor.BN;
-						scarcityPoints: anchor.BN;
-					}[] = cultivars;
-					c2.push(c);
+					let c: cultivar = ctvr.account;
+					// console.log('c is ', c);
+					let c2: cultivar[] = cultivars;
+					let pubkey = c.creator;
+					console.log(pubkey);
+					if (c.name) {
+						c2.push(c);
+					}
 					setCultivars(c2);
 				});
 				console.log('Cultivars is now', cultivars);
 				setReady(!ready);
 			}
 		})();
-	}, []); 
+	}, []);
 
-	const handleCreate = async (
-		c: {
-			name: string;
-			count: anchor.BN;
-			scarcityPoints: anchor.BN;
-		}
-	) => {
-		try {
-			if (payer.publicKey) {
-				// farm
-				let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('farm')],
-					farmProgram
+	const handleCreate = (c: cultivar) => {
+		if (payer.publicKey) {
+			let [seedsAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('seedsauthority'), payer.publicKey.toBuffer()],
+				program.programId
+			);
+
+			let [seedsBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+				[
+					Buffer.from('seedsbalance'),
+					seedsAuthority.toBuffer(),
+					Buffer.from(c.name),
+				],
+				program.programId
+			);
+			
+			(async () => {
+				let sBalance = await token.getAccount(
+					provider.connection,
+					seedsBalance
 				);
-				let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('farmer'), payer.publicKey.toBuffer()],
-					farmerProgram
-				);
+				if (sBalance.amount < 1) {
+					alert!('Please get some, ' + c.name + ' seeds');
+				}
+				alert!('You have, ' + sBalance.amount + ' of ' + c.name);
+				router.push(`/plant-tree?name=${c.name}`);
 
-				console.log('farm', farm.toString());
-
-				// cultivar_meta
-				let [cultivarMeta] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('cultivarmeta'), farm.toBuffer()],
-					farmProgram
-				);
-
-				console.log('cultivarMeta', cultivarMeta.toString());
-
-				let [cultivar] = anchor.web3.PublicKey.findProgramAddressSync(
-					[
-						Buffer.from('cultivar'),
-						cultivarMeta.toBuffer(),
-						Buffer.from(c.name), //query
-					],
-					program.programId
-				);
-
-				console.log('cultivar', cultivar.toString());
-
-				let [fruitMint] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('fruitmint'), Buffer.from(c.name)], //query
-					program.programId
-				);
-				console.log('fruitMint', fruitMint.toString());
-
-				let [fruitMintAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('fruitmintauthority')],
-					program.programId
-				);
-
-				let [treesMeta] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('treesmeta'), farm.toBuffer()],
-					farmProgram
-				);
-
-				let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('tree'), treesMeta.toBuffer(), farmer.toBuffer()],
-					program.programId
-				); /// only one tree error
-
-				let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('nutrientbalance'), tree.toBuffer()],
-					program.programId
-				);
-
-				let [fruitBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('fruit'), tree.toBuffer()],
-					program.programId
-				);
-
-				//requiredNutrients
-				let [requiredNutrients] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('requirednutrients'), tree.toBuffer()],
-					program.programId
-				);		
-
-				const tx = await program.methods
-					.createTree()
-					.accounts({
-						farmer,
-						farm,
-						cultivarMeta,
-						cultivar,
-						treesMeta,
-						tree,
-						fruitBalance,
-						fruitMint,
-						fruitMintAuthority,
-						inputBalance,
-						requiredNutrients,
-						farmProgram,
-					})
-					.rpc();
-
-				console.log('create cultivar transaction', tx);
-				let treeState;
-				treeState = await program.account.tree.fetchNullable(tree);
-
-				if (treeState) {
-					console.log('the tree is,', treeState);
-					alert(`The Cultivar Is Initialized,
-					 ${treeState},
-					`);
-				}				
-				
-				router.push("view-trees");
-			} else {
-				throw 'No pubkey provided';
-			}
-		} catch (e) {
-			console.log(e);
-			alert('There was an error try again later');
+			})();
 		}
 	};
 
@@ -202,7 +130,7 @@ const SelectCultivar = () => {
 		>
 			<Grid container spacing={2} className={styles.grid}>
 				{ready ? (
-					cultivars.map((c, i) => (
+					cultivars.map((c: cultivar, i) => (
 						<Grid
 							className={styles.ingrid}
 							item
