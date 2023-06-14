@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as anchor from '@project-serum/anchor';
-import { Farmer, IDL } from '../../../public/programs/farmer';
+import { FarmerProgram, IDL } from '../../../public/programs/farmer_program';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { Box, Button, Card, Stack, Typography, Grid ,CardActionArea,Link} from '@mui/material';
 import styles from './styles/buyland.module.css';
@@ -21,11 +21,11 @@ const BuyLand = () => {
 	});
 
 	const farmProgram = new PublicKey(
-		'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
+		'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
 	);
 
 	const programID = new PublicKey(
-		'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
+		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -85,6 +85,7 @@ const handleClick =  async () => {
 					.rpc();
 
 					console.log('Your transaction signature', tx);
+					alert("success!!")
 
 				// setData({
 				// 	farmer: farmer,

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Box,CardContent,CardMedia, Button, Card, Grid, Typography ,CardActionArea} from '@mui/material';
 // import usePdas from '../hooks/usePda';qqqq
-import { Farmer, IDL } from '../../../public/programs/farmer';
+import { FarmerProgram, IDL } from '../../../public/programs/farmer_program';
 import styles from './styles/createCultivar.module.css';
 import * as anchor from '@project-serum/anchor';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';

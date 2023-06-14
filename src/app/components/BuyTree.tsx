@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as anchor from '@project-serum/anchor';
-import { Tree, IDL } from '../../../public/programs/tree';
+import { TreeProgram, IDL } from '../../../public/programs/tree_program';
 import { Connection, PublicKey } from '@solana/web3.js';
 import {
 	Box,
@@ -17,7 +17,7 @@ import NextLink from 'next/link';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 
-const BuyTree = (props: { cultivarName: String}) => {
+const BuyTree = (props: { cultivarName: String }) => {
 	const w = useAnchorWallet();
 	// const { connection } = useConnection();
 
@@ -27,18 +27,16 @@ const BuyTree = (props: { cultivarName: String}) => {
 		commitment: 'confirmed',
 	});
 
-	const farmProgram = new PublicKey(
-		'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
-	);
-
-	//farmer program
 	const farmerProgram = new PublicKey(
-		'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
+		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
 	);
 
-	// tree program
+	const farmProgram = new PublicKey(
+		'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
+	);
+
 	const programID = new PublicKey(
-		'EfYywm823JAajvTAHFv7wnKGi8M4R7BwqufaUEECxUxG'
+		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -171,7 +169,7 @@ const BuyTree = (props: { cultivarName: String}) => {
 				})
 				.rpc();
 			console.log(`The transaction signature is ${tx.toString()}`);
-      alert("success " + tx) ;
+			alert('success ' + tx);
 			// setData({
 			// 	farmer: farmer,
 			// 	payer: payer.publicKey,
@@ -195,4 +193,4 @@ const BuyTree = (props: { cultivarName: String}) => {
 	);
 };
 
-export default BuyTree
+export default BuyTree;

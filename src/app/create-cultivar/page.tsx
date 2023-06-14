@@ -6,7 +6,7 @@ import * as anchor from '@project-serum/anchor';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import { Connection, PublicKey, Keypair } from '@solana/web3.js';
-import { Tree, IDL } from '../../../public/programs/tree';
+import { TreeProgram, IDL } from '../../../public/programs/tree_program';
 import Router from 'next/router';
 
 type cultivarAccount = {
@@ -48,15 +48,15 @@ const CreateCultivar = () => {
 	});
 
 	const farmerProgram = new PublicKey(
-		'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
+		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
 	);
 
 	const farmProgram = new PublicKey(
-		'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
+		'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
 	);
 
 	const programID = new PublicKey(
-		'EfYywm823JAajvTAHFv7wnKGi8M4R7BwqufaUEECxUxG'
+		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
 	);
 
 	const program = new Program(IDL, programID, provider);

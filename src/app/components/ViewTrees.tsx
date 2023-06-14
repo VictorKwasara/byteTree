@@ -9,7 +9,7 @@ import {
 	CardActionArea,
 } from '@mui/material';
 // import usePdas from '../hooks/usePda';qqqq
-import { Farmer, IDL } from '../../../public/programs/farmer';
+import { FarmerProgram, IDL } from '../../../public/programs/farmer_program';
 import styles from './styles/viewTrees.module.css';
 import * as anchor from '@project-serum/anchor';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';

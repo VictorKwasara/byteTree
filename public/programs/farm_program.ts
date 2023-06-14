@@ -1,6 +1,6 @@
-export type Farm = {
+export type FarmProgram = {
   "version": "0.1.0",
-  "name": "farm",
+  "name": "farm_program",
   "instructions": [
     {
       "name": "initializeFarm",
@@ -185,9 +185,9 @@ export type Farm = {
   ]
 };
 
-export const IDL: Farm = {
+export const IDL: FarmProgram = {
   "version": "0.1.0",
-  "name": "farm",
+  "name": "farm_program",
   "instructions": [
     {
       "name": "initializeFarm",

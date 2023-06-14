@@ -2,7 +2,7 @@
 import React, {useState,useEffect,useMemo} from 'react'
 import { Box, Button, Card, Grid, Typography, TextField } from '@mui/material';
 // import usePdas from '../hooks/usePda';qqqq
-import { Farmer, IDL } from '../../../public/programs/farmer';
+import {FarmerProgram, IDL } from '../../../public/programs/farmer_program';
 import styles from "./styles/createFarmer.module.css"
 import * as anchor from '@project-serum/anchor';
 import { useAnchorWallet, useConnection } from '@solana/wallet-adapter-react';
@@ -40,17 +40,17 @@ const CreateFarmer = (props: {
 		commitment: 'confirmed',
 	});
 
-	const farmProgram = new PublicKey(
-		'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
-	);
-
-		const treeProgram = new PublicKey(
-			'EfYywm823JAajvTAHFv7wnKGi8M4R7BwqufaUEECxUxG'
+		const  programID = new PublicKey(
+			'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
 		);
-	//farmer program
-	const programID = new PublicKey(
-		'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
-	);
+
+		const farmProgram = new PublicKey(
+			'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
+		);
+
+		// const programID = new PublicKey(
+		// 	'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
+		// );
 
 	const program = new Program(IDL, programID, provider);
   let payer = program.provider;
@@ -120,8 +120,7 @@ const CreateFarmer = (props: {
 						name: farmerState.name,
 						address: farmerState.address,
 						landCount: farmerState.landCount,
-						treeCount: farmerState.treeCount,
-						
+						treeCount: farmerState.treeCount,						
 					});
 					setIsLoggedIn(true);
 				}

@@ -7,3 +7,10 @@
   /* background-color: brown; */
   /* padding-left:50px; */
 }
+
+.card {
+  height: 200px;
+  background-color:#F9F871;
+  color: #e84855;
+  margin: auto;
+}

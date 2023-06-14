@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import * as anchor from '@project-serum/anchor';
-import { Farm, IDL } from '../../../public/programs/farm';
+import { FarmProgram, IDL } from '../../../public/programs/farm_program';
 import { Connection, Keypair, SystemProgram, PublicKey } from '@solana/web3.js';
 import { Box, Button } from '@mui/material';
 import styles from './page.module.css';
@@ -45,7 +45,7 @@ const CreateFarmer = () => {
 		commitment: 'confirmed',
 	});
 	const programID = new PublicKey(
-		'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
+		'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
 	);
 	const program = new Program(IDL, programID, provider);
 	const handleCreate = async () => {

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import * as anchor from '@project-serum/anchor';
-import { Farmer, IDL } from '../../../public/programs/farmer';
+import { FarmerProgram, IDL } from '../../../public/programs/farmer_program';
 import { Connection, PublicKey } from '@solana/web3.js';
 import {
 	Box,

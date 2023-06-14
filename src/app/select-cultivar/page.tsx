@@ -13,7 +13,7 @@ import * as anchor from '@project-serum/anchor';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import { Connection, PublicKey, Keypair } from '@solana/web3.js';
-import { Tree, IDL } from '../../../public/programs/tree';
+import { TreeProgram, IDL } from '../../../public/programs/tree_program';
 import { Link } from '@mui/material';
 import NextLink from 'next/link';
 import { motion } from 'framer-motion';
@@ -46,21 +46,16 @@ const SelectCultivar = () => {
 	const provider = new AnchorProvider(connection, w as Wallet, {
 		commitment: 'confirmed',
 	});
-	const farmProgram = new PublicKey(
-		'6DDP3hohHprxPNUWVtwpK89QAzcB27Fk4NSCgcq368P6'
-	);
-
-	// const farmerProgram = new PublicKey(
-	// 	'5LJq1WKXV2bdgsosp6wk2pgvk1Rhc75ffRLRXGZvPQWU'
-	// );
-
 	const farmerProgram = new PublicKey(
-		'FEa3hjWEQEmuUgZtDQ1btp1Y2EKVhChqCzADTenewCsF'
+		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
 	);
 
-	// treeProgram
+	const farmProgram = new PublicKey(
+		'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
+	);
+
 	const programID = new PublicKey(
-		'EfYywm823JAajvTAHFv7wnKGi8M4R7BwqufaUEECxUxG'
+		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -72,7 +67,7 @@ const SelectCultivar = () => {
 
 			console.log('Cultivars', ct);
 
-			if (ct) {
+			if (ct.length !== 0) {
 				ct.map((ctvr: any) => {
 					let c: cultivar = ctvr.account;
 					// console.log('c is ', c);
@@ -85,7 +80,7 @@ const SelectCultivar = () => {
 					setCultivars(c2);
 				});
 				console.log('Cultivars is now', cultivars);
-				setReady(!ready);
+				setReady(true);
 			}
 		})();
 	}, []);
@@ -105,7 +100,7 @@ const SelectCultivar = () => {
 				],
 				program.programId
 			);
-			
+
 			(async () => {
 				let sBalance = await token.getAccount(
 					provider.connection,
@@ -114,9 +109,8 @@ const SelectCultivar = () => {
 				if (sBalance.amount < 1) {
 					alert!('Please get some, ' + c.name + ' seeds');
 				}
-				alert!('You have, ' + sBalance.amount + ' of ' + c.name);
+				// alert!('You have, ' + sBalance.amount + ' of ' + c.name);
 				router.push(`/plant-tree?name=${c.name}`);
-
 			})();
 		}
 	};

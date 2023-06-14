@@ -1,6 +1,6 @@
-export type Tree = {
+export type TreeProgram = {
   "version": "0.1.0",
-  "name": "tree",
+  "name": "tree_program",
   "instructions": [
     {
       "name": "createTree",
@@ -1697,9 +1697,9 @@ export type Tree = {
   ]
 };
 
-export const IDL: Tree = {
+export const IDL: TreeProgram = {
   "version": "0.1.0",
-  "name": "tree",
+  "name": "tree_program",
   "instructions": [
     {
       "name": "createTree",

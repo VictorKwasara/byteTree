@@ -1,9 +1,67 @@
-export type FruitMarket = {
+export type FarmerProgram = {
   "version": "0.1.0",
-  "name": "fruit_market",
+  "name": "farmer_program",
   "instructions": [
     {
-      "name": "initializeMarket",
+      "name": "initializeFarmer",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "userName",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "addTreeCount",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "addLandCount",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "listFruits",
       "accounts": [
         {
           "name": "payer",
@@ -17,62 +75,11 @@ export type FruitMarket = {
         },
         {
           "name": "farmer",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "treesMeta",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tree",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "fruitMarket",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "marketEntry",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "treeProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "farmProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "createMarket",
-      "accounts": [
-        {
-          "name": "payer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "fruitMarket",
+          "name": "marketAuthority",
           "isMut": true,
           "isSigner": false
         },
@@ -82,18 +89,23 @@ export type FruitMarket = {
           "isSigner": false
         },
         {
-          "name": "marketAuthority",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "fruitMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "marketEntry",
+          "name": "fruitVault",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMarket",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "marketEntry",
+          "isMut": false,
           "isSigner": false
         },
         {
@@ -107,6 +119,66 @@ export type FruitMarket = {
           "isSigner": false
         },
         {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "marketProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "cultivarName",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "createHarvestAccount",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "fruitMintAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
@@ -125,7 +197,7 @@ export type FruitMarket = {
       ]
     },
     {
-      "name": "buyFruits",
+      "name": "buyLand",
       "accounts": [
         {
           "name": "payer",
@@ -134,62 +206,27 @@ export type FruitMarket = {
         },
         {
           "name": "farm",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "cultivarMeta",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "cultivar",
+          "name": "farmer",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "fruitMintAuthority",
+          "name": "landMeta",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "marketAuthority",
+          "name": "landPiece",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "fruitMint",
+          "name": "vault",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "seedsAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "seedsBalance",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "fruitMarket",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "currentTopMarketEntry",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "topEntryFruitBalance",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "treeProgram",
-          "isMut": false,
           "isSigner": false
         },
         {
@@ -201,68 +238,118 @@ export type FruitMarket = {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "plant",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
         },
         {
-          "name": "tokenProgram",
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cultivar",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tree",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landPiece",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treeProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "cultivarName",
-          "type": "string"
-        }
-      ]
+      "args": []
     }
   ],
   "accounts": [
     {
-      "name": "marketEntry",
+      "name": "farmer",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "maker",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "address",
             "type": "publicKey"
           },
           {
-            "name": "count",
+            "name": "landCount",
             "type": "u64"
           },
           {
-            "name": "nextMaker",
-            "type": {
-              "option": "publicKey"
-            }
+            "name": "treeCount",
+            "type": "u64"
           }
         ]
       }
     },
     {
-      "name": "fruitMarket",
+      "name": "landPiece",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "topMaker",
-            "type": {
-              "option": "publicKey"
-            }
+            "name": "owner",
+            "type": "publicKey"
           },
           {
-            "name": "bottomMaker",
-            "type": {
-              "option": "publicKey"
-            }
-          },
-          {
-            "name": "totalFruitBalance",
+            "name": "number",
             "type": "u64"
           },
           {
-            "name": "price",
-            "type": "u64"
+            "name": "isPlanted",
+            "type": "bool"
           }
         ]
       }
@@ -270,12 +357,70 @@ export type FruitMarket = {
   ]
 };
 
-export const IDL: FruitMarket = {
+export const IDL: FarmerProgram = {
   "version": "0.1.0",
-  "name": "fruit_market",
+  "name": "farmer_program",
   "instructions": [
     {
-      "name": "initializeMarket",
+      "name": "initializeFarmer",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "userName",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "addTreeCount",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "addLandCount",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "listFruits",
       "accounts": [
         {
           "name": "payer",
@@ -289,62 +434,11 @@ export const IDL: FruitMarket = {
         },
         {
           "name": "farmer",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "treesMeta",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tree",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "fruitMarket",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "marketEntry",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "treeProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "farmProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "createMarket",
-      "accounts": [
-        {
-          "name": "payer",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "fruitMarket",
+          "name": "marketAuthority",
           "isMut": true,
           "isSigner": false
         },
@@ -354,18 +448,23 @@ export const IDL: FruitMarket = {
           "isSigner": false
         },
         {
-          "name": "marketAuthority",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "fruitMint",
           "isMut": false,
           "isSigner": false
         },
         {
-          "name": "marketEntry",
+          "name": "fruitVault",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMarket",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "marketEntry",
+          "isMut": false,
           "isSigner": false
         },
         {
@@ -379,6 +478,66 @@ export const IDL: FruitMarket = {
           "isSigner": false
         },
         {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "marketProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "cultivarName",
+          "type": "string"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "createHarvestAccount",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "fruitMintAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitVault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
@@ -397,7 +556,7 @@ export const IDL: FruitMarket = {
       ]
     },
     {
-      "name": "buyFruits",
+      "name": "buyLand",
       "accounts": [
         {
           "name": "payer",
@@ -406,62 +565,27 @@ export const IDL: FruitMarket = {
         },
         {
           "name": "farm",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "cultivarMeta",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "cultivar",
+          "name": "farmer",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "fruitMintAuthority",
+          "name": "landMeta",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "marketAuthority",
+          "name": "landPiece",
           "isMut": true,
           "isSigner": false
         },
         {
-          "name": "fruitMint",
+          "name": "vault",
           "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "seedsAuthority",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "seedsBalance",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "fruitMarket",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "currentTopMarketEntry",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "topEntryFruitBalance",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "treeProgram",
-          "isMut": false,
           "isSigner": false
         },
         {
@@ -473,68 +597,118 @@ export const IDL: FruitMarket = {
           "name": "systemProgram",
           "isMut": false,
           "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "plant",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
         },
         {
-          "name": "tokenProgram",
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cultivar",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tree",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landPiece",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "treeProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "cultivarName",
-          "type": "string"
-        }
-      ]
+      "args": []
     }
   ],
   "accounts": [
     {
-      "name": "marketEntry",
+      "name": "farmer",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "maker",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "address",
             "type": "publicKey"
           },
           {
-            "name": "count",
+            "name": "landCount",
             "type": "u64"
           },
           {
-            "name": "nextMaker",
-            "type": {
-              "option": "publicKey"
-            }
+            "name": "treeCount",
+            "type": "u64"
           }
         ]
       }
     },
     {
-      "name": "fruitMarket",
+      "name": "landPiece",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "topMaker",
-            "type": {
-              "option": "publicKey"
-            }
+            "name": "owner",
+            "type": "publicKey"
           },
           {
-            "name": "bottomMaker",
-            "type": {
-              "option": "publicKey"
-            }
-          },
-          {
-            "name": "totalFruitBalance",
+            "name": "number",
             "type": "u64"
           },
           {
-            "name": "price",
-            "type": "u64"
+            "name": "isPlanted",
+            "type": "bool"
           }
         ]
       }
