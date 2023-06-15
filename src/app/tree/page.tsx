@@ -7,6 +7,7 @@ import {
 	CardActionArea,
 	Grid,
 	Card,
+	Stack
 } from '@mui/material';
 
 import TreeActions from  '../components/TreeActions';
@@ -119,29 +120,30 @@ const TreeComponent = () => {
 	return (
 		<div className={styles.dv}>
 			{ready && tree ? (
-				<Grid container spacing={2} sx={{width:"100%", haight:"100%"}}>
+				<Grid container spacing={2} sx={{ width: '100%', haight: '100%' }}>
 					<Grid item xs={8} md={4}>
-						<Card className={styles.card}>
-							<Typography>name: {tree.cultivarName}</Typography>
-							<Typography>age: {tree.age.toString()}</Typography>
-							<Typography>health: {tree.health.toString()}</Typography>
-							<Typography>
-								is alive: {tree?.isAlive ? 'true' : 'false'}
-							</Typography>
-							<Typography>height: {tree?.height.toString()}</Typography>
-							<Typography>width: {tree?.girth.toString()}</Typography>
-							<Typography>
-								next_maturation:
-								{tree?.nextFruitMaturaturationTime.toString()}
-							</Typography>
-							<Typography>
-								expected fruit: {tree?.expectedFruitCount.toString()}{' '}
-							</Typography>
-						</Card>
+						<Stack direction='column' spacing={1}>
+							<Card className={styles.card}>
+								<Typography>name: {tree.cultivarName}</Typography>
+								<Typography>age: {tree.age.toString()}</Typography>
+								<Typography>health: {tree.health.toString()}</Typography>
+								<Typography>
+									is alive: {tree?.isAlive ? 'true' : 'false'}
+								</Typography>
+								<Typography>height: {tree?.height.toString()}</Typography>
+								<Typography>width: {tree?.girth.toString()}</Typography>
+								<Typography>
+									next_maturation:
+									{tree?.nextFruitMaturaturationTime.toString()}
+								</Typography>
+								<Typography>
+									expected fruit: {tree?.expectedFruitCount.toString()}{' '}
+								</Typography>
+							</Card>
+							{name ? <TreeActions cultivarName={name} /> : <></>}
+						</Stack>
 					</Grid>
-					<Grid item xs={8} md={4}>
-						{name? <TreeActions cultivarName={name} />: <></>}
-					</Grid>
+					<Grid item xs={8} md={4}></Grid>
 					<Grid item xs={8} md={4}>
 						<NutrientBalance cultivarName={tree.cultivarName} />
 					</Grid>

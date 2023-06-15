@@ -13,16 +13,16 @@ import image from '../images/tree.jpg';
 import { Link } from '@mui/material';
 import NextLink from 'next/link';
 
-const CreateCultivar = () => {
+const CreateCultivar = (props:{source:string, alt:string, header: string, body: string, href: string}) => {
 	return (
 		<div className={styles.outter}>
 			<Card>
-				<Link href='/create-cultivar' component={NextLink} underline='none'>
+				<Link href={props.href} component={NextLink} underline='none'>
 					<CardActionArea>
 						<CardMedia>
 							<Image
-								src='/d.jpg'
-								alt='a tree with a sunrise background'
+								src={props.source}
+								alt={props.alt}
 								width='275'
 								height='140'
 							/>
@@ -34,11 +34,12 @@ const CreateCultivar = () => {
 								component='h5'
 								color='text.secondary'
 							>
-								Create a cultivar
+								{props.header}
+								{/*  */}
 							</Typography>
 							<Typography variant='body2' color='secondary.main' component='p'>
-								You can create your own tree type, that other farmers can buy an
-								grow on their land.Give your tree a attributes that are unique.
+								{props.body}
+								{/* */}
 							</Typography>
 						</CardContent>
 					</CardActionArea>

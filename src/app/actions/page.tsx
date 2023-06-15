@@ -22,8 +22,7 @@ import {
 } from '@solana/wallet-adapter-react';
 import { Wallet, AnchorProvider } from '@project-serum/anchor';
 import CreateFarmer from '../components/CreateFarmer';
-import CreateCultivar from '../components/CreateCultivar';
-import ActionsCard from '../components/Actions';
+import ActionsCard from '../components/ActionsCard';
 import PlantTree from '../components/PlantTree';
 import ViewTrees from '../components/ViewTrees';
 import BuySeed from '../components/BuySeed';
@@ -37,6 +36,34 @@ type farmerAccount = {
 	treeCount: anchor.BN;
 	
 };
+
+
+const content = [
+	{
+		source: '/d.jpg',
+		alt: 'tree image',
+		header: 'Create a Cultivar',
+		body: 'You can create your own tree type, that other farmers can buy an	grow on their land.Give your tree a attributes that are unique.',
+		key: '001h',
+		href: '/create-cultivar',
+	},
+	{
+		source: '/d2.jpg',
+		alt: 'tree image',
+		header: 'Plant Tree',
+		body: 'Select a cultivar, Buy the associated Seeds, Create a tree, Plant the tree on your land',
+		key: '0011h',
+		href: '/select-cultivar',
+	},
+	{
+		source: '/d3.jpg',
+		alt: 'tree image',
+		header: 'View My Trees',
+		body: 'View My trees, Watch my trees, Add Nutrients, Harvest Fruits',
+		key: '0012h',
+		href: '/view-trees'
+	},
+];
 
 const Actions = () => {
 	const {
@@ -85,19 +112,27 @@ const Actions = () => {
 						<></>
 					)}
 				</Grid>
-				<Grid className={styles.ingrid} item xs={12} md={3}>
-					<CreateCultivar />
-				</Grid>
-				<Grid className={styles.ingrid} item xs={12} md={3}>
+
+				{content.map(
+					(
+						{ source, alt, header, body,key ,href},
+						i
+					) => (
+						<Grid className={styles.ingrid} item xs={12} key={key + i} md={3}>
+              <ActionsCard source={source} alt={alt} header={header} body= {body} href={href}/>
+						</Grid>
+					)
+				)}
+				{/* <Grid className={styles.ingrid} item xs={12} md={3}>
 					<PlantTree />
 				</Grid>
 				<Grid className={styles.ingrid} item xs={12} md={3}>
 					<ViewTrees />
-				</Grid>
-				{/* <Grid className={styles.ingrid} item xs={12} md={2}>
+				</Grid> */}
+				{/*<Grid className={styles.ingrid} item xs={12} md={2}>
 				</Grid> */}
 				<Grid className={styles.ingrid} item xs={12} md={3}>
-					<BuySeed/>
+					<BuySeed />
 				</Grid>
 			</Grid>
 		</Box>
