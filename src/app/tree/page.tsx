@@ -117,9 +117,9 @@ const TreeComponent = () => {
         )();      
     },[payer.publicKey]);
 	return (
-		<div>
+		<div className={styles.dv}>
 			{ready && tree ? (
-				<Grid container spacing={2}>
+				<Grid container spacing={2} sx={{width:"100%", haight:"100%"}}>
 					<Grid item xs={8} md={4}>
 						<Card className={styles.card}>
 							<Typography>name: {tree.cultivarName}</Typography>

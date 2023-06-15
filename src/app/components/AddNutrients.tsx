@@ -230,7 +230,7 @@ const AddNutrients = (props:{cultivarName: String, nutrient: Nutrient, amount: a
 		}
 	};
 
-	return <Button onClick={handleClick}>AddNutrients</Button>;
+	return <Button onClick={handleClick}>{props.nutrient}</Button>;
 };
 
 export default AddNutrients;

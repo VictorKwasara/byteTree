@@ -188,7 +188,7 @@ const CalculateRequired = (props: {
 					[Buffer.from('nutrientmintauthority')],
 					program.programId
 				);
-
+			console.log('w=jwjjwjwjwjwwwwiwiwwiwiwiwwww');
 			const tx = await program.methods
 				.calculateRequired()
 				.accounts({
@@ -223,6 +223,7 @@ const CalculateRequired = (props: {
 			// 	payer: payer.publicKey,
 			// 	landPieces: landP.length,
 			// });
+		
 		}
 	};
 

@@ -23,21 +23,9 @@ const TreeActions = (props: {cultivarName: String, }) => {
 			orientation='vertical'
 			variant='contained'
 			aria-label='outlined button group'
-		>
-			<CheckAndUpdate cultivarName={props.cultivarName} />
+			>
 			<CalculateRequired cultivarName={props.cultivarName} />
-			<ConsumeNutrients
-				cultivarName={props.cultivarName}
-				nutrient='consumeNitrogen'
-			/>
-			<ConsumeNutrients
-				cultivarName={props.cultivarName}
-				nutrient='consumePhosphorus'
-			/>
-			<ConsumeNutrients
-				cultivarName={props.cultivarName}
-				nutrient='consumePotassium'
-			/>
+			<CheckAndUpdate cultivarName={props.cultivarName} />
 			<AddNutrients
 				cultivarName={props.cultivarName}
 				nutrient='addPotassium'

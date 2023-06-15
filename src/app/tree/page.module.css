@@ -1,1 +1,6 @@
 .card{}
+
+.dv{
+  width: 100% ;
+  background-color: blue;
+}

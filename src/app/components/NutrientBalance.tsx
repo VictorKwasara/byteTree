@@ -15,6 +15,7 @@ import {
 	Card,
 } from '@mui/material';
 import { publicKey } from '@project-serum/borsh';
+import { Token } from 'typescript';
 
 type balance = {   
    nitrogen: anchor.BN,
@@ -49,7 +50,6 @@ const NutrientBalance = ( props:{ cultivarName: String}) => {
 
     useEffect(()=>{
       console.log("Are we in here getting? huh");
-
       (async () => {
         if(payer.publicKey) {
 					let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
@@ -79,11 +79,10 @@ const NutrientBalance = ( props:{ cultivarName: String}) => {
 						program.programId
 					);
 					// 	inputBalance,
-					 let [inputBalance] =
-						anchor.web3.PublicKey.findProgramAddressSync(
-							[Buffer.from('nutrientbalance'), tree.toBuffer()],
-							program.programId
-						);
+					let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+						[Buffer.from('nutrientbalance'), tree.toBuffer()],
+						program.programId
+					);
 
 					// waterBalance,
 					let [waterBalance] = anchor.web3.PublicKey.findProgramAddressSync(
@@ -108,23 +107,97 @@ const NutrientBalance = ( props:{ cultivarName: String}) => {
 						program.programId
 					);
 
-          let nb = await token.getAccount(connection, nitrogenBalance);
-          // let kb = await token.getAccount(connection, potassiumBalance);
-          // let pb = await token.getAccount(connection, phosphorusBalance);
-          // let wt = await token.getAccount(connection, waterBalance);
+					// nitrogenMint,
+					let [nitrogenMint] = anchor.web3.PublicKey.findProgramAddressSync(
+						[Buffer.from('nitrogenmint')],
+						program.programId
+					);
 
+					// potassiumMint,
+					let [potassiumMint] = anchor.web3.PublicKey.findProgramAddressSync(
+						[Buffer.from('potassiummint')],
+						program.programId
+					);
+					//phosphorusMint,
+					let [phosphorusMint] = anchor.web3.PublicKey.findProgramAddressSync(
+						[Buffer.from('phosphorusmint')],
+						program.programId
+					);
 
-          console.log(nb);
-          console.log(nb.amount)
-          // let b: balance = {
-          //    nitrogen: nb.amount ,
-          //    potassium: kb.amount ,
-          //    phosphorus: pb.amount ,
-          //    water: wt.amount ,
-          // }
+					// water_mint
+					let [waterMint] = anchor.web3.PublicKey.findProgramAddressSync(
+						[Buffer.from('watermint')],
+						program.programId
+					);
 
-          // console.log(b)
-          // setBalance(b);
+					let [nutrientMintAuthority] =
+						anchor.web3.PublicKey.findProgramAddressSync(
+							[Buffer.from('nutrientmintauthority')],
+							program.programId
+						);
+
+					let nb: any;
+					let kb: any;
+					let pb: any;
+					let wt: any;
+
+					const getAccounts = async ()  => {
+							nb = await token.getAccount(connection, nitrogenBalance);
+							kb = await token.getAccount(connection, potassiumBalance);
+							pb = await token.getAccount(connection, phosphorusBalance);
+							wt = await token.getAccount(connection, waterBalance);
+					}
+
+					try {
+						 await getAccounts()
+					} catch (e) {
+						console.log('the error is this => ', e);
+
+						if (e == 'TokenAccountNotFoundError') {
+							console.log('gotcha');
+
+							alert('Once of Initialisation of accounts');
+
+							const tx = await program.methods
+								.initTreeAccounts()
+								.accounts({
+									farm,
+									farmer,
+									waterMint,
+									nitrogenMint,
+									potassiumMint,
+									phosphorusMint,
+									nutrientMintAuthority,
+									treesMeta,
+									tree,
+									inputBalance,
+									waterBalance,
+									nitrogenBalance,
+									phosphorusBalance,
+									potassiumBalance,
+									farmProgram,
+								})
+								.rpc();
+
+								await getAccounts();
+						}
+					}
+
+					console.log('The nitrogen balance is ', nb);
+    
+					let balance = 
+					console.log("the amount is? ",nb.amount);
+					if (nb != null || kb != null|| pb != null || wt != null) {
+						let b: balance = {
+							nitrogen: nb?.amount,
+							potassium: kb?.amount,
+							phosphorus: pb?.amount,
+							water: wt?.amount,
+						};
+
+						console.log(b);
+						setBalance(b);
+					}						
 				}
       })();
 
@@ -132,15 +205,21 @@ const NutrientBalance = ( props:{ cultivarName: String}) => {
 
   return (
 		<div>
-			{balance !== null ? (
+			{balance != null ? (
 				<div className={styles.div}>
-					<Typography>nitrogen balance is {balance.nitrogen}</Typography>
-					<Typography>potassium balance is{balance.potassium}</Typography>
-					<Typography>phosphorus balance is{balance.phosphorus}</Typography>
-					<Typography>water balance is{balance.water}</Typography>
+					<Typography>
+						nitrogen balance is {balance.nitrogen.toString()}
+					</Typography>
+					<Typography>
+						potassium balance is {balance.potassium.toString()}
+					</Typography>
+					<Typography>
+						phosphorus balance is {balance.phosphorus.toString()}
+					</Typography>
+					<Typography>water balance is {balance.water.toString()}</Typography>
 				</div>
-			  ):(
-				<>Nothing </>
+			) : (
+				<>Nothing</>
 			)}
 		</div>
 	);

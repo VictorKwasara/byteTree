@@ -234,6 +234,102 @@ export type TreeProgram = {
       ]
     },
     {
+      "name": "initTreeAccounts",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "waterMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nitrogenMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "potassiumMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "phosphorusMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nutrientMintAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tree",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "inputBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "waterBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nitrogenBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "phosphorusBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "potassiumBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "checkAndUpdate",
       "accounts": [
         {
@@ -353,11 +449,6 @@ export type TreeProgram = {
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -557,11 +648,6 @@ export type TreeProgram = {
           "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -691,11 +777,6 @@ export type TreeProgram = {
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -829,11 +910,6 @@ export type TreeProgram = {
           "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -963,11 +1039,6 @@ export type TreeProgram = {
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1101,11 +1172,6 @@ export type TreeProgram = {
           "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -1114,6 +1180,132 @@ export type TreeProgram = {
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "consumeNutrients",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "waterMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nitrogenMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "potassiumMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "phosphorusMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nutrientMintAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tree",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landPiece",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "inputBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "waterBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nitrogenBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "phosphorusBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "potassiumBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMintAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "requiredNutrients",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
     },
     {
       "name": "consumePhosphorus",
@@ -1235,11 +1427,6 @@ export type TreeProgram = {
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1373,11 +1560,6 @@ export type TreeProgram = {
           "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -1507,11 +1689,6 @@ export type TreeProgram = {
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -1933,6 +2110,102 @@ export const IDL: TreeProgram = {
       ]
     },
     {
+      "name": "initTreeAccounts",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "waterMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nitrogenMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "potassiumMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "phosphorusMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nutrientMintAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tree",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "inputBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "waterBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nitrogenBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "phosphorusBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "potassiumBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "checkAndUpdate",
       "accounts": [
         {
@@ -2052,11 +2325,6 @@ export const IDL: TreeProgram = {
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -2256,11 +2524,6 @@ export const IDL: TreeProgram = {
           "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -2390,11 +2653,6 @@ export const IDL: TreeProgram = {
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -2528,11 +2786,6 @@ export const IDL: TreeProgram = {
           "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -2662,11 +2915,6 @@ export const IDL: TreeProgram = {
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -2800,11 +3048,6 @@ export const IDL: TreeProgram = {
           "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -2813,6 +3056,132 @@ export const IDL: TreeProgram = {
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "consumeNutrients",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "waterMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nitrogenMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "potassiumMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "phosphorusMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nutrientMintAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tree",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landPiece",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "inputBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "waterBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "nitrogenBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "phosphorusBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "potassiumBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMintAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "requiredNutrients",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "vault",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
     },
     {
       "name": "consumePhosphorus",
@@ -2934,11 +3303,6 @@ export const IDL: TreeProgram = {
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }
@@ -3072,11 +3436,6 @@ export const IDL: TreeProgram = {
           "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": [
@@ -3206,11 +3565,6 @@ export const IDL: TreeProgram = {
         },
         {
           "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }

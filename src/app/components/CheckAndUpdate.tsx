@@ -21,6 +21,7 @@ import * as token from '@solana/spl-token';
 const CheckAndUpdate = (props: { cultivarName: String }) => {
 	const w = useAnchorWallet();
 	// const { connection } = useConnection();
+	// const [consume, setConsume ] =  useStat(false)
 
 	const connection = new Connection('https://api.devnet.solana.com');
 
@@ -44,89 +45,38 @@ const CheckAndUpdate = (props: { cultivarName: String }) => {
 	let payer = program.provider;
 
 	const handleClick =  () => {
-
 			(async () => {
-		if (payer.publicKey) {		
-				console.log('Inside if satement  dddddd');
-				let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('farm')],
-					farmProgram
-				);
-				// farmer
-				let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('farmer'), payer.publicKey.toBuffer()],
-					farmerProgram
-				);
+		if (payer.publicKey) {
+			// farm
+			 let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('farm')],
+				farmProgram
+			);
 
-				let [landMeta] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('landmeta'), farm.toBuffer()],
-					farmProgram
-				);
+			// farmer
+			 let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('farmer'), payer.publicKey.toBuffer()],
+				farmerProgram
+			);
 
-				let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
-					farmerProgram
-				);
+			// land_meta
+			 let [landMeta] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('landmeta'), farm.toBuffer()],
+				farmProgram
+			);
 
-				let [vault] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('carbonvault')],
-					farmProgram
-				);
+			//land_piece
+			 let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
+				farmerProgram
+			);
+			
 
-				console.log('farm', farm.toString());
+			let [treesMeta] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('treesmeta'), farm.toBuffer()],
+				farmProgram);
 
-				// cultivar_meta
-				let [cultivarMeta] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('cultivarmeta'), farm.toBuffer()],
-					farmProgram
-				);
-
-				console.log('cultivarMeta', cultivarMeta.toString());
-
-				let [cultivar] = anchor.web3.PublicKey.findProgramAddressSync(
-					[
-						Buffer.from('cultivar'),
-						cultivarMeta.toBuffer(),
-						Buffer.from(props.cultivarName),
-					],
-					program.programId
-				);
-
-				console.log('cultivar', cultivar.toString());
-
-				let [fruitMint] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('fruitmint'), Buffer.from(props.cultivarName)],
-					program.programId
-				);
-				console.log('fruitMint', fruitMint.toString());
-
-				let [fruitMintAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('fruitmintauthority')],
-					program.programId
-				);
-
-				let [seedsAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('seedsauthority'), payer.publicKey.toBuffer()],
-					program.programId
-				);
-
-				let [seedsBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[
-						Buffer.from('seedsbalance'),
-						seedsAuthority.toBuffer(),
-						Buffer.from(props.cultivarName),
-					],
-					program.programId
-				);
-
-				// trees_meta
-				let [treesMeta] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('treesmeta'), farm.toBuffer()],
-					farmProgram
-				);
-
-				//tree
-				let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
+			 let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
 					[
 						Buffer.from('tree'),
 						treesMeta.toBuffer(),
@@ -135,68 +85,11 @@ const CheckAndUpdate = (props: { cultivarName: String }) => {
 					],
 					program.programId
 				);
-				let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('nutrientbalance'), tree.toBuffer()],
-					program.programId
-				);
 
-				//fruitBalance,
-				let [fruitBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('fruit'), tree.toBuffer()],
-					program.programId
-				);
-
-				//requiredNutrients
-				let [requiredNutrients] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('requirednutrients'), tree.toBuffer()],
-					program.programId
-				);
-				// waterBalance,
-				let [waterBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('water'), inputBalance.toBuffer()],
-					program.programId
-				);
-
-				// 	nitrogenBalance,
-				let [nitrogenBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('nitrogen'), inputBalance.toBuffer()],
-					program.programId
-				);
-				// 	phosphorusBalance,
-				let [phosphorusBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('phosphorus'), inputBalance.toBuffer()],
-					program.programId
-				);
-				// 	potassiumBalance,
-				let [potassiumBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('potassium'), inputBalance.toBuffer()],
-					program.programId
-				);
-
-				// nitrogenMint,
-				let [nitrogenMint] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('nitrogenmint')],
-					program.programId
-				);
-
-				// potassiumMint,
-				let [potassiumMint] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('potassiummint')],
-					program.programId
-				);
-				//phosphorusMint,
-				let [phosphorusMint] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('phosphorusmint')],
-					program.programId
-				);
-
-				// water_mint
 				let [waterMint] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('watermint')],
 					program.programId
 				);
-
-				// nutrient_mint_authority
 
 				let [nutrientMintAuthority] =
 					anchor.web3.PublicKey.findProgramAddressSync(
@@ -204,50 +97,140 @@ const CheckAndUpdate = (props: { cultivarName: String }) => {
 						program.programId
 					);
 
-				const tx = await program.methods
-					.checkAndUpdate()
-					.accounts({
-						farm,
-						farmer,
-						waterMint,
-						nitrogenMint,
-						potassiumMint,
-						phosphorusMint,
-						nutrientMintAuthority,
-						landMeta,
-						treesMeta,
-						tree,
-						landPiece,
-						inputBalance,
-						waterBalance,
-						nitrogenBalance,
-						phosphorusBalance,
-						potassiumBalance,
-						fruitMintAuthority,
-						fruitMint,
-						fruitBalance,
-						requiredNutrients,
-						vault,
-						farmProgram,
-						tokenProgram: token.TOKEN_PROGRAM_ID, 
-						systemProgram: anchor.web3.SystemProgram.programId
-					})
-					.rpc();
+				 let [vault] = anchor.web3.PublicKey.findProgramAddressSync(
+						[Buffer.from('carbonvault')],
+						farmProgram
+					);
 
-				console.log(`The transaction signature is ${tx.toString()}`);
-				alert('success ' + tx);
-			} })();	
+			let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('nutrientbalance'), tree.toBuffer()],
+				program.programId
+			);
 
+			let [nitrogenMint] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('nitrogenmint')],
+				program.programId
+			);
+
+			let [potassiumMint] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('potassiummint')],
+				program.programId
+			);
+
+			let [phosphorusMint] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('phosphorusmint')],
+				program.programId
+			);
+
+			let [fruitMintAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('fruitmintauthority')],
+				program.programId
+			);
+
+			 let [fruitMint] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('fruitmint'), Buffer.from(props.cultivarName)],
+					program.programId
+				);
+
+				let [fruitBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('fruit'), tree.toBuffer()],
+					program.programId
+				);
+
+				 let [requiredNutrients] =
+						anchor.web3.PublicKey.findProgramAddressSync(
+							[Buffer.from('requirednutrients'), tree.toBuffer()],
+							program.programId
+						);
+
+				let [waterBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('water'), inputBalance.toBuffer()],
+					program.programId
+				);
+
+				let [nitrogenBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('nitrogen'), inputBalance.toBuffer()],
+					program.programId
+				);
+
+				 let [phosphorusBalance] =
+						anchor.web3.PublicKey.findProgramAddressSync(
+							[Buffer.from('phosphorus'), inputBalance.toBuffer()],
+							program.programId
+						);
+
+				 let [potassiumBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+						[Buffer.from('potassium'), inputBalance.toBuffer()],
+						program.programId
+					);			
 			
-			
-			// setData({
-			// 	farmer: farmer,
-			// 	payer: payer.publicKey,
-			// 	landPieces: landP.length,
-			// });
-		
+			setTimeout( () => {
+				 consume()
+			}, 5000);	
+			const consume = async () => {					
+			alert("Consume nutrients and update tree")
+			const tx2 = await program.methods
+				.consumeNutrients()
+				.accounts({
+					farm,
+					farmer,
+					waterMint,
+					nitrogenMint,
+					potassiumMint,
+					phosphorusMint,
+					nutrientMintAuthority,
+					landMeta,
+					treesMeta,
+					tree,
+					landPiece,
+					inputBalance,
+					waterBalance,
+					nitrogenBalance,
+					phosphorusBalance,
+					potassiumBalance,
+					fruitMintAuthority,
+					fruitMint,
+					fruitBalance,
+					requiredNutrients,
+					vault,
+					farmProgram,
+				})
+				.rpc();
+			  console.log('The nutrients have been consumed: ', tx2.toString());			
+        }
+					const tx = await program.methods
+						.checkAndUpdate()
+						.accounts({
+							farm,
+							farmer,
+							waterMint,
+							nitrogenMint,
+							potassiumMint,
+							phosphorusMint,
+							nutrientMintAuthority,
+							landMeta,
+							treesMeta,
+							tree,
+							landPiece,
+							inputBalance,
+							waterBalance,
+							nitrogenBalance,
+							phosphorusBalance,
+							potassiumBalance,
+							fruitMintAuthority,
+							fruitMint,
+							fruitBalance,
+							requiredNutrients,
+							vault,
+							farmProgram,
+							tokenProgram: token.TOKEN_PROGRAM_ID,
+						})
+						.rpc();
+
+					console.log(`Tree has bee updated ${tx.toString()}`);
+					alert('Tree updated ' + tx);
+		}})();			
 	};
-
 	return <Button onClick={handleClick}>CheckAndUpdate</Button>;
 };
 

@@ -1,5 +1,6 @@
 .div { 
    border: 1px solid grey ;
-   min-width: 200px ;
-   min-height: 300px ;
+   /* min-width: 200px ;
+   min-height: 300px ; */
+   background-color: brown;
 }
