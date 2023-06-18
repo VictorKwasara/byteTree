@@ -16,6 +16,7 @@ import styles from './styles/calculate.module.css';
 import NextLink from 'next/link';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
+import {motion} from 'framer-motion';
 
 const CalculateRequired = (props: { cultivarName: String }) => {
 	const [calculated, setCalculated] = useState(false)
@@ -228,13 +229,24 @@ const CalculateRequired = (props: { cultivarName: String }) => {
 		}
 	};
 
-	return (
-		!calculated?(
-		<div className={styles.container}>
-			<Button variant="contained" sx={{ color: '#F1F085' }} onClick={handleClick}>
-				CalculateRequired
-			</Button>
-		</div>): <></>
+	return  (
+		<motion.div
+			animate={{ x:!calculated ? 0 : "102vw", transition: { duration: 2, delay: 1 } }}
+			initial={{ x: '-100vw' }}
+			className={styles.container}
+		>
+			<div className={styles.btn}>
+				<Button
+					variant='contained'
+					sx={{ color: '#F1F085' }}
+					onClick={handleClick}
+				>
+					CalculateRequired
+				</Button>
+			</div>
+			<div className={styles.break}></div>
+			<div className={styles.empty}></div>
+		</motion.div> 
 	);
 };
 

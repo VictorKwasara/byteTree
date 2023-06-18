@@ -3,10 +3,31 @@
  top: 0px ;
  left: 0px ;
  height: 101vh;
- width: 101vw ;
+ width: 201vw ;
  background-color: rgb(0, 0, 0);
  z-index: 1000000;
  display: flex ;
  align-items: center;
  justify-content: center; 
+}
+
+.btn{
+  height: 101vh;
+  width: 99vw ;
+  display: flex ;
+  align-items: center;
+  justify-content: center; 
+  background-image: radial-gradient(circle, #f9f871, #e4ed6e, #d0e16b, #bdd668, #abca65);
+}
+.break{
+  height: 101vh;
+  width: 3vw ;
+  box-shadow:  0 0 10px 3px #6b9a59 ;
+  z-index: 100000000
+}
+
+.empty{
+  height: 101vh;
+  width: 99vw ;
+  background-image: radial-gradient(circle, #6b9a59, #7aa65c, #89b25f, #9abe62, #abca65);
 }

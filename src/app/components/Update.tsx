@@ -17,6 +17,7 @@ import NextLink from 'next/link';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import * as token from '@solana/spl-token';
+import { motion } from 'framer-motion';
 
 const CheckAndUpdate = (props: { cultivarName: String }) => {
 	const w = useAnchorWallet();
@@ -229,23 +230,28 @@ const CheckAndUpdate = (props: { cultivarName: String }) => {
 					.rpc();
 
 				console.log(`Tree has bee updated ${tx.toString()}`);
-				alert('Tree updated ' + tx);
+				// alert('Tree updated ' + tx);
 				setUpdated(true)
 			}
 		})();
 	};
-	return !updated ? (
-		<div className={styles.container}>
+	return   (
+		<motion.div
+			animate={{
+				x: !updated ? 0 : '102vw',
+				transition: { duration: 2, delay: 1 },
+			}}
+			initial={{ x: 0 }}
+			className={styles.container}			
+		>
 			<Button
 				variant='contained'
-				sx={{ color: '#F1F085' }}
+				sx={{ color: '#F1F085'}}
 				onClick={handleClick}
 			>
 				CheckAndUpdate
 			</Button>
-		</div>
-	) : (
-		<></>
+		</motion.div>
 	);
 };
 

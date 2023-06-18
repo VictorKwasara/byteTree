@@ -17,9 +17,7 @@ import NextLink from 'next/link';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 
-const CalculateRequired = (props: {
-	cultivarName: String;
-}) => {
+const CalculateRequired = (props: { cultivarName: String; handleEnable: () => any}) => {
 	const w = useAnchorWallet();
 	// const { connection } = useConnection();
 
@@ -218,12 +216,12 @@ const CalculateRequired = (props: {
 				.rpc();
 			console.log(`The transaction signature is ${tx.toString()}`);
 			alert('success ' + tx);
+			props.handleEnable()
 			// setData({
 			// 	farmer: farmer,
 			// 	payer: payer.publicKey,
 			// 	landPieces: landP.length,
 			// });
-		
 		}
 	};
 

@@ -34,9 +34,7 @@ type farmerAccount = {
 	address: PublicKey;
 	landCount: anchor.BN;
 	treeCount: anchor.BN;
-	
 };
-
 
 const content = [
 	{
@@ -61,7 +59,7 @@ const content = [
 		header: 'View My Trees',
 		body: 'View My trees, Watch my trees, Add Nutrients, Harvest Fruits',
 		key: '0012h',
-		href: '/view-trees'
+		href: '/view-trees',
 	},
 ];
 
@@ -113,16 +111,17 @@ const Actions = () => {
 					)}
 				</Grid>
 
-				{content.map(
-					(
-						{ source, alt, header, body,key ,href},
-						i
-					) => (
-						<Grid className={styles.ingrid} item xs={12} key={key + i} md={3}>
-              <ActionsCard source={source} alt={alt} header={header} body= {body} href={href}/>
-						</Grid>
-					)
-				)}
+				{content.map(({ source, alt, header, body, key, href }, i) => (
+					<Grid className={styles.ingrid} item xs={12} key={key + i} md={3}>
+						<ActionsCard
+							source={source}
+							alt={alt}
+							header={header}
+							body={body}
+							href={href}
+						/>
+					</Grid>
+				))}
 				{/* <Grid className={styles.ingrid} item xs={12} md={3}>
 					<PlantTree />
 				</Grid>
