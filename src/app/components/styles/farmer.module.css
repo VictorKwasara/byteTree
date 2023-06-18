@@ -1,13 +1,15 @@
 .box {
   display: flex ;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-image: linear-gradient(to right top, #f9f871, #faf968, #fcfb5f, #fdfc54, #fffd49);
-  box-shadow: 0 3px 5px 3px #fffd49;
-  height: 300px;
+  flex-direction: row;
+  /* align-items: center;
+  justify-content: center; */
+  /* background-image: linear-gradient(to right top, #f9f871, #faf968, #fcfb5f, #fdfc54, #fffd49);
+  box-shadow: 0 3px 5px 3px #fffd49; */
+  background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c);
+  /* height: 300px; */
   border-radius: 0 0 5px 5px;
   margin-top: 0 ;
+  padding: 10px;
   /* width: 650px ; */
 }
 
@@ -16,4 +18,52 @@
 }
 .text2{
   /* color:#79881D; */
+}
+
+.card {
+  width: 380px;
+  height: 180px;
+  border: 1px solid #1D3C2F;
+  display: flex ;
+  align-items: center;
+  justify-content: center;  
+  margin-top: -10px;
+  padding: 10px;
+}
+
+.image {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background-image: url("../../../../public/face4.png");
+  background-size: cover;
+  margin-left: -13px;  
+  border: 10px solid rgba(125,129,76,.2);
+  /* position: absolute ;  
+  top: -20% ;
+  left: 10% ; 
+  z-index: 10000000000000000000000000 */
+}
+
+.dv {
+  margin-left: 100px ;  
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  background-color: none;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.imgSection {
+  height: 72px;
+  background-color: none ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000000;
+  margin-top: 30px;
 }

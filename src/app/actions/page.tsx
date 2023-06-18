@@ -27,6 +27,8 @@ import PlantTree from '../components/PlantTree';
 import ViewTrees from '../components/ViewTrees';
 import BuySeed from '../components/BuySeed';
 import FarmerComponent from '../components/Farmer';
+import { motion } from 'framer-motion';
+
 const connection = new Connection('https://api.devnet.solana.com');
 
 type farmerAccount = {
@@ -94,47 +96,56 @@ const Actions = () => {
 		console.log('clicked');
 		setFarmer(farmerAccount);
 	};
-	return (
-		<Box className={styles.box}>
-			<CreateFarmer searchFarmer={searchFarmer} />
-			<Grid container spacing={2} className={styles.grid}>
-				<Grid className={styles.ingrid} item xs={12} md={12}>
-					{farmer ? (
-						<FarmerComponent
-							name={farmer?.name}
-							landCount={farmer?.landCount}
-							treeCount={farmer?.treeCount}
-							cultivarName={null}
-						/>
-					) : (
-						<></>
-					)}
-				</Grid>
 
-				{content.map(({ source, alt, header, body, key, href }, i) => (
-					<Grid className={styles.ingrid} item xs={12} key={key + i} md={3}>
-						<ActionsCard
-							source={source}
-							alt={alt}
-							header={header}
-							body={body}
-							href={href}
-						/>
+	return (
+		<div>
+			<CreateFarmer searchFarmer={searchFarmer} />
+			<motion.div
+				animate={{
+					opacity: 1,			
+					transition: { duration: 3, delay: 1 },
+				}}
+				initial={{ opacity: 0 }}
+				className={styles.box}
+			>
+				<Grid container spacing={2} className={styles.grid}>
+					<Grid className={styles.ingrid} item xs={12} md={12}>						
+							<motion.div
+								animate={{
+									opacity: farmer ? 1 : 0,
+									transition: { duration: 2 },
+								}}
+								initial={{ opacity: 0 }}
+								className={styles.farmer}
+							
+							>
+							{ farmer ?  <FarmerComponent
+									name={farmer?.name}
+									landCount={farmer?.landCount}
+									treeCount={farmer?.treeCount}
+									cultivarName={null}
+								/>: (
+							<></>
+						  )}
+						</motion.div>						 
 					</Grid>
-				))}
-				{/* <Grid className={styles.ingrid} item xs={12} md={3}>
-					<PlantTree />
+					{content.map(({ source, alt, header, body, key, href }, i) => (
+						<Grid className={styles.ingrid} item xs={12} key={key + i} md={3}>
+							<ActionsCard
+								source={source}
+								alt={alt}
+								header={header}
+								body={body}
+								href={href}
+							/>
+						</Grid>
+					))}
+					<Grid className={styles.ingrid} item xs={12} md={3}>
+						<BuySeed />
+					</Grid>
 				</Grid>
-				<Grid className={styles.ingrid} item xs={12} md={3}>
-					<ViewTrees />
-				</Grid> */}
-				{/*<Grid className={styles.ingrid} item xs={12} md={2}>
-				</Grid> */}
-				<Grid className={styles.ingrid} item xs={12} md={3}>
-					<BuySeed />
-				</Grid>
-			</Grid>
-		</Box>
+			</motion.div>
+		</div>
 	);
 };
 

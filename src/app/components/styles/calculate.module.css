@@ -29,5 +29,5 @@
 .empty{
   height: 101vh;
   width: 99vw ;
-  background-image: radial-gradient(circle, #6b9a59, #7aa65c, #89b25f, #9abe62, #abca65);
+ background-image:  radial-gradient(circle, #6b9a59, #7aa65c, #89b25f, #9abe62, #abca65);
 }

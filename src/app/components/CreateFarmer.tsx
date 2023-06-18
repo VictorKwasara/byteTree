@@ -12,6 +12,7 @@ import {
 	AnchorProvider,
 } from '@project-serum/anchor';
 import { Connection,PublicKey } from '@solana/web3.js';
+import {motion} from 'framer-motion';
 
 type farmerAccount = {
 	name: string,
@@ -167,54 +168,72 @@ const CreateFarmer = (props: {
 
 	return (
 		<>
-			{!isLoggedIn ? (
-				<div className={styles.outter}>
-					<div className={styles.div}>
-						<legend className={styles.legend}>
-							<Typography
-								className={styles.text1}
-								variant='h4'
-								component='h4'
-								color='secondary'
+			{!isLoggedIn ? (<>
+			
+					<motion.div
+					animate={{
+						opacity: 0,
+						transition: { duration: 7 },
+					}}
+					initial={{ opacity: 1 }}
+					className={styles.outter}
+				>	</motion.div>
+
+					<motion.div
+						className={styles.inner}
+						animate={{
+							opacity: 1,
+							transition: { duration: 3, },
+						}}
+						initial={{ opacity: .5 }}
+					>
+						<div className={styles.div}>
+							<legend className={styles.legend}>
+								<Typography
+									className={styles.text1}
+									variant='h4'
+									component='h4'
+									color='secondary'
+								>
+									Search or Create Account
+								</Typography>
+							</legend>
+							<label htmlFor='name'>
+								<Typography
+									className={styles.text2}
+									component='h5'
+									color='secondary'
+								>
+									Whats your Name?
+								</Typography>
+							</label>
+							<TextField
+								id='name'
+								variant='filled'
+								label='Name'
+								className={styles.textfield}
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								required
+								inputProps={{
+									sx: {
+										margin: '0px',
+										backgroundColor: '#F9F871',
+									},
+								}}
+							/>
+							<Button
+								variant='contained'
+								sx={{ color: '#F9F871' }}
+								onClick={() => {
+									handleCreate();
+								}}
 							>
-								Search or Create Account
-							</Typography>
-						</legend>
-						<label htmlFor='name'>
-							<Typography
-								className={styles.text2}
-								component='h5'
-								color='secondary'
-							>
-								Whats your Name?
-							</Typography>
-						</label>
-						<TextField
-							id='name'
-							variant='filled'
-							label='Name'
-							className={styles.textfield}
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-							required
-							inputProps={{
-								sx: {
-									margin: '0px',
-									backgroundColor: '#F9F871',
-								},
-							}}
-						/>
-						<Button
-							variant='contained'
-							sx={{ color: '#F9F871' }}
-							onClick={() => {
-								handleCreate();
-							}}
-						>
-							Enter
-						</Button>
-					</div>
-				</div>
+								Enter
+							</Button>
+						</div>
+					</motion.div>
+			</>				
 			) : (
 				<></>
 			)}

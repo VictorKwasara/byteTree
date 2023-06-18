@@ -37,7 +37,8 @@ export default function Home() {
 					href='/actions'
 					size='large'
 					variant='contained'
-					color='secondary'
+					color="secondary"
+					// sx={{backgroundColor:'text.secondary'}}
 				>
 					Become A Farmer
 				</Button>

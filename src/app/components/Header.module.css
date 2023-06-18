@@ -10,14 +10,15 @@
 	/* justify-content: space-around;  */
 	/* background-image: linear-gradient(to top, #14372f, #165849, #137c64, #0ca280, #04c99b); */
 	/* background-image: linear-gradient(to top, rgba(137,155,176,.2), rgba(137,155,176,.8)); */
-	background-image: linear-gradient(
+	/* background-image: linear-gradient(
 		to top,
 		#f9f871,
 		#f9f86f,
 		#f8f76d,
 		#f8f76b,
 		#f7f669
-	);
+	); */
+	background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c);
 }
 .toolbar {
 	/* width: 100vw , */

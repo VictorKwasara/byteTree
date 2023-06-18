@@ -75,20 +75,38 @@ const Farmer = (props: {
 
 	return (
 		<Box className={styles.box}>
-			<Stack direction={{ sm: 'column', md: 'row' }} spacing={{ sm: 3, md: 1 }}>
-				<div>
-					<Typography variant='h3' className={styles.text1}>
+			  <div className={styles.content}>
+				  <div className={styles.imgSection}>
+					    <div className={styles.image}> </div>
+				  </div>
+				  <Card className={styles.card}>
+					<Typography
+						variant='h4'
+						color='text.secondary'
+						className={styles.text1}
+					>
 						Welcome {props.name}
 					</Typography>
-					<Typography className={styles.text2} variant='h5'>
+					<Typography
+						className={styles.text2}
+						variant='body1'
+						color='secondary.main'
+					>
 						You have {props.landCount.toString()} pieces of land
 					</Typography>
-					<Typography className={styles.text2} variant='h5'>
+					<Typography
+						color='secondary.main'
+						className={styles.text2}
+						variant='body1'
+					>
 						You have planted {props.treeCount.toString()} trees
 					</Typography>
+				  </Card>
 				</div>
-				<Actions cultivarName={props.cultivarName} />
-			</Stack>
+				<div className={styles.dv}>
+					<Actions cultivarName={props.cultivarName} />
+				</div>
+			
 		</Box>
 	);
 };

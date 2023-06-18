@@ -7,10 +7,23 @@
   display:flex;
   align-items: center;
   justify-content: center;
-  background-color: black;
-  opacity: .85;
+  background-image: radial-gradient(circle, #000000, #060403, #0a0804, #0a0d08, #08110f);
+  /* opacity: .95; */
   z-index: 1001;
 }
+
+.inner{
+   width:100vw ;
+   height: 100vh;
+   position:absolute ;
+   top: 0 ;
+   left: 0 ;
+   display:flex;
+   align-items: center;
+   justify-content: center;
+   background-image: radial-gradient(circle, #000000, #060403, #0a0804, #0a0d08, #08110f);
+   z-index: 10001;
+  }
 
 .legend {
   margin:  10px ;
