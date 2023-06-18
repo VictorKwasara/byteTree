@@ -17,7 +17,7 @@ import {
 import { Anchor } from '@mui/icons-material';
 import CheckAndUpdate from './CheckAndUpdate';
 
-const TreeActions = (props: {cultivarName: String, }) => {
+const TreeActions = (props: {cultivarName: String}) => {
   return (
 		<ButtonGroup
 			orientation='vertical'

@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
-import NextLink from 'next/link';
-import {Link} from "@mui/material"
+import Link from 'next/link';
+// import {Link} from "@mui/material"
 import AppBar from '@mui/material/AppBar';
 import styles from './Header.module.css';
 import Toolbar from '@mui/material/Toolbar';
@@ -25,17 +25,15 @@ const Header = () => {
 				className={styles.appbar}
 			>
 				<Toolbar className={styles.toolbar}>
-					<Stack className={styles.stack} direction='row' spacing={8}>
-						<Link className={styles.link} href='/' component={NextLink}>
-							Home
-						</Link>
-						<Link className={styles.link} href='/actions' component={NextLink}>
-							Actions
-						</Link>
-						<Link className={styles.link} href='/about' component={NextLink}>
-							About
-						</Link>
-						<WalletDialogProvider>
+					<Stack className={styles.stack} direction='row' spacing={8}>					
+							<Link className={styles.link} href='/'>Home</Link>					
+							<Link className={styles.link} href='/actions'>
+								Actions
+							</Link>										
+							<Link className={styles.link} href='/about'>
+								About
+							</Link>
+							<WalletDialogProvider>
 							<WalletMultiButton />
 						</WalletDialogProvider>
 					</Stack>

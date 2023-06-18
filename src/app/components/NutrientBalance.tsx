@@ -184,6 +184,9 @@ const NutrientBalance = ( props:{ cultivarName: String}) => {
 					}
 
 					console.log('The nitrogen balance is ', nb);
+					console.log('The nitrogen balance is ', pb);
+					console.log('The nitrogen balance is ', kb);
+					console.log('The nitrogen balance is ', w);
     
 					let balance = 
 					console.log("the amount is? ",nb.amount);
@@ -207,16 +210,77 @@ const NutrientBalance = ( props:{ cultivarName: String}) => {
 		<div>
 			{balance != null ? (
 				<div className={styles.div}>
-					<Typography>
-						nitrogen balance is {balance.nitrogen.toString()}
-					</Typography>
-					<Typography>
-						potassium balance is {balance.potassium.toString()}
-					</Typography>
-					<Typography>
-						phosphorus balance is {balance.phosphorus.toString()}
-					</Typography>
-					<Typography>water balance is {balance.water.toString()}</Typography>
+					<Card className={styles.card}>
+						<div className={styles.title}>
+							<Typography variant='h4' sx={{ color: '#9CA860' }}>
+								Your {"Tree's "}Nutrient Reserves
+							</Typography>
+						</div>
+
+						<div className={styles.reserves}>
+							<div className={styles.divs}>
+								<Typography
+									variant='h6'
+									color='secondary'
+									className={styles.header}
+								>
+									Nitrogen
+								</Typography>
+								<Typography variant='body1' className={styles.value}>
+									<span className={styles.spn}>
+										{balance.nitrogen.toString()}
+									</span>
+								</Typography>{' '}
+							</div>
+							<div className={styles.divs}>
+								{' '}
+								<Typography
+									variant='h6'
+									color='secondary'
+									className={styles.header}
+								>
+									potassium
+								</Typography>
+								<Typography variant='body1' className={styles.value}>
+									{' '}
+									balance is{' '}
+									<span className={styles.spn}>
+										{balance.potassium.toString()}
+									</span>
+								</Typography>
+							</div>
+							<div className={styles.divs}>
+								<Typography
+									variant='h6'
+									color='secondary'
+									className={styles.header}
+								>
+									phosphorus
+								</Typography>
+								<Typography variant='body1' className={styles.value}>
+									{' '}
+									balance is{' '}
+									<span className={styles.spn}>
+										{balance.phosphorus.toString()}
+									</span>
+								</Typography>
+							</div>
+							<div className={styles.divs}>
+								<Typography
+									variant='h6'
+									color='secondary'
+									className={styles.header}
+								>
+									water
+								</Typography>
+								<Typography variant='body1' className={styles.value}>
+									{' '}
+									balance is{' '}
+									<span className={styles.spn}>{balance.water.toString()}</span>
+								</Typography>
+							</div>
+						</div>
+					</Card>
 				</div>
 			) : (
 				<>Nothing</>

@@ -42,7 +42,7 @@
   color : #171A21;
   font-size: 23px ;
   transition: all .5s ease ; 
-	/* font-family: 'Pacifico','Great Vibes', cursive; */
+	font-family: Tahoma, sans-serif;
 }
 
 .link:hover {

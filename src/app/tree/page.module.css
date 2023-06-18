@@ -1,4 +1,18 @@
-.card{}
+.card{
+	margin: auto ;
+	margin-left: 20px;
+}
+
+.paper {
+
+	margin: auto;
+	margin-top: -5px;
+	background-color: #79881D;
+	border-radius: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
 .dv{
   margin-top: -200px;
@@ -13,4 +27,20 @@
 		#f8f76b,
 		#f7f669
 	);
+}
+
+.divs{
+	margin: 4px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	/* justify-content: center; */
+}
+.heading {
+	margin-left: 10px;
+}
+
+.value {
+  margin-left: 10px;
+	margin-top: 6px;
 }

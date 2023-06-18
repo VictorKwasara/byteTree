@@ -1,0 +1,9 @@
+.initialize {
+ position: fixed;
+ top: 0px ;
+ left: 0px ;
+ height: 101vh;
+ width: 101vw ;
+ background-color: black;
+ z-index: 1000000
+}

@@ -7,9 +7,12 @@ import {
 	CardActionArea,
 	Grid,
 	Card,
-	Stack
+	Stack,
+	Paper,
+	CardContent,
+	CardMedia,
 } from '@mui/material';
-
+import Image from "next/image";
 import TreeActions from  '../components/TreeActions';
 import styles from './page.module.css';
 import * as anchor from '@project-serum/anchor';
@@ -26,6 +29,7 @@ import CreateFarmer from '../components/CreateFarmer';
 import FarmerComponent from '../components/Farmer';
 import * as bs58 from 'bs58';
 import NutrientBalance from '../components/NutrientBalance';
+import InitializeTreeAccounts from '../components/InitializeTreeAccounts';
 
 type TreeType = {
 	authority: PublicKey;
@@ -103,6 +107,7 @@ const TreeComponent = () => {
 								],
 								program.programId
 							);
+							
 
 							let n = name.trim();
 							console.log('the n is => ', n);
@@ -119,32 +124,89 @@ const TreeComponent = () => {
     },[payer.publicKey]);
 	return (
 		<div className={styles.dv}>
+			{name ? <InitializeTreeAccounts name={name}/>:<></>}
 			{ready && tree ? (
 				<Grid container spacing={2} sx={{ width: '100%', haight: '100%' }}>
 					<Grid item xs={8} md={4}>
 						<Stack direction='column' spacing={1}>
 							<Card className={styles.card}>
-								<Typography>name: {tree.cultivarName}</Typography>
-								<Typography>age: {tree.age.toString()}</Typography>
-								<Typography>health: {tree.health.toString()}</Typography>
-								<Typography>
-									is alive: {tree?.isAlive ? 'true' : 'false'}
-								</Typography>
-								<Typography>height: {tree?.height.toString()}</Typography>
-								<Typography>width: {tree?.girth.toString()}</Typography>
-								<Typography>
-									next_maturation:
-									{tree?.nextFruitMaturaturationTime.toString()}
-								</Typography>
-								<Typography>
-									expected fruit: {tree?.expectedFruitCount.toString()}{' '}
-								</Typography>
+								<CardMedia className={styles.cardMedia}>
+									<Image
+										src='/d.jpg'
+										alt='A tree image'
+										width='400'
+										height='190'
+									/>
+								</CardMedia>
+								<Paper className={styles.paper}>
+									<Typography variant='h4'>{tree.cultivarName}</Typography>{' '}
+								</Paper>
+								<div className={styles.divs}>
+									<Typography className={styles.heading} variant='h5'>
+										age:
+									</Typography>
+									<Typography variant='body1' className={styles.value}>
+										{tree.age.toString()}
+									</Typography>
+								</div>
+								<div className={styles.divs}>
+									<Typography variant='h5' className={styles.heading}>
+										health:
+									</Typography>
+									<Typography variant='body1' className={styles.value}>
+										{' '}
+										{tree.health.toString()}
+									</Typography>
+								</div>
+								<div className={styles.divs}>
+									<Typography variant='h5' className={styles.heading}>
+										is alive:
+									</Typography>
+									<Typography variant='body1' className={styles.value}>
+										{' '}
+										{tree?.isAlive ? 'true' : 'false'}
+									</Typography>
+								</div>
+								<div className={styles.divs}>
+									<Typography variant='h5' className={styles.heading}>
+										height:
+									</Typography>
+									<Typography variant='body1' className={styles.value}>
+										{' '}
+										{tree?.height.toString()}
+									</Typography>
+								</div>
+								<div className={styles.divs}>
+									<Typography variant='h5' className={styles.heading}>
+										width:
+									</Typography>
+									<Typography variant='body1' className={styles.value}>
+										{' '}
+										{tree?.girth.toString()}
+									</Typography>
+								</div>
+								<div className={styles.divs}>
+									<Typography variant='h5' className={styles.heading}>
+										next_maturation:
+									</Typography>
+									<Typography variant='body1' className={styles.value}>
+										{tree?.nextFruitMaturaturationTime.toString()}
+									</Typography>
+								</div>
+								<div className={styles.divs}>
+									<Typography variant='h5' className={styles.heading}>
+										expected fruit:
+									</Typography>
+									<Typography variant='body1' className={styles.value}>
+										{' '}
+										{tree?.expectedFruitCount.toString()}
+									</Typography>
+								</div>
 							</Card>
 							{name ? <TreeActions cultivarName={name} /> : <></>}
 						</Stack>
-					</Grid>
-					<Grid item xs={8} md={4}></Grid>
-					<Grid item xs={8} md={4}>
+					</Grid>					
+					<Grid item xs={8} md={6}>
 						<NutrientBalance cultivarName={tree.cultivarName} />
 					</Grid>
 				</Grid>
