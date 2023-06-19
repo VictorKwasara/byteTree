@@ -28,6 +28,7 @@ import ViewTrees from '../components/ViewTrees';
 import BuySeed from '../components/BuySeed';
 import FarmerComponent from '../components/Farmer';
 import { motion } from 'framer-motion';
+import Footer from "../components/Footer"
 
 const connection = new Connection('https://api.devnet.solana.com');
 
@@ -62,6 +63,14 @@ const content = [
 		body: 'View My trees, Watch my trees, Add Nutrients, Harvest Fruits',
 		key: '0012h',
 		href: '/view-trees',
+	},
+	{
+		source: '/seeds.jpg',
+		alt: 'tree image',
+		header: 'Buy Seeds',
+		body: 'View the seeds that are available at the Market.',
+		key: '0012seeds',
+		href: '/seeds-market',
 	},
 ];
 
@@ -140,11 +149,11 @@ const Actions = () => {
 							/>
 						</Grid>
 					))}
-					<Grid className={styles.ingrid} item xs={12} md={3}>
-						<BuySeed />
-					</Grid>
 				</Grid>
 			</motion.div>
+			<div className={styles.footer}>
+				<Footer></Footer>
+			</div>			
 		</div>
 	);
 };

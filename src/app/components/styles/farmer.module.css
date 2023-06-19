@@ -46,7 +46,12 @@
 }
 
 .dv {
-  margin-left: 100px ;  
+  margin-left: 100px ;
+  margin-top:  93px;
+  width: 550px ;
+  height: 200px;  
+  background-color: #1D3C2F;
+  /* border-radius: 5%; */
 }
 
 .content {

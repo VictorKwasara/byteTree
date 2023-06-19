@@ -1,6 +1,6 @@
 .box{
   width: 100%;
-  height:98vh;
+  min-height:98vh;
   /* background-color: bisque; */
   /* display: flex ;
   align-items: center;
@@ -28,6 +28,10 @@
   /* margin-top: -95px; */
 }
 
+.ingrid{
+  margin-top: 35px;
+}
+
 .label {                                
   color: #08110F;
 }
@@ -35,4 +39,8 @@
 .farmer {
   height: 300px;
   background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c);
+}
+
+.footer {
+  margin-top: -150px ;
 }

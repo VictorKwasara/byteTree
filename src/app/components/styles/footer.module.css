@@ -1,0 +1,16 @@
+.container {
+  background-image: radial-gradient(circle, #97a041, #aeb54b, #c6ca56, #dee061, #f8f66c);  
+  width: 100%;
+  min-height: 200px;
+}
+
+.inner{
+  height: 180px;
+}
+
+.card {
+  height: 50px;
+  border-radius: 0;
+  background-color: #08110F;
+  
+}

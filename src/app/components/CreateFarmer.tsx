@@ -168,8 +168,7 @@ const CreateFarmer = (props: {
 
 	return (
 		<>
-			{!isLoggedIn ? (<>
-			
+			{!isLoggedIn ? (<>			
 					<motion.div
 					animate={{
 						opacity: 0,
@@ -178,7 +177,6 @@ const CreateFarmer = (props: {
 					initial={{ opacity: 1 }}
 					className={styles.outter}
 				>	</motion.div>
-
 					<motion.div
 						className={styles.inner}
 						animate={{

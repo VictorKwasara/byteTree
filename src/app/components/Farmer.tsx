@@ -103,10 +103,9 @@ const Farmer = (props: {
 					</Typography>
 				  </Card>
 				</div>
-				<div className={styles.dv}>
+				<Card className={styles.dv}>
 					<Actions cultivarName={props.cultivarName} />
-				</div>
-			
+				</Card>			
 		</Box>
 	);
 };
