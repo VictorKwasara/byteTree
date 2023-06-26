@@ -51,11 +51,14 @@ const BasalApplication = (props: { cultivarName: String }) => {
 	);
 
 	const program = new Program(IDL, programID, provider);
+
 	let payer = program.provider;
+
 	useEffect(() => {
 		console.log('Are we in here getting? huh');
 		(async () => {
 			if (payer.publicKey) {
+
 				let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('farm')],
 					farmProgram
@@ -181,8 +184,9 @@ const BasalApplication = (props: { cultivarName: String }) => {
 								farmProgram,
 							})
 							.rpc();
+							console.log("The transaction is complete: ", tx);
 
-						await getAccounts();
+						  await getAccounts();
 					}
 				}
 
@@ -192,6 +196,7 @@ const BasalApplication = (props: { cultivarName: String }) => {
 				console.log('The nitrogen balance is ', w);
 
 				let balance = console.log('the amount is? ', nb.amount);
+
 				if (nb != null || kb != null || pb != null || wt != null) {
 					let b: balance = {
 						nitrogen: nb?.amount,
@@ -216,10 +221,10 @@ const BasalApplication = (props: { cultivarName: String }) => {
 	}, [payer.publicKey]);
 
 	return balance != null &&
-		balance.water > 0 &&
-		balance.potassium > 0 &&
-		balance.nitrogen > 0 &&
-		balance.phosphorus > 0 ? (
+		balance.water > new anchor.BN(0) &&
+		balance.potassium > new anchor.BN(0) &&
+		balance.nitrogen > new anchor.BN(0) &&
+		balance.phosphorus > new anchor.BN(0) ? (
 		<></>
 	) : (
 		<div className={styles.container}>
@@ -227,11 +232,13 @@ const BasalApplication = (props: { cultivarName: String }) => {
 				className={styles.button}
 				style={{
 					borderColor:
-						balance !== null && balance.potassium > 0 ? 'green' : 'red',
+						balance !== null && balance.potassium > new anchor.BN(0)
+							? 'green'
+							: 'red',
 				}}
 			>
 				<Typography variant='h6' sx={{ color: 'red' }}>
-					{balance?.potassium.toString() | 0}{' '}
+					{balance !== null ? balance.potassium.toString() : '0'}
 				</Typography>
 				<AddNutrients
 					cultivarName={props.cultivarName}
@@ -243,11 +250,13 @@ const BasalApplication = (props: { cultivarName: String }) => {
 				className={styles.button}
 				style={{
 					borderColor:
-						balance != null && balance.nitrogen > 0 ? 'green' : 'red',
+						balance != null && balance.nitrogen > new anchor.BN(0)
+							? 'green'
+							: 'red',
 				}}
 			>
 				<Typography variant='h6' sx={{ color: 'red' }}>
-					{balance?.nitrogen.toString() | 0}{' '}
+					{balance !== null ? balance.nitrogen.toString() : '0'}
 				</Typography>
 				<AddNutrients
 					cultivarName={props.cultivarName}
@@ -259,11 +268,13 @@ const BasalApplication = (props: { cultivarName: String }) => {
 				className={styles.button}
 				style={{
 					borderColor:
-						balance !== null && balance.phosphorus > 0 ? 'green' : 'red',
+						balance !== null && balance.phosphorus > new anchor.BN(0)
+							? 'green'
+							: 'red',
 				}}
 			>
 				<Typography variant='h6' sx={{ color: 'red' }}>
-					{balance?.phosphorus.toString() | 0}{' '}
+					{balance !== null ? balance.phosphorus.toString() : '0'}
 				</Typography>
 				<AddNutrients
 					cultivarName={props.cultivarName}
@@ -274,11 +285,14 @@ const BasalApplication = (props: { cultivarName: String }) => {
 			<div
 				className={styles.button}
 				style={{
-					borderColor: balance !== null && balance.water > 0 ? 'green' : 'red',
+					borderColor:
+						balance !== null && balance.water > new anchor.BN(0)
+							? 'green'
+							: 'red',
 				}}
 			>
 				<Typography variant='h6' sx={{ color: 'red' }}>
-					{balance?.water.toString() | 0}{' '}
+					{balance !== null ? balance.water.toString(): "0"}
 				</Typography>
 				<AddNutrients
 					cultivarName={props.cultivarName}
