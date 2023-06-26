@@ -15,10 +15,11 @@ import { Connection,PublicKey } from '@solana/web3.js';
 import {motion} from 'framer-motion';
 
 type farmerAccount = {
-	name: string,
-	address: PublicKey,
-	landCount: anchor.BN,
-	treeCount: anchor.BN,
+	name: string;
+	address: PublicKey;
+	landCount: anchor.BN;
+	treeCount: anchor.BN;
+	profileNft: string;
 };
 
 const CreateFarmer = (props: {
@@ -121,7 +122,8 @@ const CreateFarmer = (props: {
 						name: farmerState.name,
 						address: farmerState.address,
 						landCount: farmerState.landCount,
-						treeCount: farmerState.treeCount,						
+						treeCount: farmerState.treeCount,
+						profileNft: farmerState.profileNft,
 					});
 					setIsLoggedIn(true);
 				}
@@ -151,6 +153,7 @@ const CreateFarmer = (props: {
 						address: farmerState.address,
 						landCount: farmerState.landCount,
 						treeCount: farmerState.treeCount,
+						profileNft: farmerState.profileNft,
 					});
 					setIsLoggedIn(true);
 			 	}

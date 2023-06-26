@@ -37,6 +37,7 @@ type farmerAccount = {
 	address: PublicKey;
 	landCount: anchor.BN;
 	treeCount: anchor.BN;
+	profileNft: string ;
 };
 
 const content = [
@@ -125,14 +126,14 @@ const Actions = () => {
 									transition: { duration: 2 },
 								}}
 								initial={{ opacity: 0 }}
-								className={styles.farmer}
-							
+								className={styles.farmer}							
 							>
 							{ farmer ?  <FarmerComponent
 									name={farmer?.name}
 									landCount={farmer?.landCount}
 									treeCount={farmer?.treeCount}
 									cultivarName={null}
+									profileNft={farmer?.profileNft}
 								/>: (
 							<></>
 						  )}

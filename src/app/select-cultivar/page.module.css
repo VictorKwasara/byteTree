@@ -10,9 +10,12 @@
 
 .card {
   height: 200px;
+  width: 400px ;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
   background-color:#F9F871;
   color: #e84855;
-  margin: auto;
 }
 
 .grid {
@@ -39,4 +42,41 @@
 .link:hover, .link:active {
   text-decoration: none;
   color: #e84855;
+}
+
+.divImage{
+  width:200px ;
+  height: 200px ;
+  background-color: #08110F;
+}
+
+.img {
+  width: 100% ;
+  height: 100% ;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  /* background-color: #e84855; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.media {
+  width: 100%;
+  height: 100%;
+  padding: 0 ;
+  margin: 0 ;
+  /* margin-left: -50px; */
+}
+
+.cardAction{
+  height: 200px;
+  width: 400px ;
+  margin: auto;
+  display: flex;
+  margin: auto;
 }

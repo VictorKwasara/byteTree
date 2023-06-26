@@ -91,7 +91,12 @@ export type TreeProgram = {
           "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "date",
+          "type": "string"
+        }
+      ]
     },
     {
       "name": "createCultivar",
@@ -169,6 +174,10 @@ export type TreeProgram = {
         {
           "name": "width",
           "type": "u64"
+        },
+        {
+          "name": "uri",
+          "type": "string"
         }
       ]
     },
@@ -1711,6 +1720,10 @@ export type TreeProgram = {
             "type": "string"
           },
           {
+            "name": "imageUri",
+            "type": "string"
+          },
+          {
             "name": "count",
             "type": "u64"
           },
@@ -1762,6 +1775,10 @@ export type TreeProgram = {
             "type": "string"
           },
           {
+            "name": "nftUri",
+            "type": "string"
+          },
+          {
             "name": "landNumber",
             "type": "u64"
           },
@@ -1790,6 +1807,10 @@ export type TreeProgram = {
             "type": "u64"
           },
           {
+            "name": "lastFruitUpdate",
+            "type": "u64"
+          },
+          {
             "name": "nextFruitMaturaturationTime",
             "type": "u64"
           },
@@ -1808,6 +1829,23 @@ export type TreeProgram = {
           {
             "name": "rootArea",
             "type": "u64"
+          },
+          {
+            "name": "lastConsumedUsed",
+            "type": "bool"
+          },
+          {
+            "name": "location",
+            "type": {
+              "array": [
+                "u8",
+                2
+              ]
+            }
+          },
+          {
+            "name": "createdDate",
+            "type": "string"
           }
         ]
       }
@@ -1856,6 +1894,10 @@ export type TreeProgram = {
           {
             "name": "lastCheckTime",
             "type": "u64"
+          },
+          {
+            "name": "period",
+            "type": "u64"
           }
         ]
       }
@@ -1870,6 +1912,14 @@ export type TreeProgram = {
     {
       "code": 6001,
       "name": "ClockError"
+    },
+    {
+      "code": 6002,
+      "name": "CalculateRequired"
+    },
+    {
+      "code": 6003,
+      "name": "ConsumeNutrients"
     }
   ]
 };
@@ -1967,7 +2017,12 @@ export const IDL: TreeProgram = {
           "isSigner": false
         }
       ],
-      "args": []
+      "args": [
+        {
+          "name": "date",
+          "type": "string"
+        }
+      ]
     },
     {
       "name": "createCultivar",
@@ -2045,6 +2100,10 @@ export const IDL: TreeProgram = {
         {
           "name": "width",
           "type": "u64"
+        },
+        {
+          "name": "uri",
+          "type": "string"
         }
       ]
     },
@@ -3587,6 +3646,10 @@ export const IDL: TreeProgram = {
             "type": "string"
           },
           {
+            "name": "imageUri",
+            "type": "string"
+          },
+          {
             "name": "count",
             "type": "u64"
           },
@@ -3638,6 +3701,10 @@ export const IDL: TreeProgram = {
             "type": "string"
           },
           {
+            "name": "nftUri",
+            "type": "string"
+          },
+          {
             "name": "landNumber",
             "type": "u64"
           },
@@ -3666,6 +3733,10 @@ export const IDL: TreeProgram = {
             "type": "u64"
           },
           {
+            "name": "lastFruitUpdate",
+            "type": "u64"
+          },
+          {
             "name": "nextFruitMaturaturationTime",
             "type": "u64"
           },
@@ -3684,6 +3755,23 @@ export const IDL: TreeProgram = {
           {
             "name": "rootArea",
             "type": "u64"
+          },
+          {
+            "name": "lastConsumedUsed",
+            "type": "bool"
+          },
+          {
+            "name": "location",
+            "type": {
+              "array": [
+                "u8",
+                2
+              ]
+            }
+          },
+          {
+            "name": "createdDate",
+            "type": "string"
           }
         ]
       }
@@ -3732,6 +3820,10 @@ export const IDL: TreeProgram = {
           {
             "name": "lastCheckTime",
             "type": "u64"
+          },
+          {
+            "name": "period",
+            "type": "u64"
           }
         ]
       }
@@ -3746,6 +3838,14 @@ export const IDL: TreeProgram = {
     {
       "code": 6001,
       "name": "ClockError"
+    },
+    {
+      "code": 6002,
+      "name": "CalculateRequired"
+    },
+    {
+      "code": 6003,
+      "name": "ConsumeNutrients"
     }
   ]
 };

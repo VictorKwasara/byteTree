@@ -330,6 +330,10 @@ export type FarmerProgram = {
           {
             "name": "treeCount",
             "type": "u64"
+          },
+          {
+            "name": "profileNft",
+            "type": "string"
           }
         ]
       }
@@ -350,6 +354,15 @@ export type FarmerProgram = {
           {
             "name": "isPlanted",
             "type": "bool"
+          },
+          {
+            "name": "location",
+            "type": {
+              "array": [
+                "u8",
+                2
+              ]
+            }
           }
         ]
       }
@@ -689,6 +702,10 @@ export const IDL: FarmerProgram = {
           {
             "name": "treeCount",
             "type": "u64"
+          },
+          {
+            "name": "profileNft",
+            "type": "string"
           }
         ]
       }
@@ -709,6 +726,15 @@ export const IDL: FarmerProgram = {
           {
             "name": "isPlanted",
             "type": "bool"
+          },
+          {
+            "name": "location",
+            "type": {
+              "array": [
+                "u8",
+                2
+              ]
+            }
           }
         ]
       }

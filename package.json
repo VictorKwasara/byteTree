@@ -12,6 +12,8 @@
 		"node": ">=16"
 	},
 	"dependencies": {
+		"@metaplex-foundation/js": "^0.19.3",
+		"@metaplex-foundation/mpl-token-metadata": "^2.10.0",
 		"@emotion/react": "^11.11.0",
 		"@emotion/styled": "^11.11.0",
 		"@mui/icons-material": "^5.10.16",

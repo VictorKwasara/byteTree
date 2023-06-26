@@ -159,6 +159,14 @@ export type FarmProgram = {
           {
             "name": "landPieceCount",
             "type": "u64"
+          },
+          {
+            "name": "xCoord",
+            "type": "u8"
+          },
+          {
+            "name": "yCoord",
+            "type": "u8"
           }
         ]
       }
@@ -346,6 +354,14 @@ export const IDL: FarmProgram = {
           {
             "name": "landPieceCount",
             "type": "u64"
+          },
+          {
+            "name": "xCoord",
+            "type": "u8"
+          },
+          {
+            "name": "yCoord",
+            "type": "u8"
           }
         ]
       }

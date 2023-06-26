@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import {
 	Button,
+	CardContent,
+	CardMedia,
 	Box,
 	Typography,
 	CardActionArea,
@@ -19,9 +21,11 @@ import NextLink from 'next/link';
 import { motion } from 'framer-motion';
 import * as token from '@solana/spl-token';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 type cultivar = {
 	creator: PublicKey;
+	imageUri: String;
 	name: String;
 	count: anchor.BN;
 	initHeight: anchor.BN;
@@ -74,7 +78,8 @@ const SelectCultivar = () => {
 					let c2: cultivar[] = cultivars;
 					let pubkey = c.creator;
 					console.log(pubkey);
-					if (c.name) {
+					if (c.imageUri.toString().indexOf('https://arweave') != -1) {
+						console.log('image Uri ', c.imageUri.toString());
 						c2.push(c);
 					}
 					setCultivars(c2);
@@ -134,17 +139,31 @@ const SelectCultivar = () => {
 						>
 							<Card className={styles.card} sx={{ backgroundColor: '#F9F871' }}>
 								<CardActionArea
+									className={styles.cardAction}
 									component={Button}
 									onClick={(e) => {
 										e.preventDefault;
 										handleCreate(c);
 									}}
 								>
-									<Typography variant='h4'>{c.name}</Typography>
-									<Typography variant='body2'>{c.count.toString()}</Typography>
-									<Typography variant='body2'>
-										{c.scarcityPoints.toString()}
-									</Typography>
+									<CardMedia className={styles.media}>
+										<div className={styles.divImage}>
+											<img
+												src={c.imageUri as string}
+												alt={`${c.name} image`}
+												className={styles.img}
+											/>
+										</div>
+									</CardMedia>
+									<CardContent className={styles.content}>
+										<Typography variant='h4'>{c.name}</Typography>
+										<Typography variant='body2'>
+											{c.count.toString()}
+										</Typography>
+										<Typography variant='body2'>
+											{c.scarcityPoints.toString()}
+										</Typography>
+									</CardContent>
 								</CardActionArea>
 							</Card>
 						</Grid>

@@ -13,6 +13,7 @@ const Farmer = (props: {
 	landCount: anchor.BN;
 	treeCount: anchor.BN;
 	cultivarName: String | null;
+	profileNft: string
 }) => {
 	// const [data, setData] = useState<{
 	// 	payer: PublicKey;
@@ -75,11 +76,14 @@ const Farmer = (props: {
 
 	return (
 		<Box className={styles.box}>
-			  <div className={styles.content}>
-				  <div className={styles.imgSection}>
-					    <div className={styles.image}> </div>
-				  </div>
-				  <Card className={styles.card}>
+			<div className={styles.content}>
+				<div className={styles.imgSection}>
+					<div className={styles.image}>
+						<img className={styles.img} src={props.profileNft}>							
+						</img>
+					</div>
+				</div>
+				<Card className={styles.card}>
 					<Typography
 						variant='h4'
 						color='text.secondary'
@@ -101,11 +105,11 @@ const Farmer = (props: {
 					>
 						You have planted {props.treeCount.toString()} trees
 					</Typography>
-				  </Card>
-				</div>
-				<Card className={styles.dv}>
-					<Actions cultivarName={props.cultivarName} />
-				</Card>			
+				</Card>
+			</div>
+			<Card className={styles.dv}>
+				<Actions cultivarName={props.cultivarName} />
+			</Card>
 		</Box>
 	);
 };

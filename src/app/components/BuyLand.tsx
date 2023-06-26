@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import * as anchor from '@project-serum/anchor';
 import { FarmerProgram, IDL } from '../../../public/programs/farmer_program';
+import { FarmProgram, IDL as fIDL } from '../../../public/programs/farm_program';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { Box, Button, Card, Stack, Typography, Grid ,CardActionArea,Link} from '@mui/material';
 import styles from './styles/buyland.module.css';
 import NextLink from "next/link"
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
+
 
 
 const BuyLand = () => {
@@ -20,7 +22,7 @@ const BuyLand = () => {
 		commitment: 'confirmed',
 	});
 
-	const farmProgram = new PublicKey(
+	const farmProgramID = new PublicKey(
 		'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
 	);
 
@@ -29,6 +31,8 @@ const BuyLand = () => {
 	);
 
 	const program = new Program(IDL, programID, provider);
+	const fp = new Program(fIDL, farmProgramID, provider);
+	
 	let payer = program.provider;
 
 const handleClick =  async () => {
@@ -37,7 +41,7 @@ const handleClick =  async () => {
 				console.log('Inside if satement');
 				let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('farm')],
-					farmProgram
+					farmProgramID
 				);
 				// farmer
 				let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
@@ -47,17 +51,19 @@ const handleClick =  async () => {
 
 				let [landMeta] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('landmeta'), farm.toBuffer()],
-					farmProgram
+					farmProgramID
 				);
 
+				let lm  = await fp.account.landMeta.fetch(landMeta) ;
+
 				let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
+					[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer(),Buffer.from([lm.xCoord,lm.yCoord])],
 					program.programId
 				);
 
 				let [vault] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('carbonvault')],
-					farmProgram
+					farmProgramID
         );
 
 				let landP;
@@ -80,7 +86,7 @@ const handleClick =  async () => {
 						landMeta,
 						landPiece,
 						vault,
-						farmProgram,
+						farmProgram:farmProgramID,
 					})
 					.rpc();
 
@@ -93,10 +99,7 @@ const handleClick =  async () => {
 				// 	landPieces: landP.length,
 				// });
 			}	
-
-
 	};
-
 
   return (
     <Card className={styles.card}>   		

@@ -35,7 +35,7 @@
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  background-image: url("../../../../public/face4.png");
+  /* background-image: url("../../../../public/face4.png"); */
   background-size: cover;
   margin-left: -13px;  
   border: 10px solid rgba(125,129,76,.2);
@@ -43,6 +43,13 @@
   top: -20% ;
   left: 10% ; 
   z-index: 10000000000000000000000000 */
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: none;
 }
 
 .dv {
