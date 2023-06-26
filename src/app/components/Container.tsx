@@ -2,6 +2,7 @@
 import React, { FC, ReactNode } from 'react';
 import Connection from './Connection';
 import Header from './Header';
+import Footer from './Footer';
 import Theme from './Theme';
 import styles from "./container.module.css";
 import { Box,Container as MuiContainer} from '@mui/material';
@@ -22,8 +23,9 @@ const Container: FC<{ children: ReactNode }> = ({ children }) => {
 					}}
 				>
 					{children}
-				</Box>
+				</Box>				
 			</MuiContainer>
+			<Footer/>
 			</Theme>
 		</Connection>
 	);

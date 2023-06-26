@@ -1,7 +1,8 @@
 .container {
-  background-image: radial-gradient(circle, #97a041, #aeb54b, #c6ca56, #dee061, #f8f66c);  
-  width: 100%;
+  background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c); 
+  width: 100vw;
   min-height: 200px;
+  z-index: 200000000000;
 }
 
 .inner{
@@ -11,6 +12,6 @@
 .card {
   height: 50px;
   border-radius: 0;
-  background-color: #08110F;
+  background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c);
   
 }

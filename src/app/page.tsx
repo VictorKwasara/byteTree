@@ -177,7 +177,7 @@ export default function Home() {
 				</Typography>
 				<motion.div className={styles.innerDiv}>
 					<Grid container spacing={2}>
-						<Grid sm={12} md={3} m={2}>
+						<Grid item sm={12} md={3} m={2}>
 							<div className={styles.textwrap}>
 								<Typography
 									variant='h6'
@@ -211,7 +211,7 @@ export default function Home() {
 								</Typography>
 							</div>
 						</Grid>
-						<Grid sm={12} md={3} m={2}>
+						<Grid item sm={12} md={3} m={2}>
 							<div className={styles.textwrap}>
 								<Typography
 									variant='h6'
@@ -243,7 +243,7 @@ export default function Home() {
 								</Typography>
 							</div>
 						</Grid>
-						<Grid sm={12} md={3} m={2}>
+						<Grid item sm={12} md={3} m={2}>
 							<div className={styles.textwrap}>
 								<Typography
 									variant='h6'
@@ -281,34 +281,120 @@ export default function Home() {
 				</motion.div>
 			</motion.div>
 			<motion.div className={styles.page3}>
-				<Typography
-					variant='h2'
-					component='h4'
-					align='center'
-					fontFamily='Gloock'
-					className={styles.text3}
-					p={2}
-					m={2}
-					color='primary.main'
-					// sx={{ color: '#d2d376' }}
-					fontWeight='700'
-				>
-					Fun ByteTree Stats
-				</Typography>
-				<Typography
-					variant='h4'
-					component='h4'
-					align='center'
-					fontFamily='Gloock'
-					className={styles.text}
-					p={2}
-					m={2}
-					color='primary.main'
-					// sx={{ color: '#d2d376' }}
-					fontWeight='700'
-				>
-					Fun ByteTree Stats
-				</Typography>
+				<div className={styles.dataDiv}>
+					<Typography
+						variant='h4'
+						component='h4'
+						fontFamily='Gloock'
+						className={styles.text3}
+						p={2}
+						m={2}
+						color='primary.main'
+						// sx={{ color: '#d2d376' }}
+						fontWeight='700'
+					>
+						Fun ByteTree Stats
+					</Typography>
+					<Typography
+						variant='h6'
+						component='h4'
+						// align='center'
+						// fontFamily='Gloock'
+						className={styles.text3}
+						p={2}
+						m={2}
+						color='primary.main'
+						sx={{ marginTop: '-15px', color: '#2e321f' }}
+					>
+						Trees in Our Forest
+					</Typography>
+				</div>
+				<Grid container spacing={1} className={styles.dataGrid}>
+					<Grid item sm={12} md={3} m={1}>
+						<div className={styles.numbers}>
+							<Typography
+								variant='h4'
+								component='h4'
+								fontFamily='Gloock'
+								className={styles.number}
+								m={4}
+								color='primary.main'
+								sx={{ marginBottom: '0' }}
+								fontWeight='700'
+							>
+								700
+							</Typography>
+							<Typography
+								variant='h6'
+								component='h4'
+								// align='center'
+								// fontFamily='Gloock'
+								className={styles.text5}
+								m={4}
+								color='primary.main'
+								sx={{ marginTop: '0', color: '#413e2b' }}
+							>
+								Thriving Trees!
+							</Typography>
+						</div>
+					</Grid>
+					<Grid item sm={12} md={3} m={1}>
+						<div className={styles.numbers}>
+							<Typography
+								variant='h4'
+								component='h4'
+								fontFamily='Gloock'
+								className={styles.number}
+								m={4}
+								color='primary.main'
+								sx={{ marginBottom: '0' }}
+								fontWeight='700'
+							>
+								125
+							</Typography>
+							<Typography
+								variant='h6'
+								component='h4'
+								// align='center'
+								// fontFamily='Gloock'
+								className={styles.text5}
+								m={4}
+								color='primary.main'
+								sx={{ marginTop: '0', color: '#413e2b' }}
+							>
+								Daily Active Farmers!
+							</Typography>
+						</div>
+					</Grid>
+					<Grid item sm={12} md={3} m={1}>
+						<div className={styles.numbers}>
+							<Typography
+								variant='h4'
+								component='h4'
+								fontFamily='Gloock'
+								className={styles.number}
+								m={4}
+								color='primary.main'
+								sx={{ marginBottom: '0' }}
+								fontWeight='700'
+							>
+								35
+							</Typography>
+							<Typography
+								variant='h6'
+								component='h4'
+								// align='center'
+								// fontFamily='Gloock'
+								className={styles.text5}
+								m={4}
+								color='primary.main'
+								sx={{ marginTop: '0', color: '#413e2b' }}
+							>
+								Unique Cultivars!
+							</Typography>
+						</div>
+					</Grid>
+				</Grid>
 			</motion.div>
 		</div>
 	);
