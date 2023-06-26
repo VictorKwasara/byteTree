@@ -59,6 +59,7 @@
   padding:55px;
   background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c);
   border-radius: 4px;
+  margin-top: 30px;
 }
 
 .cardA{
@@ -161,9 +162,9 @@
   /* background-color: aqua; */
   /* margin-left: -600px; */
   width:100% ;
-  min-height: 100vh;
+  min-height: 300px;
   padding: 0 90px ;
-  z-index: 2000000000000;
+  z-index: 3;
   /* display: flex; */
   margin-top: auto;
   /* justify-content: center; */

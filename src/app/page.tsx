@@ -389,6 +389,7 @@ export default function Home() {
 								m={4}
 								color='primary.main'
 								sx={{ marginTop: '0', color: '#413e2b' }}
+								fontWeight='500'
 							>
 								Unique Cultivars!
 							</Typography>

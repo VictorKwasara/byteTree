@@ -15,17 +15,17 @@ const Container: FC<{ children: ReactNode }> = ({ children }) => {
 				maxWidth='lg'
 				sx={{ overflowX: 'hidden',}}
 			>
-					<Header />
-				<Box
-					className={styles.box}
-					sx={{
-						background: 'bg',
-					}}
-				>
-					{children}
-				</Box>				
-			</MuiContainer>
-			<Footer/>
+				<Header />
+						<Box
+							className={styles.box}
+							sx={{
+								background: 'bg',
+							}}
+						>
+							{children}
+							<Footer/>		
+						</Box>				
+			</MuiContainer>		
 			</Theme>
 		</Connection>
 	);
