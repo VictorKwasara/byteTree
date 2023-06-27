@@ -45,6 +45,8 @@ const BuyTree = (props: { cultivarName: String }) => {
 	const handleClick = async () => {
 		if (payer.publicKey) {
 			console.log('Inside if satement');
+			let date = new Date().toISOString();
+			
 			let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('farm')],
 				farmProgram
@@ -129,6 +131,7 @@ const BuyTree = (props: { cultivarName: String }) => {
 					treesMeta.toBuffer(),
 					farmer.toBuffer(),
 					Buffer.from(props.cultivarName),
+					Buffer.from(date),
 				],
 				program.programId
 			);
@@ -148,9 +151,10 @@ const BuyTree = (props: { cultivarName: String }) => {
 				[Buffer.from('requirednutrients'), tree.toBuffer()],
 				program.programId
 			);
+			
 
 			const tx = await program.methods
-				.createTree()
+				.createTree(date)
 				.accounts({
 					farmer,
 					farm,

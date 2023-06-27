@@ -108,7 +108,7 @@ const Actions = () => {
 	};
 
 	return (
-		<div>
+		<div className={styles.outterDiv}>
 			<CreateFarmer searchFarmer={searchFarmer} />
 			<motion.div
 				animate={{
@@ -119,7 +119,7 @@ const Actions = () => {
 				className={styles.box}
 			>
 				<Grid container spacing={2} className={styles.grid}>
-					<Grid className={styles.ingrid} item xs={12} md={12}>						
+					<Grid className={styles.ingridTop} item xs={12} md={12} p={2}>						
 							<motion.div
 								animate={{
 									opacity: farmer ? 1 : 0,
@@ -140,7 +140,7 @@ const Actions = () => {
 						</motion.div>						 
 					</Grid>
 					{content.map(({ source, alt, header, body, key, href }, i) => (
-						<Grid className={styles.ingrid} item xs={12} key={key + i} md={3}>
+						<Grid m={3} className={styles.ingrid} item sm={12} key={key + i} md={3} pl={2}>
 							<ActionsCard
 								source={source}
 								alt={alt}
@@ -151,10 +151,7 @@ const Actions = () => {
 						</Grid>
 					))}
 				</Grid>
-			</motion.div>
-			<div className={styles.footer}>
-				<Footer></Footer>
-			</div>			
+			</motion.div>		
 		</div>
 	);
 };

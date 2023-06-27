@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as anchor from '@project-serum/anchor';
 import { FarmerProgram, IDL } from '../../../public/programs/farmer_program';
+import { TreeProgram, IDL as tIDL} from '../../../public/programs/tree_program';
 import { Connection, PublicKey } from '@solana/web3.js';
 import {
 	Box,
@@ -31,7 +32,7 @@ const Plant = (props: { cultivarName: String }) => {
 		'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
 	);
 
-	const treeProgram = new PublicKey(
+	const treeProgramID = new PublicKey(
 		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
 	);
 	//farmer program
@@ -40,6 +41,7 @@ const Plant = (props: { cultivarName: String }) => {
 	);
 
 	const program = new Program(IDL, programID, provider);
+	const treeProgram = new Program(tIDL, treeProgramID, provider) ;
 	let payer = program.provider;
 
 	const handleClick = async () => {
@@ -86,25 +88,25 @@ const Plant = (props: { cultivarName: String }) => {
 					cultivarMeta.toBuffer(),
 					Buffer.from(props.cultivarName),
 				],
-				treeProgram
+				treeProgramID
 			);
 
 			console.log('cultivar', cultivar.toString());
 
 			let [fruitMint] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('fruitmint'), Buffer.from(props.cultivarName)],
-				treeProgram
+				treeProgramID
 			);
 			console.log('fruitMint', fruitMint.toString());
 
 			let [fruitMintAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('fruitmintauthority')],
-				treeProgram
+				treeProgramID
 			);
 
 			let [seedsAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('seedsauthority'), payer.publicKey.toBuffer()],
-				treeProgram
+				treeProgramID
 			);
 
 			let [seedsBalance] = anchor.web3.PublicKey.findProgramAddressSync(
@@ -113,7 +115,7 @@ const Plant = (props: { cultivarName: String }) => {
 					seedsAuthority.toBuffer(),
 					Buffer.from(props.cultivarName),
 				],
-				treeProgram
+				treeProgramID
 			);
 
 			// trees_meta
@@ -122,51 +124,53 @@ const Plant = (props: { cultivarName: String }) => {
 				farmProgram
 			);
 
-			//tree
-			let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
-				[
-					Buffer.from('tree'),
-					treesMeta.toBuffer(),
-					farmer.toBuffer(),
-					Buffer.from(props.cultivarName),
-				],
-				treeProgram
-			);
-			let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('nutrientbalance'), tree.toBuffer()],
-				treeProgram
-			);
+			let trees = await treeProgram.account.tree.all([
+				{
+					memcmp: {
+						offset: 8,
+						bytes: payer.publicKey.toBase58().toString(),
+					},
+				},
+			]);
 
-			//fruitBalance,
-			let [fruitBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('fruit'), tree.toBuffer()],
-				treeProgram
-			);
 
-			//requiredNutrients
-			let [requiredNutrients] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('requirednutrients'), tree.toBuffer()],
-				treeProgram
-			);
+			
+		
+			// let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('nutrientbalance'), tree.toBuffer()],
+			// 	treeProgramID
+			// );
 
-			const tx = await program.methods
-				.plant()
-				.accounts({
-					farmer,
-					farm,
-					landMeta,
-					landPiece,
-					cultivarMeta,
-					cultivar,
-					treesMeta,
-					tree,
-					farmProgram,
-					treeProgram,
-				})
-				.rpc();
-			console.log(`The transaction signature is ${tx.toString()}`);
+			// //fruitBalance,
+			// let [fruitBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('fruit'), tree.toBuffer()],
+			// 	treeProgramID
+			// );
 
-			alert('success ' + tx);
+			// //requiredNutrients
+			// let [requiredNutrients] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('requirednutrients'), tree.toBuffer()],
+			// 	treeProgramID
+			// );
+
+			// const tx = await program.methods
+			// 	.plant()
+			// 	.accounts({
+			// 		farmer,
+			// 		farm,
+			// 		landMeta,
+			// 		landPiece,
+			// 		cultivarMeta,
+			// 		cultivar,
+			// 		treesMeta,
+			// 		tree,
+			// 		farmProgram,
+			// 		treeProgram: treeProgramID,
+			// 	})
+			// 	.rpc();
+			// console.log(`The transaction signature is ${tx.toString()}`);
+
+			// alert('success ' + tx);
 			// setData({
 			// 	farmer: farmer,
 			// 	payer: payer.publicKey,

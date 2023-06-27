@@ -9,7 +9,7 @@
   justify-content: center;
   background-image: radial-gradient(circle, #000000, #060403, #0a0804, #0a0d08, #08110f);
   /* opacity: .95; */
-  z-index:  1000000;
+  z-index:  100000000000;
 }
 
 .inner{
@@ -22,7 +22,7 @@
    align-items: center;
    justify-content: center;
    background-image: radial-gradient(circle, #000000, #060403, #0a0804, #0a0d08, #08110f);
- 
+   z-index:  100000000000; 
   }
 
 .legend {

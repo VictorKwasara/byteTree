@@ -38,6 +38,7 @@ type farmerAccount = {
 	address: PublicKey;
 	landCount: anchor.BN;
 	treeCount: anchor.BN;
+	profileNft: string;
 };
 
 const PlantTree = () => {
@@ -82,131 +83,7 @@ const PlantTree = () => {
 		setFarmer(farmerAccount);
 	};
 
-	const handleCreate = async (c: cultivar) => {
-		try {
-			if (payer.publicKey && name) {
-				// farm
-				let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('farm')],
-					farmProgram
-				);
-				let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('farmer'), payer.publicKey.toBuffer()],
-					farmerProgram
-				);
-
-				console.log('farm', farm.toString());
-
-				// cultivar_meta
-				let [cultivarMeta] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('cultivarmeta'), farm.toBuffer()],
-					farmProgram
-				);
-
-				console.log('cultivarMeta', cultivarMeta.toString());
-
-				let [cultivar] = anchor.web3.PublicKey.findProgramAddressSync(
-					[
-						Buffer.from('cultivar'),
-						cultivarMeta.toBuffer(),
-						Buffer.from(name), //query
-					],
-					program.programId
-				);
-
-				console.log('cultivar', cultivar.toString());
-
-				let [fruitMint] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('fruitmint'), Buffer.from(c.name)], //query
-					program.programId
-				);
-				console.log('fruitMint', fruitMint.toString());
-
-				let [fruitMintAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('fruitmintauthority')],
-					program.programId
-				);
-
-				let [treesMeta] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('treesmeta'), farm.toBuffer()],
-					farmProgram
-				);
-
-				let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('tree'), treesMeta.toBuffer(), farmer.toBuffer()],
-					program.programId
-				); /// only one tree error
-
-				let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('nutrientbalance'), tree.toBuffer()],
-					program.programId
-				);
-
-				let [fruitBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('fruit'), tree.toBuffer()],
-					program.programId
-				);
-
-				//requiredNutrients
-				let [requiredNutrients] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('requirednutrients'), tree.toBuffer()],
-					program.programId
-				);
-
-				let [seedsAuthority] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('seedsauthority'), payer.publicKey.toBuffer()],
-					program.programId
-				);
-
-				let [seedsBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[
-						Buffer.from('seedsbalance'),
-						seedsAuthority.toBuffer(),
-						Buffer.from(name),
-					],
-					program.programId
-				);
-
-				const tx = await program.methods
-					.createTree()
-					.accounts({
-						farmer,
-						farm,
-						cultivarMeta,
-						cultivar,
-						treesMeta,
-						tree,
-						fruitBalance,
-						fruitMint,
-						fruitMintAuthority,
-						inputBalance,
-						requiredNutrients,
-						farmProgram,
-						seedsAuthority,
-						seedsBalance,
-					})
-					.rpc();
-
-				console.log('create cultivar transaction', tx);
-				let treeState;
-				treeState = await program.account.tree.fetchNullable(tree);
-
-				if (treeState) {
-					console.log('the tree is,', treeState);
-					alert(`The Cultivar Is Initialized,
-					 ${treeState},
-					`);
-				}
-
-				router.push('view-trees');
-			} else {
-				throw 'No pubkey provided';
-			}
-		} catch (e) {
-			console.log(e);
-			alert('There was an error try again later');
-		}
-	};
+	
 	return (
 		<div>
 			<CreateFarmer searchFarmer={searchFarmer} />
@@ -216,6 +93,7 @@ const PlantTree = () => {
 					landCount={farmer?.landCount}
 					treeCount={farmer?.treeCount}
 					cultivarName={name}
+					profileNft={farmer?.profileNft}
 				/>
 			) : (
 				<></>
