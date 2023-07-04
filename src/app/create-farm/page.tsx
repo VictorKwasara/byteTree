@@ -41,11 +41,12 @@ const CreateFarmer = () => {
 	// const wallet =   useWallet()https://api.devnet.solana.comhttp://localhost:8899
 	const w = useAnchorWallet();
 	const connection = new Connection('https://api.devnet.solana.com');
+	//  const connection = new Connection('http://localhost:8899');
 	const provider = new AnchorProvider(connection, w as Wallet, {
 		commitment: 'confirmed',
 	});
 	const programID = new PublicKey(
-		'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
+		'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
 	);
 	const program = new Program(IDL, programID, provider);
 	const handleCreate = async () => {
@@ -115,12 +116,84 @@ const CreateFarmer = () => {
 			console.log('There was an error ', e);
 		}
 	};
+
+	const handleDelete = async () => {
+		try {
+			if (publicKey) {
+				// let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
+				// 	[Buffer.from('farm')],
+				// 	program.programId
+				// );
+
+				
+	let payer = program.provider ;
+	// farm
+	let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
+		[Buffer.from('farm')],
+		program.programId
+	);
+
+	 let farmState = await program.account.farm.fetchNullable(farm);
+
+		console.log('The farm is now ', farmState);
+
+		// if (farmState) {
+		// 	console.log('the farm is,', farmState.initializer.toString());
+		// } else {
+		// 	console.log('else state is', farmState);
+		// }
+
+	// land_meta
+	let [landMeta] = anchor.web3.PublicKey.findProgramAddressSync(
+		[Buffer.from('landmeta'), farm.toBuffer()],
+		program.programId
+	);
+
+	// cultivar_meta
+	let [cultivarMeta] = anchor.web3.PublicKey.findProgramAddressSync(
+		[Buffer.from('cultivarmeta'), farm.toBuffer()],
+		program.programId
+	);
+
+	// trees_meta
+	let [treesMeta] = anchor.web3.PublicKey.findProgramAddressSync(
+		[Buffer.from('treesmeta'), farm.toBuffer()],
+		program.programId
+	);
+
+	//vault
+	let [vault] = anchor.web3.PublicKey.findProgramAddressSync(
+		[Buffer.from('carbonvault')],
+		program.programId
+	);
+
+	// Add your test here.
+	const tx = await program.methods
+		.closeFarm()
+		.accounts({
+			farm,
+			landMeta,
+			cultivarMeta,
+			treesMeta,
+		})
+		.rpc();
+
+	console.log('Your transaction signature', tx);
+
+			} else {
+				throw 'Connect to wallet';
+			}
+		} catch (e) {
+			console.log('There was an error ', e);
+		}
+	};
 	return (
 		<Box className={styles.box}>
 			<legend>Create A Farmer Account</legend>
 			<label htmlFor='name'></label>
 			<input className={styles.name} type='text' name='name' id='name' />
 			<Button onClick={handleCreate}>Create Farm</Button>
+			<Button onClick={handleDelete}>Delete Farm</Button>
 		</Box>
 	);
 };

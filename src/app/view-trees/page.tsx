@@ -10,6 +10,7 @@ import { Link } from '@mui/material';
 import NextLink from 'next/link';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image'
 import {
 	Button,
 	Box,
@@ -17,11 +18,13 @@ import {
 	CardActionArea,
 	Grid,
 	Card,
+	CardMedia,
 } from '@mui/material';
 
 type TreeType = {
 	authority: PublicKey;
 	cultivarName: String;
+	nftUri: string,
 	landNumber: anchor.BN;
 	height: anchor.BN;
 	girth: anchor.BN;
@@ -34,6 +37,10 @@ type TreeType = {
 	isAlive: Boolean;
 	leafArea: anchor.BN;
 	rootArea: anchor.BN;
+	lastConsumedUsed: boolean ;
+	location: number[] ;
+	createdDate: String;
+	isPlanted: boolean
 };
 
 const ViewTrees = () => {
@@ -48,15 +55,15 @@ const ViewTrees = () => {
 		commitment: 'confirmed',
 	});
 		const farmerProgram = new PublicKey(
-			'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
+			'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
 		);
 
 		const farmProgram = new PublicKey(
-			'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
+			'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
 		);
 
 		const programID = new PublicKey(
-			'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
+			'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
 		);
 
 	const program = new Program(IDL, programID, provider);
@@ -72,7 +79,7 @@ const ViewTrees = () => {
 				);
 				console.log('farmer bytes ', farmer.toBase58());
 
-				let t: any= await program.account.tree.all([
+				let t = await program.account.tree.all([
 					{
 						memcmp:{
 							offset: 8,
@@ -80,12 +87,16 @@ const ViewTrees = () => {
 						}
 					}
 				]);
+			
+				let planted = t.filter((v) =>{
+					console.log("is true =>", v.account.isPlanted);
+					return v.account.isPlanted == true
+				});
+				console.log('Trees', t);
+	      console.log('plantes Trees', planted);
 
-				console.log('Treees');
-				console.log('Treees', t);
-
-				if (t.length !== 0) {
-					t.map((tr: any) => {
+				if (planted.length !== 0) {
+					planted.map((tr: any) => {
 						let tree = tr.account;
 						console.log('tree is ', tree);
 						let tree2: TreeType[] = trees;
@@ -111,6 +122,9 @@ const ViewTrees = () => {
 									component={NextLink}
 									underline='none'
 								>
+									<CardMedia>
+									<Image alt="cultivar nft" src={t.nftUri} width="200" height="100"/>
+									</CardMedia>
 									<CardActionArea sx={{ width: '100%', height: '100%' }}>
 										{t.cultivarName}
 									</CardActionArea>

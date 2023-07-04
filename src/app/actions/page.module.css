@@ -1,4 +1,8 @@
 .outterDiv{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   padding-top: 0 ;
   margin-top: 0;
 }
@@ -6,7 +10,7 @@
 .box{
   width: 100%;
   min-height:98vh;
-  /* background-color: bisque; */
+ 
   /* display: flex ; */
 
   /* align-items: center; */
@@ -31,7 +35,13 @@
 } 
 
 .grid{
-  /* margin-top: -95px; */
+  /* background-color: #08110F; */
+  /* display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; */  
+  padding-left: 105px; 
+  margin-right: auto;
 }
 
 .ingrid{
@@ -44,12 +54,16 @@
 
 .farmer {
   min-height: 60vh;
-  background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c);
+  /* background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c); */
   margin-top: 100px;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
+  padding: 5px 120px;
+  /* background-color: bisque; */
 }
 
 .ingridTop{
   margin-bottom: 100px;
 }
+
+
 

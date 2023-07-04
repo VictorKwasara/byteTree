@@ -1,5 +1,18 @@
+.container {
+  position: absolute;
+  top: 0 ;
+  left: 0 ;
+  width: 98vw;
+  height: 100vh;
+  /* background-color: red ; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card {
-  width: 240px ;
+  min-width: 240px;
+  width: auto ;
   /* background-color: red ; */
   display: flex;
   align-items: center;

@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Gloock&family=Oswald:wght@200;300;600;700&display=swap');
 
 .appbar {
 	/* width: 100vw , */
@@ -43,7 +46,8 @@
   color : #171A21;
   font-size: 23px ;
   transition: all .5s ease ; 
-	font-family: Tahoma, sans-serif;
+	font-family: Oswald, Tahoma, sans-serif; 
+	font-weight: 700;
 }
 
 .link:hover {

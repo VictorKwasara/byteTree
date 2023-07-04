@@ -1,5 +1,9 @@
-.card {
-  width: 240px ;
+.container {
+  position: absolute;
+  top: 0 ;
+  left: 0 ;
+  width: 98vw;
+  height: 100vh;
   /* background-color: red ; */
   display: flex;
   align-items: center;

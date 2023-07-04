@@ -117,11 +117,8 @@ const Actions = () => {
 				}}
 				initial={{ opacity: 0 }}
 				className={styles.box}
-			>
-				<Grid container spacing={2} className={styles.grid}>
-					<Grid className={styles.ingridTop} item xs={12} md={12} p={2}>						
-							<motion.div
-								animate={{
+			><motion.div
+							animate={{
 									opacity: farmer ? 1 : 0,
 									transition: { duration: 2 },
 								}}
@@ -138,7 +135,7 @@ const Actions = () => {
 							<></>
 						  )}
 						</motion.div>						 
-					</Grid>
+					<Grid container ml="auto" mr="auto" spacing={2} className={styles.grid}>
 					{content.map(({ source, alt, header, body, key, href }, i) => (
 						<Grid m={3} className={styles.ingrid} item sm={12} key={key + i} md={3} pl={2}>
 							<ActionsCard
@@ -150,7 +147,7 @@ const Actions = () => {
 							/>
 						</Grid>
 					))}
-				</Grid>
+				  </Grid>
 			</motion.div>		
 		</div>
 	);

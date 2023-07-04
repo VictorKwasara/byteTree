@@ -225,6 +225,16 @@ export type FarmerProgram = {
           "isSigner": false
         },
         {
+          "name": "treesMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "vault",
           "isMut": true,
           "isSigner": false
@@ -307,6 +317,89 @@ export type FarmerProgram = {
         }
       ],
       "args": []
+    },
+    {
+      "name": "closeFarmer",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeLand",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landPiece",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "coordinates",
+          "type": {
+            "array": [
+              "u8",
+              2
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "setProfileImageUri",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "uri",
+          "type": "string"
+        }
+      ]
     }
   ],
   "accounts": [
@@ -597,6 +690,16 @@ export const IDL: FarmerProgram = {
           "isSigner": false
         },
         {
+          "name": "treesMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
           "name": "vault",
           "isMut": true,
           "isSigner": false
@@ -679,6 +782,89 @@ export const IDL: FarmerProgram = {
         }
       ],
       "args": []
+    },
+    {
+      "name": "closeFarmer",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeLand",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landPiece",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "coordinates",
+          "type": {
+            "array": [
+              "u8",
+              2
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "setProfileImageUri",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "uri",
+          "type": "string"
+        }
+      ]
     }
   ],
   "accounts": [

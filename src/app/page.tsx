@@ -57,7 +57,7 @@ export default function Home() {
 						color='secondary'
 						sx={{ color: '#f1f085' }}
 					>
-						Become A Farmer
+						Get Started
 					</Button>
 				</div>
 			</Box>
@@ -207,7 +207,7 @@ export default function Home() {
 								>
 									Digital trees are virtual representations of real-world trees
 									and plants, built on blockchain that you can create, grow, and
-									trade.
+									nature.
 								</Typography>
 							</div>
 						</Grid>

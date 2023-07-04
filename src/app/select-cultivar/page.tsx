@@ -51,15 +51,15 @@ const SelectCultivar = () => {
 		commitment: 'confirmed',
 	});
 	const farmerProgram = new PublicKey(
-		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
+		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
 	);
 
 	const farmProgram = new PublicKey(
-		'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
+		'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
 	);
 
 	const programID = new PublicKey(
-		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
+		'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -107,7 +107,8 @@ const SelectCultivar = () => {
 			);
 
 			(async () => {
-				let sBalance = await token.getAccount(
+				try {
+					let sBalance = await token.getAccount(
 					provider.connection,
 					seedsBalance
 				);
@@ -115,7 +116,12 @@ const SelectCultivar = () => {
 					alert!('Please get some, ' + c.name + ' seeds');
 				}
 				// alert!('You have, ' + sBalance.amount + ' of ' + c.name);
-				router.push(`/plant-tree?name=${c.name}`);
+				  router.push(`/plant-tree?name=${c.name}`);
+				}catch (e) {
+					alert!('You need to purchase ' + c.name + " before planting some!");
+				  router.push(`/seeds-market?name=${c.name}`);
+				}
+		
 			})();
 		}
 	};

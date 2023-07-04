@@ -66,7 +66,7 @@ const TreeComponent = () => {
 		);
 
 		const farmProgram = new PublicKey(
-			'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
+			'JDAMcZJRfuXdNywQEdincd6ud5v8zfuEqeFeBmoHo3Tn'
 		);
 
 		const programID = new PublicKey(

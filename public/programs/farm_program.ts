@@ -75,16 +75,6 @@ export type FarmProgram = {
           "name": "treesMeta",
           "isMut": true,
           "isSigner": false
-        },
-        {
-          "name": "vault",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": []
@@ -116,10 +106,72 @@ export type FarmProgram = {
           "name": "treesMeta",
           "isMut": true,
           "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "buyLand",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
         },
         {
-          "name": "vault",
+          "name": "farm",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeFarm",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
           "isSigner": false
         },
         {
@@ -136,7 +188,12 @@ export type FarmProgram = {
       "name": "farm",
       "type": {
         "kind": "struct",
-        "fields": []
+        "fields": [
+          {
+            "name": "initializer",
+            "type": "publicKey"
+          }
+        ]
       }
     },
     {
@@ -189,6 +246,13 @@ export type FarmProgram = {
         "kind": "struct",
         "fields": []
       }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "FarmFullError",
+      "msg": "The Farm is full"
     }
   ]
 };
@@ -270,16 +334,6 @@ export const IDL: FarmProgram = {
           "name": "treesMeta",
           "isMut": true,
           "isSigner": false
-        },
-        {
-          "name": "vault",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "systemProgram",
-          "isMut": false,
-          "isSigner": false
         }
       ],
       "args": []
@@ -311,10 +365,72 @@ export const IDL: FarmProgram = {
           "name": "treesMeta",
           "isMut": true,
           "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "buyLand",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
         },
         {
-          "name": "vault",
+          "name": "farm",
           "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeFarm",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "landMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
           "isSigner": false
         },
         {
@@ -331,7 +447,12 @@ export const IDL: FarmProgram = {
       "name": "farm",
       "type": {
         "kind": "struct",
-        "fields": []
+        "fields": [
+          {
+            "name": "initializer",
+            "type": "publicKey"
+          }
+        ]
       }
     },
     {
@@ -384,6 +505,13 @@ export const IDL: FarmProgram = {
         "kind": "struct",
         "fields": []
       }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "FarmFullError",
+      "msg": "The Farm is full"
     }
   ]
 };

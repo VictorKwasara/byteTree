@@ -42,12 +42,12 @@ const CreateFarmer = (props: {
 		commitment: 'confirmed',
 	});
 
-		const  programID = new PublicKey(
-			'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
+		const programID = new PublicKey(
+			'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
 		);
 
 		const farmProgram = new PublicKey(
-			'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
+			'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
 		);
 
 		// const programID = new PublicKey(
@@ -79,8 +79,7 @@ const CreateFarmer = (props: {
 			let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
 				program.programId
-			);
-		
+			);		
 
 			let landP;
 	        landP = await program.account.landPiece.all([{					  
@@ -90,6 +89,14 @@ const CreateFarmer = (props: {
 						},
 					}]);
 					console.log("Land Piece Account Is now: ", landP) ;		
+					let count = 0  ;
+					landP.map(x => {
+
+						if(x.account.isPlanted != true) {
+							 count ++
+						}
+
+					})				   
 
 					  // tree = await treeProgram.account.tree.all([
 						// 	{
@@ -103,7 +110,7 @@ const CreateFarmer = (props: {
 						setData({
 							farmerKey: farmer,
 							payer: payer.publicKey,
-							landPieces: landP.length,
+							landPieces: count,
 						});
 					}			
 			})() ;		

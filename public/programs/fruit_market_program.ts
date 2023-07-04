@@ -125,6 +125,57 @@ export type FruitMarketProgram = {
       ]
     },
     {
+      "name": "closeMarket",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "fruitMarket",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMintAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "marketAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "marketEntry",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "entryFruitBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "cultivarName",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "name": "buyFruits",
       "accounts": [
         {
@@ -385,6 +436,57 @@ export const IDL: FruitMarketProgram = {
         },
         {
           "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "cultivarName",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "closeMarket",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "fruitMarket",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMintAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "marketAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMint",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "marketEntry",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "entryFruitBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
           "isMut": false,
           "isSigner": false
         }

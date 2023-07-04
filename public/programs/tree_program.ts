@@ -1703,6 +1703,164 @@ export type TreeProgram = {
         }
       ],
       "args": []
+    },
+    {
+      "name": "closeCultivar",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cultivar",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMintAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeTree",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cultivar",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMintAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "plant",
+      "accounts": [
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tree",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "location",
+          "type": {
+            "array": [
+              "u8",
+              2
+            ]
+          }
+        }
+      ]
     }
   ],
   "accounts": [
@@ -1846,6 +2004,10 @@ export type TreeProgram = {
           {
             "name": "createdDate",
             "type": "string"
+          },
+          {
+            "name": "isPlanted",
+            "type": "bool"
           }
         ]
       }
@@ -1920,6 +2082,10 @@ export type TreeProgram = {
     {
       "code": 6003,
       "name": "ConsumeNutrients"
+    },
+    {
+      "code": 6004,
+      "name": "FailedToPlant"
     }
   ]
 };
@@ -3629,6 +3795,164 @@ export const IDL: TreeProgram = {
         }
       ],
       "args": []
+    },
+    {
+      "name": "closeCultivar",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cultivar",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMintAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "closeTree",
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cultivarMeta",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "cultivar",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMintAuthority",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "fruitMint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "seedsBalance",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "plant",
+      "accounts": [
+        {
+          "name": "farm",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "farmer",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "tree",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "treesMeta",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "farmProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "location",
+          "type": {
+            "array": [
+              "u8",
+              2
+            ]
+          }
+        }
+      ]
     }
   ],
   "accounts": [
@@ -3772,6 +4096,10 @@ export const IDL: TreeProgram = {
           {
             "name": "createdDate",
             "type": "string"
+          },
+          {
+            "name": "isPlanted",
+            "type": "bool"
           }
         ]
       }
@@ -3846,6 +4174,10 @@ export const IDL: TreeProgram = {
     {
       "code": 6003,
       "name": "ConsumeNutrients"
+    },
+    {
+      "code": 6004,
+      "name": "FailedToPlant"
     }
   ]
 };

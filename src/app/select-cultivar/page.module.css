@@ -8,6 +8,16 @@
   /* padding-left:50px; */
 }
 
+.buy {
+  position: absolute;
+  top: 0 ;
+  left: 0 ;
+  width: 100vw ;
+  height: 100vh;
+  background-color: #08110F;
+  z-index: 5000000;
+}
+
 .card {
   height: 200px;
   width: 400px ;

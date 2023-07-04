@@ -5,7 +5,7 @@
   justify-content: center; */
   /* background-image: linear-gradient(to right top, #f9f871, #faf968, #fcfb5f, #fdfc54, #fffd49);
   box-shadow: 0 3px 5px 3px #fffd49; */
-  background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c);
+  /* background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c); */
   /* height: 300px; */
   border-radius: 0 0 5px 5px;
   margin-top: 0 ;
@@ -21,7 +21,7 @@
 }
 
 .card {
-  width: 380px;
+  width: 320px;
   height: 180px;
   border: 1px solid #1D3C2F;
   display: flex ;
