@@ -112,12 +112,6 @@ const PlantTree = () => {
 							bytes: payer.publicKey.toBase58(),
 						},
 					},
-					{
-						memcmp: {
-							offset: 8 + 50 + 200 + 5 * 8 + 1 + 4 * 8,
-							bytes: '0',
-						},
-					},
 				]);
 
 				console.log('the trees you own ==> ', t);
@@ -136,6 +130,7 @@ const PlantTree = () => {
 				} catch (e) {
 					console.log('The error is ', e);
 				}
+
 			}
 		})();
 	}, [payer.publicKey, name]);
@@ -169,7 +164,6 @@ const PlantTree = () => {
 			{farmer && name ? (
 				// <FarmerComponent
 				// 	name={farmer?.name}
-				//
 				// 	treeCount={farmer?.treeCount}
 				// 	cultivarName={name}
 				// 	profileNft={farmer?.profileNft}
@@ -178,14 +172,25 @@ const PlantTree = () => {
 				// />
 				<motion.div className={styles.buyLand}>
 					<BuyLand landCount={farmer?.landCount} setLandPiece={setLandPiece} />
-					<BuyTree setSeeds={setSeeds} cultivarName={name} setKey={setKey} />
-					{address != null && land != null ? (
-						<Plant setSeeds={setSeeds} cultivarName={name} tree={address} land={land} />
-					) : (
-						<></>
-					)}
+						{land != null ?	<BuyTree
+							setSeeds={setSeeds}
+							cultivarName={name}
+							land={land}
+							setKey={setKey}
+						/>:<></>
+						}
+						{address != null && land != null ? (
+								<Plant
+									setSeeds={setSeeds}
+									cultivarName={name}
+									tree={address}
+									land={land}
+								/>
+							  ):(
+							  <></>
+						)}
 				</motion.div>
-			) : (
+			      ):(
 				<></>
 			)}
 		</div>

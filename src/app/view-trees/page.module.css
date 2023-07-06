@@ -10,7 +10,38 @@
 
 .card {
   height: 200px;
+  width: 350px ;
   background-color:#F9F871;
   color: #e84855;
   margin: auto;
+}
+
+.link {
+  display: flex  ;
+  flex-direction: column;
+}
+
+.name {
+
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  /* background-color: aqua; */
+  height: 95px;
+}
+
+.gcontainer{
+  margin-top: auto;
+  margin-bottom: 0;
+  width: 350px ;
+  height: 25px;
+  /* background-color: #e84855; */
+  padding:  1px 10px;
+}
+
+.div {
+  width: 100% ;
+  height: 100%;
 }

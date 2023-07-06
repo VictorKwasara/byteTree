@@ -45,7 +45,9 @@ type TreeType = {
 
 const ViewTrees = () => {
 	const router = useRouter();
-	const [trees, setTrees] = useState<TreeType[]>([]);
+	const [trees, setTrees] = useState<
+		{ account: TreeType; publicKey: PublicKey }[]
+	>([]);
 	const [ready, setReady] = useState(false);
 	const w = useAnchorWallet();
 
@@ -89,7 +91,7 @@ const ViewTrees = () => {
 				]);
 			
 				let planted = t.filter((v) =>{
-					console.log("is true =>", v.account.isPlanted);
+					console.log("is true =>", v);
 					return v.account.isPlanted == true
 				});
 				console.log('Trees', t);
@@ -97,10 +99,10 @@ const ViewTrees = () => {
 
 				if (planted.length !== 0) {
 					planted.map((tr: any) => {
-						let tree = tr.account;
-						console.log('tree is ', tree);
-						let tree2: TreeType[] = trees;
-						tree2.push(tree);
+						// let tree = tr.account;
+						console.log('tree is ', tr);
+						let tree2 = trees;
+						tree2.push(tr);
 						setTrees(tree2);
 					});
 					console.log('Trees is now', trees);
@@ -115,18 +117,59 @@ const ViewTrees = () => {
 			<Grid container spacing={2}>
 				{ready ? (
 					trees.map((t, i) => (
-						<Grid item xs={12} md={6} key={`${i} + ${t.cultivarName}`}>
+						<Grid item xs={12} md={6} key={`${i} + ${t.account.cultivarName}`}>
 							<Card sx={{ backgroundColor: '#F9F871' }} className={styles.card}>
 								<Link
-									href={`/tree?name=${t.cultivarName}`}
+									href={`/tree?name=${t.account.cultivarName}&tree=${t.publicKey.toString()}`}
 									component={NextLink}
 									underline='none'
+									className={styles.link}
 								>
 									<CardMedia>
-									<Image alt="cultivar nft" src={t.nftUri} width="200" height="100"/>
+										<Image
+											alt='cultivar nft'
+											src={t.account.nftUri}
+											width='350'
+											height='100'
+										/>
 									</CardMedia>
-									<CardActionArea sx={{ width: '100%', height: '100%' }}>
-										{t.cultivarName}
+									<CardActionArea
+										sx={{ width: '100%', height: '100%' }}
+										className={styles.action}
+									>
+										<Typography
+											variant='h5'
+											className={styles.name}
+											fontWeight='600'
+										>
+											{t.account.cultivarName}
+										</Typography>
+										<Grid container className={styles.gcontainer}>
+											<Grid item sx={{ width: '60px' }}>
+												<Typography variant='body1' className={styles.health}>
+													Health
+												</Typography>
+											</Grid>
+											<Grid item sx={{ width: '60px' }}>
+												<Typography variant='body1' className={styles.health}>
+													{t.account.health.toString()}
+												</Typography>
+											</Grid>
+											<Grid
+												item
+												sx={{ width: `calc(${t.account.health }* 2px + 1px)` }}
+											>
+												<div
+													className={styles.div}
+													style={{
+														backgroundColor:
+															(t.account.health as number) > 50
+																? 'green'
+																: 'red',
+													}}
+												></div>
+											</Grid>
+										</Grid>
 									</CardActionArea>
 								</Link>
 							</Card>

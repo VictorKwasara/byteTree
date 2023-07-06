@@ -21,25 +21,27 @@ import { useSearchParams } from 'next/navigation';
 import Calculate from './Calculate';
 import Update from './Update';
 import AddNutrients from './AddNutrients';
+import { amber } from '@mui/material/colors';
 
-type balance = {
-	nitrogen: anchor.BN;
-	potassium: anchor.BN;
-	phosphorus: anchor.BN;
-	water: anchor.BN;
-};
+// type balance = {
+// 	nitrogen: anchor.BN;
+// 	potassium: anchor.BN;
+// 	phosphorus: anchor.BN;
+// 	water: anchor.BN;
+// };
 
-const BasalApplication = (props: { cultivarName: String }) => {
-	const [balance, setBalance] = useState<balance | null>(null);
+const BasalApplication = (props: { cultivarName: String, tree: string }) => {
+	const [amount, setAmount] = useState<anchor.BN[]>([]);
 	const w = useAnchorWallet();
-
+	const [added, setAdded] = useState(false);
+	const router = useRouter();
 	const connection = new Connection('https://api.devnet.solana.com');
 
 	const provider = new AnchorProvider(connection, w as Wallet, {
 		commitment: 'confirmed',
 	});
 	const farmerProgram = new PublicKey(
-		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
+		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
 	);
 
 	const farmProgram = new PublicKey(
@@ -47,7 +49,7 @@ const BasalApplication = (props: { cultivarName: String }) => {
 	);
 
 	const programID = new PublicKey(
-		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
+		'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -55,10 +57,9 @@ const BasalApplication = (props: { cultivarName: String }) => {
 	let payer = program.provider;
 
 	useEffect(() => {
-		console.log('Are we in here getting? huh');
+		// console.log('Are we in here getting? huh');
 		(async () => {
 			if (payer.publicKey) {
-
 				let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('farm')],
 					farmProgram
@@ -76,15 +77,7 @@ const BasalApplication = (props: { cultivarName: String }) => {
 				);
 
 				//tree
-				let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
-					[
-						Buffer.from('tree'),
-						treesMeta.toBuffer(),
-						farmer.toBuffer(),
-						Buffer.from(props.cultivarName),
-					],
-					program.programId
-				);
+				let tree = new anchor.web3.PublicKey(props.tree);
 				// 	inputBalance,
 				let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('nutrientbalance'), tree.toBuffer()],
@@ -184,120 +177,129 @@ const BasalApplication = (props: { cultivarName: String }) => {
 								farmProgram,
 							})
 							.rpc();
-							console.log("The transaction is complete: ", tx);
+						console.log('The transaction is complete: ', tx);
 
-						  await getAccounts();
+						await getAccounts();
 					}
 				}
 
 				console.log('The nitrogen balance is ', nb);
 				console.log('The nitrogen balance is ', pb);
 				console.log('The nitrogen balance is ', kb);
-				console.log('The nitrogen balance is ', w);
+				console.log('The nitrogen balance is ', wt);
 
-				let balance = console.log('the amount is? ', nb.amount);
+				 console.log('the amount is? ', nb.amount);
 
-				if (nb != null || kb != null || pb != null || wt != null) {
-					let b: balance = {
-						nitrogen: nb?.amount,
-						potassium: kb?.amount,
-						phosphorus: pb?.amount,
-						water: wt?.amount,
-					};
-					if (nb != null) {
-					}
-					if (kb != null) {
-					}
-					if (pb != null) {
-					}
-					if (wt != null) {
-					}
+				if (nb.amount > 0){
+				 let a = amount ;
+				 a[0] = nb.amount
+         setAmount(a)
 
-					console.log(b);
-					setBalance(b);
+				} 
+				if (pb.amount > 0) {
+						 let a = amount;
+							a[1] = pb.amount;
+							setAmount(a);
 				}
+				
+				if (kb.amount > 0){
+							 let a = amount;
+								a[2] = kb.amount;
+								setAmount(a);
+				}
+
+				
+				if (wt.amount > 0) {
+					 let a = amount ;
+					a[3] = wt.amount;
+					setAmount(a);
+				}
+
 			}
 		})();
-	}, [payer.publicKey]);
+	}, [payer.publicKey, added]);
 
-	return balance != null &&
-		balance.water > new anchor.BN(0) &&
-		balance.potassium > new anchor.BN(0) &&
-		balance.nitrogen > new anchor.BN(0) &&
-		balance.phosphorus > new anchor.BN(0) ? (
+	const loaded = () => {
+		 setAdded(!added);
+		 router.refresh();
+	}
+
+	return amount[0] > new anchor.BN(0) &&
+		amount[1] > new anchor.BN(0) &&
+		amount[2] > new anchor.BN(0) &&
+		amount[3] > new anchor.BN(0) ? (
 		<></>
 	) : (
 		<div className={styles.container}>
 			<div
 				className={styles.button}
 				style={{
-					borderColor:
-						balance !== null && balance.potassium > new anchor.BN(0)
-							? 'green'
-							: 'red',
+					borderColor: amount[2] > new anchor.BN(0) ? 'green' : 'red',
 				}}
 			>
 				<Typography variant='h6' sx={{ color: 'red' }}>
-					{balance !== null ? balance.potassium.toString() : '0'}
+					{amount[2] > new anchor.BN(0) ? amount[2].toString() : '0'}
 				</Typography>
 				<AddNutrients
 					cultivarName={props.cultivarName}
 					nutrient='addPotassium'
 					amount={new anchor.BN(50000)}
+					tree={props.tree}
+					setReload={loaded}
 				/>
 			</div>
 			<div
 				className={styles.button}
 				style={{
 					borderColor:
-						balance != null && balance.nitrogen > new anchor.BN(0)
-							? 'green'
-							: 'red',
+						amount != null && amount[0] > new anchor.BN(0) ? 'green' : 'red',
 				}}
 			>
 				<Typography variant='h6' sx={{ color: 'red' }}>
-					{balance !== null ? balance.nitrogen.toString() : '0'}
+					{amount[0] > new anchor.BN(0) ? amount[0].toString() : '0'}
 				</Typography>
 				<AddNutrients
 					cultivarName={props.cultivarName}
 					nutrient='addNitrogen'
 					amount={new anchor.BN(50000)}
+					tree={props.tree}
+					setReload={loaded}
 				/>
 			</div>
 			<div
 				className={styles.button}
 				style={{
 					borderColor:
-						balance !== null && balance.phosphorus > new anchor.BN(0)
-							? 'green'
-							: 'red',
+						amount != null && amount[1] > new anchor.BN(0) ? 'green' : 'red',
 				}}
 			>
 				<Typography variant='h6' sx={{ color: 'red' }}>
-					{balance !== null ? balance.phosphorus.toString() : '0'}
+					{amount[1] > new anchor.BN(0) ? amount[1].toString() : '0'}
 				</Typography>
 				<AddNutrients
 					cultivarName={props.cultivarName}
 					nutrient='addPhosphorus'
 					amount={new anchor.BN(50000)}
+					tree={props.tree}
+					setReload={loaded}
 				/>
 			</div>
 			<div
 				className={styles.button}
 				style={{
 					borderColor:
-						balance !== null && balance.water > new anchor.BN(0)
-							? 'green'
-							: 'red',
+						amount != null && amount[3] > new anchor.BN(0) ? 'green' : 'red',
 				}}
 			>
 				<Typography variant='h6' sx={{ color: 'red' }}>
-					{balance !== null ? balance.water.toString(): "0"}
+					{amount[3] > new anchor.BN(0) ? amount[3].toString() : '0'}
 				</Typography>
 				<AddNutrients
 					cultivarName={props.cultivarName}
 					nutrient='waterTree'
 					amount={new anchor.BN(50000)}
+					tree={props.tree}
+					setReload={loaded}
 				/>
 			</div>
 		</div>

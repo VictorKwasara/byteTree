@@ -17,13 +17,17 @@ import NextLink from 'next/link';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 
-
 type Nutrient = 'waterTree' | "addNitrogen" | "addPhosphorus" | "addPotassium" ;
 
 
-const AddNutrients = (props:{cultivarName: String, nutrient: Nutrient, amount: anchor.BN}) => {
-
-  const w = useAnchorWallet();
+const AddNutrients = (props: {
+	cultivarName: String;
+	nutrient: Nutrient;
+	amount: anchor.BN;
+	tree: string;
+	setReload: () => void  
+}) => {
+	const w = useAnchorWallet();
 	// const { connection } = useConnection();
 
 	const connection = new Connection('https://api.devnet.solana.com');
@@ -33,7 +37,7 @@ const AddNutrients = (props:{cultivarName: String, nutrient: Nutrient, amount: a
 	});
 
 	const farmerProgram = new PublicKey(
-		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
+		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
 	);
 
 	const farmProgram = new PublicKey(
@@ -41,7 +45,7 @@ const AddNutrients = (props:{cultivarName: String, nutrient: Nutrient, amount: a
 	);
 
 	const programID = new PublicKey(
-		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
+		'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -50,6 +54,9 @@ const AddNutrients = (props:{cultivarName: String, nutrient: Nutrient, amount: a
 	const handleClick = async () => {
 		if (payer.publicKey) {
 			console.log('Inside if satement');
+			let tree = new anchor.web3.PublicKey(props.tree);
+
+			let t_account = await program.account.tree.fetch(tree);
 			let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('farm')],
 				farmProgram
@@ -66,7 +73,7 @@ const AddNutrients = (props:{cultivarName: String, nutrient: Nutrient, amount: a
 			);
 
 			let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
+				[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer(), Buffer.from(t_account.location)],
 				farmerProgram
 			);
 
@@ -107,7 +114,6 @@ const AddNutrients = (props:{cultivarName: String, nutrient: Nutrient, amount: a
 				program.programId
 			);
 
-
 			// trees_meta
 			let [treesMeta] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('treesmeta'), farm.toBuffer()],
@@ -115,15 +121,7 @@ const AddNutrients = (props:{cultivarName: String, nutrient: Nutrient, amount: a
 			);
 
 			//tree
-			let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
-				[
-					Buffer.from('tree'),
-					treesMeta.toBuffer(),
-					farmer.toBuffer(),
-					Buffer.from(props.cultivarName),
-				],
-				program.programId
-			);
+
 			let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('nutrientbalance'), tree.toBuffer()],
 				program.programId
@@ -193,8 +191,7 @@ const AddNutrients = (props:{cultivarName: String, nutrient: Nutrient, amount: a
 					program.programId
 				);
 
-			const tx = await program.methods
-				[props.nutrient](props.amount)
+			const tx = await program.methods[props.nutrient](props.amount)
 				.accounts({
 					farm,
 					farmer,
@@ -222,11 +219,7 @@ const AddNutrients = (props:{cultivarName: String, nutrient: Nutrient, amount: a
 				.rpc();
 			console.log(`The transaction signature is ${tx.toString()}`);
 			alert('success ' + tx);
-			// setData({
-			// 	farmer: farmer,
-			// 	payer: payer.publicKey,
-			// 	landPieces: landP.length,
-			// });
+			props.setReload();
 		}
 	};
 

@@ -23,6 +23,7 @@ const BuyTree = (props: {
 	cultivarName: String;
 	setSeeds: (amount: anchor.BN) => void;
 	setKey: (tree: anchor.web3.PublicKey) => void;
+	land: anchor.web3.PublicKey
 }) => {
 	// const [seeds, setSeeds] = useState<anchor.BN>(new anchor.BN(0)) ;
 	const [trees, setTrees] = useState<number>(0);
@@ -65,7 +66,7 @@ const BuyTree = (props: {
 				]);
 
 				console.log('the trees you own ==> ', t);
-				let unplanted = t.filter((t) => t.account.isPlanted == false);
+				let unplanted = t.filter((t) => t.account.isPlanted == false && t.account.name == props.cultivarName);
 
 				console.log('Unplanted trees! ', unplanted);
 
@@ -74,6 +75,7 @@ const BuyTree = (props: {
 				props.setKey(unplanted[0].publicKey);
 			}
 		})();
+
 	}, [payer.publicKey]);
 
 	const handleClick = async () => {
@@ -96,10 +98,12 @@ const BuyTree = (props: {
 				farmProgram
 			);
 
-			let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
-				farmerProgram
-			);
+			// let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
+			// 	farmerProgram
+			// );
+
+			 let landPiece = new anchor.web3.PublicKey(props.land);
 
 			let [vault] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('carbonvault')],
@@ -207,6 +211,8 @@ const BuyTree = (props: {
 				.rpc();
 			console.log(`The transaction signature is ${tx.toString()}`);
 			alert('success ' + tx);
+			setTrees(1);
+			props.setKey(tree);
 			// try {
 			// 	let sb = await token.getAccount(connection, seedsBalance);
 			// 	let amount = sb.amount.toString();
@@ -232,8 +238,7 @@ const BuyTree = (props: {
 					component={Button}
 					onClick={handleClick}
 					className={styles.cardArea}
-				>
-					<Typography variant='h5' className={styles.type}>
+				><Typography variant='h5' className={styles.type}>
 						Buy Tree
 					</Typography>
 				</CardActionArea>

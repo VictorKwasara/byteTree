@@ -21,9 +21,10 @@ import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
 import BasalApplication from './BasalApplication';
 import Calculate from './Calculate';
+import Consume from './Consume';
 import Update from './Update';
 
-const InitializeTreeAccounts = (props:{name: string}) => {
+const InitializeTreeAccounts = ( props:{name: string, tree: string}) => {
   const [initialized, setInitialized] = useState(false)
   const [newPlant, setNewPlant] = useState(false)
   const w = useAnchorWallet();
@@ -37,15 +38,15 @@ const InitializeTreeAccounts = (props:{name: string}) => {
 		commitment: 'confirmed',
 	});
 	const farmerProgram = new PublicKey(
-		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
+		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
 	);
 
 	const farmProgram = new PublicKey(
-		'6ENVuGLwmXzs3vTtrnELHTA1y3Q1s2NKZMu4zDo3nPUd'
+		'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
 	);
 
 	const programID = new PublicKey(
-		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
+		'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -71,19 +72,13 @@ const InitializeTreeAccounts = (props:{name: string}) => {
 					farmProgram
 				);
 
+			
 				//tree
-				let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
-					[
-						Buffer.from('tree'),
-						treesMeta.toBuffer(),
-						farmer.toBuffer(),
-						Buffer.from(props.name),
-					],
-					program.programId
-				);
+				let tree = new anchor.web3.PublicKey(props.tree);
+				
 				// 	inputBalance,
 				let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-					[Buffer.from('nutrientbalance'), tree.toBuffer()],
+					[Buffer.from('nutrientbalance'),tree.toBuffer()],
 					program.programId
 				);
 
@@ -152,13 +147,21 @@ const InitializeTreeAccounts = (props:{name: string}) => {
 
 				try {
 					await getAccounts();
-          setInitialized(true);
-         
+
+					if (nb.amount > new anchor.BN(0) &&
+					kb.amount > new anchor.BN(0) &&
+					pb.amount > new anchor.BN(0) &&
+					wt.amount > new anchor.BN(0)) {
+							setInitialized(true); 
+					}else {
+							setInitialized(true); 
+							setNewPlant(true);
+					}
+           
+					console.log('already initialized');      
 				} catch (e) {
 					console.log('the error is this => ', e);
-
-					if (e == 'TokenAccountNotFoundError') {
-						
+					if (e == 'TokenAccountNotFoundError') {						
 						const tx = await program.methods
 							.initTreeAccounts()
 							.accounts({
@@ -170,7 +173,7 @@ const InitializeTreeAccounts = (props:{name: string}) => {
 								phosphorusMint,
 								nutrientMintAuthority,
 								treesMeta,
-								tree,
+								tree: props.tree,
 								inputBalance,
 								waterBalance,
 								nitrogenBalance,
@@ -193,9 +196,14 @@ const InitializeTreeAccounts = (props:{name: string}) => {
 		<div className={styles.initialize}></div>
 	) : (
 		<>
-			{newPlant ? <BasalApplication cultivarName={props.name} /> : <></>}
-			<Update cultivarName={props.name} />
-			<Calculate cultivarName={props.name} />
+			<Update cultivarName={props.name} tree={props.tree} />
+			<Consume cultivarName={props.name} tree={props.tree} />
+			<Calculate cultivarName={props.name} tree={props.tree} />
+			 {newPlant ? (
+				<BasalApplication cultivarName={props.name} tree={props.tree} />
+			) : (
+				<> </>
+			)}
 		</>
 	);
 };

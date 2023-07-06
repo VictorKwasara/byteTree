@@ -52,6 +52,7 @@ const TreeComponent = () => {
 		const router = useRouter();
   	const searchParams = useSearchParams();
 		const name = searchParams.get('name');
+		const address = searchParams.get('tree');
     const [ready, setReady] = useState<boolean>(false);
 
 		const w = useAnchorWallet();
@@ -62,15 +63,15 @@ const TreeComponent = () => {
 			commitment: 'confirmed',
 		});
 		const farmerProgram = new PublicKey(
-			'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
+			'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
 		);
 
 		const farmProgram = new PublicKey(
-			'JDAMcZJRfuXdNywQEdincd6ud5v8zfuEqeFeBmoHo3Tn'
+			'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
 		);
 
 		const programID = new PublicKey(
-			'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
+			'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
 		);
 
 		const program = new Program(IDL, programID, provider);
@@ -78,36 +79,26 @@ const TreeComponent = () => {
 
     useEffect(()=>{ 
       (async () => {
-           if (payer.publicKey && name!= null) {
-							console.log('the name is => ', name);
+           if (payer.publicKey && name!= null && address!=null) {
+							let tree = new anchor.web3.PublicKey(address);
 
-              let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
-								[Buffer.from('farm')],
-								farmProgram
-							);
-							// farmer
-							let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
-								[Buffer.from('farmer'), payer.publicKey.toBuffer()],
-								farmerProgram
-							);
+							// let t_account = await program.account.tree.fetch(tree);
 
-							// trees_meta
-							let [treesMeta] = anchor.web3.PublicKey.findProgramAddressSync(
-								[Buffer.from('treesmeta'), farm.toBuffer()],
-								farmProgram
-							);
+              // let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
+							// 	[Buffer.from('farm')],
+							// 	farmProgram
+							// );
+							// // farmer
+							// let [farmer] = anchor.web3.PublicKey.findProgramAddressSync(
+							// 	[Buffer.from('farmer'), payer.publicKey.toBuffer()],
+							// 	farmerProgram
+							// );
 
-							//tree
-							let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
-								[
-									Buffer.from('tree'),
-									treesMeta.toBuffer(),
-									farmer.toBuffer(),
-									Buffer.from(name),
-								],
-								program.programId
-							);
-							
+							// // trees_meta
+							// let [treesMeta] = anchor.web3.PublicKey.findProgramAddressSync(
+							// 	[Buffer.from('treesmeta'), farm.toBuffer()],
+							// 	farmProgram
+							// );						
 
 							let n = name.trim();
 							console.log('the n is => ', n);
@@ -125,7 +116,7 @@ const TreeComponent = () => {
 
 	return (
 		<div className={styles.dv}>
-			{name ? <InitializeTreeAccounts name={name} /> : <></>}
+			{name && address ? <InitializeTreeAccounts name={name} tree={address} /> : <></>}
 			{ready && tree ? (
 				<Grid container spacing={2} sx={{ width: '100%', haight: '100%' }}>
 					<Grid item xs={8} md={4}>
@@ -214,7 +205,7 @@ const TreeComponent = () => {
 								}}
 								initial={{ opacity: 0 }}
 							>
-								<NutrientBalance cultivarName={tree.cultivarName} />
+								{/* <NutrientBalance cultivarName={tree.cultivarName} /> */}
 							</motion.div>
 						</Stack>
 					</Grid>

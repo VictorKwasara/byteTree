@@ -35,7 +35,7 @@ const TreeActions = (props: {cultivarName: String}) => {
   return (
 		<div className={styles.container}>
 			<Stack direction='row' spacing={2}>
-				<ButtonGroup
+				{/* <ButtonGroup
 					orientation='vertical'
 					variant='contained'
 					aria-label='outlined button group'
@@ -50,7 +50,7 @@ const TreeActions = (props: {cultivarName: String}) => {
 					<div className={enabled ? styles.enabled : styles.disabled}>
 						<CheckAndUpdate cultivarName={props.cultivarName} />
 					</div>
-				</ButtonGroup>
+				</ButtonGroup> */}
 				<ButtonGroup
 					orientation='vertical'
 					variant='contained'

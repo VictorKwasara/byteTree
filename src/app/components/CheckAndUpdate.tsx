@@ -30,7 +30,7 @@ const CheckAndUpdate = (props: { cultivarName: String }) => {
 	});
 
 	const farmerProgram = new PublicKey(
-		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
+		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
 	);
 
 	const farmProgram = new PublicKey(
@@ -38,7 +38,7 @@ const CheckAndUpdate = (props: { cultivarName: String }) => {
 	);
 
 	const programID = new PublicKey(
-		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
+		'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
 	);
 
 	const program = new Program(IDL, programID, provider);

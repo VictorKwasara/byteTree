@@ -18,8 +18,8 @@ import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import {motion} from 'framer-motion';
 
-const CalculateRequired = (props: { cultivarName: String }) => {
-	const [calculated, setCalculated] = useState(false)
+const CalculateRequired = (props: { cultivarName: String, tree: string }) => {
+	const [calculated, setCalculated] = useState(false);
 	const w = useAnchorWallet();
 	// const { connection } = useConnection();
 
@@ -30,7 +30,7 @@ const CalculateRequired = (props: { cultivarName: String }) => {
 	});
 
 	const farmerProgram = new PublicKey(
-		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
+		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
 	);
 
 	const farmProgram = new PublicKey(
@@ -38,7 +38,7 @@ const CalculateRequired = (props: { cultivarName: String }) => {
 	);
 
 	const programID = new PublicKey(
-		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
+		'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -47,6 +47,13 @@ const CalculateRequired = (props: { cultivarName: String }) => {
 	const handleClick = async () => {
 		if (payer.publicKey) {
 			console.log('Inside if satement');
+			//tree
+			let tree = new anchor.web3.PublicKey(props.tree);
+
+			let t_account = await program.account.tree.fetch(tree);
+
+			t_account.location;
+
 			let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('farm')],
 				farmProgram
@@ -63,7 +70,12 @@ const CalculateRequired = (props: { cultivarName: String }) => {
 			);
 
 			let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
+				[
+					Buffer.from('landpiece'),
+					landMeta.toBuffer(),
+					farmer.toBuffer(),
+					Buffer.from(t_account.location),
+				],
 				farmerProgram
 			);
 
@@ -110,16 +122,6 @@ const CalculateRequired = (props: { cultivarName: String }) => {
 				farmProgram
 			);
 
-			//tree
-			let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
-				[
-					Buffer.from('tree'),
-					treesMeta.toBuffer(),
-					farmer.toBuffer(),
-					Buffer.from(props.cultivarName),
-				],
-				program.programId
-			);
 			let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('nutrientbalance'), tree.toBuffer()],
 				program.programId
@@ -188,6 +190,7 @@ const CalculateRequired = (props: { cultivarName: String }) => {
 					[Buffer.from('nutrientmintauthority')],
 					program.programId
 				);
+
 			console.log('w=jwjjwjwjwjwwwwiwiwwiwiwiwwww');
 			const tx = await program.methods
 				.calculateRequired()
@@ -218,20 +221,16 @@ const CalculateRequired = (props: { cultivarName: String }) => {
 				.rpc();
 			console.log(`The transaction signature is ${tx.toString()}`);
 			alert('success ' + tx);
-
-			setCalculated(true)
-			// setData({
-			// 	farmer: farmer,
-			// 	payer: payer.publicKey,
-			// 	landPieces: landP.length,
-			// });
-			
+			 setCalculated(true);
 		}
 	};
 
-	return  (
+	return (
 		<motion.div
-			animate={{ x:!calculated ? 0 : "102vw", transition: { duration: 2, delay: 1 } }}
+			animate={{
+				x: !calculated ? 0 : '102vw',
+				transition: { duration: 2, delay: 1 },
+			}}
 			initial={{ x: '-100vw' }}
 			className={styles.container}
 		>
@@ -241,12 +240,12 @@ const CalculateRequired = (props: { cultivarName: String }) => {
 					sx={{ color: '#F1F085' }}
 					onClick={handleClick}
 				>
-					CalculateRequired
+					Calculate Required
 				</Button>
 			</div>
 			<div className={styles.break}></div>
 			<div className={styles.empty}></div>
-		</motion.div> 
+		</motion.div>
 	);
 };
 

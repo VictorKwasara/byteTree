@@ -28,7 +28,7 @@ const CalculateRequired = (props: { cultivarName: String; handleEnable: () => an
 	});
 
 	const farmerProgram = new PublicKey(
-		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
+		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
 	);
 
 	const farmProgram = new PublicKey(
@@ -36,7 +36,7 @@ const CalculateRequired = (props: { cultivarName: String; handleEnable: () => an
 	);
 
 	const programID = new PublicKey(
-		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
+		'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -60,10 +60,10 @@ const CalculateRequired = (props: { cultivarName: String; handleEnable: () => an
 				farmProgram
 			);
 
-			let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
-				farmerProgram
-			);
+			// let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
+			// 	farmerProgram
+			// );
 
 			let [vault] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('carbonvault')],
@@ -109,52 +109,52 @@ const CalculateRequired = (props: { cultivarName: String; handleEnable: () => an
 			);
 
 			//tree
-			let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
-				[
-					Buffer.from('tree'),
-					treesMeta.toBuffer(),
-					farmer.toBuffer(),
-					Buffer.from(props.cultivarName),
-				],
-				program.programId
-			);
-			let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('nutrientbalance'), tree.toBuffer()],
-				program.programId
-			);
+			// let [tree] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[
+			// 		Buffer.from('tree'),
+			// 		treesMeta.toBuffer(),
+			// 		farmer.toBuffer(),
+			// 		Buffer.from(props.cultivarName),
+			// 	],
+			// 	program.programId
+			// );
+			// let [inputBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('nutrientbalance'), tree.toBuffer()],
+			// 	program.programId
+			// );
 
-			//fruitBalance,
-			let [fruitBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('fruit'), tree.toBuffer()],
-				program.programId
-			);
+			// //fruitBalance,
+			// let [fruitBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('fruit'), tree.toBuffer()],
+			// 	program.programId
+			// );
 
-			//requiredNutrients
-			let [requiredNutrients] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('requirednutrients'), tree.toBuffer()],
-				program.programId
-			);
-			// waterBalance,
-			let [waterBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('water'), inputBalance.toBuffer()],
-				program.programId
-			);
+			// //requiredNutrients
+			// let [requiredNutrients] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('requirednutrients'), tree.toBuffer()],
+			// 	program.programId
+			// );
+			// // waterBalance,
+			// let [waterBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('water'), inputBalance.toBuffer()],
+			// 	program.programId
+			// );
 
-			// 	nitrogenBalance,
-			let [nitrogenBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('nitrogen'), inputBalance.toBuffer()],
-				program.programId
-			);
-			// 	phosphorusBalance,
-			let [phosphorusBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('phosphorus'), inputBalance.toBuffer()],
-				program.programId
-			);
-			// 	potassiumBalance,
-			let [potassiumBalance] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('potassium'), inputBalance.toBuffer()],
-				program.programId
-			);
+			// // 	nitrogenBalance,
+			// let [nitrogenBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('nitrogen'), inputBalance.toBuffer()],
+			// 	program.programId
+			// );
+			// // 	phosphorusBalance,
+			// let [phosphorusBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('phosphorus'), inputBalance.toBuffer()],
+			// 	program.programId
+			// );
+			// // 	potassiumBalance,
+			// let [potassiumBalance] = anchor.web3.PublicKey.findProgramAddressSync(
+			// 	[Buffer.from('potassium'), inputBalance.toBuffer()],
+			// 	program.programId
+			// );
 
 			// nitrogenMint,
 			let [nitrogenMint] = anchor.web3.PublicKey.findProgramAddressSync(
@@ -187,35 +187,35 @@ const CalculateRequired = (props: { cultivarName: String; handleEnable: () => an
 					program.programId
 				);
 			console.log('w=jwjjwjwjwjwwwwiwiwwiwiwiwwww');
-			const tx = await program.methods
-				.calculateRequired()
-				.accounts({
-					farm,
-					farmer,
-					waterMint,
-					nitrogenMint,
-					potassiumMint,
-					phosphorusMint,
-					nutrientMintAuthority,
-					landMeta,
-					treesMeta,
-					tree,
-					landPiece,
-					inputBalance,
-					waterBalance,
-					nitrogenBalance,
-					phosphorusBalance,
-					potassiumBalance,
-					fruitMintAuthority,
-					fruitMint,
-					fruitBalance,
-					requiredNutrients,
-					vault,
-					farmProgram,
-				})
-				.rpc();
-			console.log(`The transaction signature is ${tx.toString()}`);
-			alert('success ' + tx);
+			// const tx = await program.methods
+			// 	.calculateRequired()
+			// 	.accounts({
+			// 		farm,
+			// 		farmer,
+			// 		waterMint,
+			// 		nitrogenMint,
+			// 		potassiumMint,
+			// 		phosphorusMint,
+			// 		nutrientMintAuthority,
+			// 		landMeta,
+			// 		treesMeta,
+			// 		tree,
+			// 		landPiece,
+			// 		inputBalance,
+			// 		waterBalance,
+			// 		nitrogenBalance,
+			// 		phosphorusBalance,
+			// 		potassiumBalance,
+			// 		fruitMintAuthority,
+			// 		fruitMint,
+			// 		fruitBalance,
+			// 		requiredNutrients,
+			// 		vault,
+			// 		farmProgram,
+			// 	})
+			// 	.rpc();
+			// console.log(`The transaction signature is ${tx.toString()}`);
+			// alert('success ' + tx);
 			props.handleEnable()
 			// setData({
 			// 	farmer: farmer,

@@ -12,16 +12,16 @@ import {
 	CardActionArea,
 	Link,
 } from '@mui/material';
-import styles from './styles/update.module.css';
+import styles from './styles/consume.module.css';
 import NextLink from 'next/link';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import * as token from '@solana/spl-token';
 import { motion } from 'framer-motion';
 
-const CheckAndUpdate = (props: { cultivarName: String; tree: string }) => {
+const CheckAndUpdate = (props: { cultivarName: String, tree: string }) => {
 	const w = useAnchorWallet();
-	const [updated, setUpdated] = useState(false);
+	const [updated, setUpdated] = useState(false)
 	// const { connection } = useConnection();
 	// const [consume, setConsume ] =  useStat(false)
 
@@ -49,10 +49,11 @@ const CheckAndUpdate = (props: { cultivarName: String; tree: string }) => {
 	const handleClick = () => {
 		(async () => {
 			if (payer.publicKey) {
+
 				let tree = new anchor.web3.PublicKey(props.tree);
 
 				let t_account = await program.account.tree.fetch(tree);
-
+				
 				// farm
 				let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('farm')],
@@ -73,19 +74,14 @@ const CheckAndUpdate = (props: { cultivarName: String; tree: string }) => {
 
 				//land_piece
 				let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
-					[
-						Buffer.from('landpiece'),
-						landMeta.toBuffer(),
-						farmer.toBuffer(),
-						Buffer.from(t_account.location),
-					],
+					[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer(), Buffer.from(t_account.location)],
 					farmerProgram
 				);
 
 				let [treesMeta] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('treesmeta'), farm.toBuffer()],
 					farmProgram
-				);
+				);				
 
 				let [waterMint] = anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('watermint')],
@@ -162,58 +158,56 @@ const CheckAndUpdate = (props: { cultivarName: String; tree: string }) => {
 					[Buffer.from('potassium'), inputBalance.toBuffer()],
 					program.programId
 				);
-
-				alert('Update tree');
-				const tx = await program.methods
-					.checkAndUpdate()
+					
+				alert('Consume nutrients');
+				const tx2 = await program.methods
+					.consumeNutrients()
 					.accounts({
-						farm,
-						farmer,
-						waterMint,
-						nitrogenMint,
-						potassiumMint,
-						phosphorusMint,
-						nutrientMintAuthority,
-						landMeta,
-						treesMeta,
-						tree,
-						landPiece,
-						inputBalance,
-						waterBalance,
-						nitrogenBalance,
-						phosphorusBalance,
-						potassiumBalance,
-						fruitMintAuthority,
-						fruitMint,
-						fruitBalance,
-						requiredNutrients,
-						vault,
-						farmProgram,
-						tokenProgram: token.TOKEN_PROGRAM_ID,
+							farm,
+							farmer,
+							waterMint,
+							nitrogenMint,
+							potassiumMint,
+							phosphorusMint,
+							nutrientMintAuthority,
+							landMeta,
+							treesMeta,
+							tree,
+							landPiece,
+							inputBalance,
+							waterBalance,
+							nitrogenBalance,
+							phosphorusBalance,
+							potassiumBalance,
+							fruitMintAuthority,
+							fruitMint,
+							fruitBalance,
+							requiredNutrients,
+							vault,
+							farmProgram,
 					})
 					.rpc();
-
-				console.log(`Tree has bee updated ${tx.toString()}`);
-				setUpdated(true);
-				// alert('Tree updated ' + tx);
+					console.log('The nutrients have been consumed: ', tx2.toString());
+	
+				  setUpdated(true)
 			}
 		})();
 	};
-	return (
+	return   (
 		<motion.div
 			animate={{
 				x: !updated ? 0 : '102vw',
 				transition: { duration: 2, delay: 1 },
 			}}
 			initial={{ x: 0 }}
-			className={styles.container}
+			className={styles.container}			
 		>
 			<Button
 				variant='contained'
-				sx={{ color: '#F1F085' }}
+				sx={{ color: '#F1F085'}}
 				onClick={handleClick}
 			>
-				Check And Update
+				Consume
 			</Button>
 		</motion.div>
 	);
