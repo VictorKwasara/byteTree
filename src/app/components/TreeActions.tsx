@@ -51,7 +51,7 @@ const TreeActions = (props: {cultivarName: String}) => {
 						<CheckAndUpdate cultivarName={props.cultivarName} />
 					</div>
 				</ButtonGroup> */}
-				<ButtonGroup
+				{/* <ButtonGroup
 					orientation='vertical'
 					variant='contained'
 					aria-label='outlined button group'
@@ -76,7 +76,7 @@ const TreeActions = (props: {cultivarName: String}) => {
 						nutrient='waterTree'
 						amount={new anchor.BN(50000)}
 					/>
-				</ButtonGroup>
+				</ButtonGroup> */}
 			</Stack>
 		</div>
 	);
