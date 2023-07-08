@@ -34,11 +34,11 @@
   color: #e84855;
 }
 
-.divImage{
+/* .divImage{
   width:200px ;
   height: 200px ;
   background-color: #08110F;
-}
+} */
 
 .content {
   width: 195px;
@@ -49,6 +49,8 @@
   align-items: center;
   justify-content: center;
   border: 2px solid black;
+  margin-left: auto ;
+  
 }
 
 .media {
