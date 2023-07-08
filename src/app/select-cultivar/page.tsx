@@ -133,7 +133,7 @@ const SelectCultivar = () => {
 			animate={{ x: '0' }}
 			transition={{ delay: 1 }}
 		>
-			<Grid container spacing={2} className={styles.grid} m={2} p={2}>
+			<Grid container spacing={6} className={styles.grid} m={2} p={2}>
 				{ready ? (
 					cultivars.map((c: cultivar, i) => (
 						<Grid
@@ -156,10 +156,11 @@ const SelectCultivar = () => {
 								>
 									<CardMedia className={styles.media}>
 										<div className={styles.divImage}>
-											<img
+											<Image
 												src={c.imageUri as string}
 												alt={`${c.name} image`}
-												className={styles.img}
+												width={195}
+												height={200}
 											/>
 										</div>
 									</CardMedia>
