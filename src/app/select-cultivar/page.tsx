@@ -153,17 +153,18 @@ const SelectCultivar = () => {
 										e.preventDefault;
 										handleCreate(c);
 									}}
-								>
-									<CardMedia className={styles.media}>
-										<div className={styles.divImage}>
-											<Image
-												src={c.imageUri as string}
-												alt={`${c.name} image`}
-												width={195}
-												height={200}
-											/>
-										</div>
-									</CardMedia>
+								 >
+							   {/* <CardMedia className={styles.media}>
+									<div className={styles.divImage}>
+									<Image
+										src={c.imageUri as string}
+										alt={`${c.name} image`}
+								 				width={195}
+								 				height={200}
+								 			/>
+								 		</div>
+								 	</CardMedia> */}
+
 									<CardContent className={styles.content}>
 										<Typography variant='h4'>{c.name}</Typography>
 										<Typography variant='body2'>
