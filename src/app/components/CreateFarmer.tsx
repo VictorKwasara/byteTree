@@ -178,22 +178,25 @@ const CreateFarmer = (props: {
 
 	return (
 		<>
-			{!isLoggedIn ? (<>			
+			{!isLoggedIn ? (
+				<>
 					<motion.div
-					animate={{
-						opacity: 0,
-						transition: { duration: 7 },
-					}}
-					initial={{ opacity: 1 }}
-					className={styles.outter}
-				>	</motion.div>
+						animate={{
+							opacity: 0,
+							transition: { duration: 7 },
+						}}
+						initial={{ opacity: 1 }}
+						className={styles.outter}
+					>
+						{' '}
+					</motion.div>
 					<motion.div
 						className={styles.inner}
 						animate={{
 							opacity: 1,
-							transition: { duration: 3, },
+							transition: { duration: 2 },
 						}}
-						initial={{ opacity: .5 }}
+						initial={{ opacity: 0.6 }}
 					>
 						<div className={styles.div}>
 							<legend className={styles.legend}>
@@ -201,7 +204,9 @@ const CreateFarmer = (props: {
 									className={styles.text1}
 									variant='h4'
 									component='h4'
-									color='secondary'
+									color='#7d814c'
+									fontFamily='Oswald'
+									fontWeight='700px'
 								>
 									Search or Create Account
 								</Typography>
@@ -210,9 +215,9 @@ const CreateFarmer = (props: {
 								<Typography
 									className={styles.text2}
 									component='h5'
-									color='secondary'
+									color='#1b5749'
 								>
-									Whats your Name?
+									Whats Your Nickname?
 								</Typography>
 							</label>
 							<TextField
@@ -226,13 +231,14 @@ const CreateFarmer = (props: {
 								inputProps={{
 									sx: {
 										margin: '0px',
-										backgroundColor: '#F9F871',
+										background: '#1b5749',
+										borderRadius:'5px'
 									},
 								}}
 							/>
 							<Button
 								variant='contained'
-								sx={{ color: '#F9F871' }}
+								sx={{ color: '#7d814c', background: '#1b5749' }}
 								onClick={() => {
 									handleCreate();
 								}}
@@ -241,7 +247,7 @@ const CreateFarmer = (props: {
 							</Button>
 						</div>
 					</motion.div>
-			</>				
+				</>
 			) : (
 				<></>
 			)}
