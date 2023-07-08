@@ -109,19 +109,18 @@ const SelectCultivar = () => {
 			(async () => {
 				try {
 					let sBalance = await token.getAccount(
-					provider.connection,
-					seedsBalance
-				);
-				if (sBalance.amount < 1) {
-					alert!('Please get some, ' + c.name + ' seeds');
+						provider.connection,
+						seedsBalance
+					);
+					if (sBalance.amount < 1) {
+						alert!('Please get some, ' + c.name + ' seeds');
+					}
+					// alert!('You have, ' + sBalance.amount + ' of ' + c.name);
+					router.push(`/plant-tree?name=${c.name}`);
+				} catch (e) {
+					alert!('You need to purchase ' + c.name + ' before planting some!');
+					router.push(`/seeds-market?name=${c.name}`);
 				}
-				// alert!('You have, ' + sBalance.amount + ' of ' + c.name);
-				  router.push(`/plant-tree?name=${c.name}`);
-				}catch (e) {
-					alert!('You need to purchase ' + c.name + " before planting some!");
-				  router.push(`/seeds-market?name=${c.name}`);
-				}
-		
 			})();
 		}
 	};
@@ -144,34 +143,22 @@ const SelectCultivar = () => {
 							key={`${i}+${c.name}`}
 							m={2}
 							p={2}
-						><Card className={styles.card} sx={{ backgroundColor: '#F9F871' }}>
-								<CardActionArea
-									className={styles.cardAction}
-									component={Button}
-									onClick={(e) => {
-										e.preventDefault;
-										handleCreate(c);
-									}}
-								 >
-							   <CardMedia className={styles.media}>
-									<Image
-										src={c.imageUri as string}
-										alt={`${c.name} image`}
-								 				width={195}
-								 				height={200}
-								 			/>
-								 	</CardMedia>
-									<CardContent className={styles.content}>
-										<Typography variant='h4'>{c.name}</Typography>
-										<Typography variant='body2'>
-											{c.count.toString()}
-										</Typography>
-										<Typography variant='body2'>
-											{c.scarcityPoints.toString()}
-										</Typography>
-									</CardContent>
-								</CardActionArea>
-							</Card>
+						>
+							<div className={styles.card}>
+								<Image
+									src={c.imageUri as string}
+									alt={`${c.name} image`}
+									width={195}
+									height={200}
+								/>
+								<div className={styles.content}>
+									<Typography variant='h4'>{c.name}</Typography>
+									<Typography variant='body2'>{c.count.toString()}</Typography>
+									<Typography variant='body2'>
+										{c.scarcityPoints.toString()}
+									</Typography>
+								</div>
+							</div>
 						</Grid>
 					))
 				) : (
