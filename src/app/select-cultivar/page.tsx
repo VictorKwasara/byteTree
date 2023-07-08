@@ -142,6 +142,8 @@ const SelectCultivar = () => {
 							xs={12}
 							md={5}
 							key={`${i}+${c.name}`}
+							m="auto"
+							p="auto"
 						>
 							<Card className={styles.card} sx={{ backgroundColor: '#F9F871' }}>
 								<CardActionArea
@@ -157,7 +159,7 @@ const SelectCultivar = () => {
 											<img
 												src={c.imageUri as string}
 												alt={`${c.name} image`}
-												className={styles.img}
+												className={styles.img}												
 											/>
 										</div>
 									</CardMedia>

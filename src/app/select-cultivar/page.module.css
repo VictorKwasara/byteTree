@@ -1,13 +1,15 @@
 .outter {
-  display: flex ;
+  /* display: flex ;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   width:100%;
   min-height: 89vh;
   /* background-color: brown; */
+  /* padding: auto; */
   /* padding-left:50px; */
 }
 
+/* 
 .buy {
   position: absolute;
   top: 0 ;
@@ -16,7 +18,7 @@
   height: 100vh;
   background-color: #08110F;
   z-index: 5000000;
-}
+} */
 
 .card {
   height: 200px;
@@ -29,12 +31,14 @@
 }
 
 .grid {
-  margin: auto ;
-  padding: 0;
-  margin: auto;
+  margin: auto; 
+  margin-top: 90px ;
+  /* background-color: #F9F871; */
+  /* padding: 0;*/
 }
 
 .ingrid{
+  /* border:  2px solid grey ; */
   /* background-color: black; */
 }
 
@@ -88,5 +92,6 @@
   width: 400px ;
   margin: auto;
   display: flex;
+  flex-direction: row;
   margin: auto;
 }
