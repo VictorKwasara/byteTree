@@ -16,8 +16,8 @@ import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import { Connection, PublicKey, Keypair } from '@solana/web3.js';
 import { TreeProgram, IDL } from '../../../public/programs/tree_program';
-import { Link } from '@mui/material';
-import NextLink from 'next/link';
+// import { Link } from '@mui/material';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import * as token from '@solana/spl-token';
 import { useRouter } from 'next/navigation';
@@ -143,22 +143,30 @@ const SelectCultivar = () => {
 							key={`${i}+${c.name}`}
 							m={2}
 							p={2}
-						>
-							<div className={styles.card}>
-								<Image
-									src={c.imageUri as string}
-									alt={`${c.name} image`}
-									width={195}
-									height={200}
-								/>
-								<div className={styles.content}>
-									<Typography variant='h4'>{c.name}</Typography>
-									<Typography variant='body2'>{c.count.toString()}</Typography>
-									<Typography variant='body2'>
-										{c.scarcityPoints.toString()}
-									</Typography>
+						>						
+								<div
+									className={styles.card}
+									onClick={(e) => {
+										e.preventDefault;
+										handleCreate(c);
+									}}
+								>
+									<Image
+										src={c.imageUri as string}
+										alt={`${c.name} image`}
+										width={195}
+										height={200}
+									/>
+									<div className={styles.content}>
+										<Typography variant='h4'>{c.name}</Typography>
+										<Typography variant='body2'>
+											{c.count.toString()}
+										</Typography>
+										<Typography variant='body2'>
+											{c.scarcityPoints.toString()}
+										</Typography>
+									</div>
 								</div>
-							</div>
 						</Grid>
 					))
 				) : (

@@ -8,18 +8,7 @@
   /* color: #e84855; */
 }
 
-.grid {
-  /* margin: auto; 
-  margin-top:20px ;
-  margin-bottom:20px ; */
-  /* background-color: #F9F871; */
-  /* padding: 0;*/
-}
 
-.ingrid{
-  /* border:  2px solid grey ; */
-  /* background-color: black; */
-}
 
 .link {
   text-decoration: none;
@@ -32,16 +21,11 @@
   color: #08110F;
 }
 
-.link:hover, .link:active {
+.card:hover, .card:active {
   text-decoration: none;
   color: #e84855;
 }
 
-/* .divImage{
-  width:200px ;
-  height: 200px ;
-  background-color: #08110F;
-} */
 
 .content {
   width: 195px;
