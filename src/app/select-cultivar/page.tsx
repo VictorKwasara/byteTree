@@ -144,8 +144,7 @@ const SelectCultivar = () => {
 							key={`${i}+${c.name}`}
 							m={2}
 							p={2}
-						>
-							<Card className={styles.card} sx={{ backgroundColor: '#F9F871' }}>
+						><Card className={styles.card} sx={{ backgroundColor: '#F9F871' }}>
 								<CardActionArea
 									className={styles.cardAction}
 									component={Button}
@@ -154,17 +153,14 @@ const SelectCultivar = () => {
 										handleCreate(c);
 									}}
 								 >
-							   {/* <CardMedia className={styles.media}>
-									<div className={styles.divImage}>
+							   <CardMedia className={styles.media}>
 									<Image
 										src={c.imageUri as string}
 										alt={`${c.name} image`}
 								 				width={195}
 								 				height={200}
 								 			/>
-								 		</div>
-								 	</CardMedia> */}
-
+								 	</CardMedia>
 									<CardContent className={styles.content}>
 										<Typography variant='h4'>{c.name}</Typography>
 										<Typography variant='body2'>
