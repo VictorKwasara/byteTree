@@ -2,18 +2,16 @@
   height: 200px;
   width: 400px ;
   margin: auto;
-  display: flex;
-  flex-direction: row;
   background-color:#F9F871;
   color: #e84855;
 }
 
 .grid {
   margin: auto; 
-  margin-top: 50px ;
-  margin-bottom: 50px ;
+  margin-top:20px ;
+  margin-bottom:20px ;
   width: 100%;
-  min-height: 95vh;
+  min-height: 8%;
   /* background-color: #F9F871; */
   /* padding: 0;*/
 }
@@ -69,10 +67,10 @@
 }
 
 .cardAction{
-  height: 200px;
-  width: 400px ;
-  margin: auto;
+  height: 100%;
+  width: 100%;
+  margin: 0;
   display: flex;
   flex-direction: row;
-  margin: auto;
+  
 }

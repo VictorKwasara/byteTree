@@ -139,11 +139,11 @@ const SelectCultivar = () => {
 						<Grid
 							className={styles.ingrid}
 							item
-							xs={12}
+							sm={12}
 							md={5}
 							key={`${i}+${c.name}`}
-							m='auto'
-							p='auto'
+							m={2}
+							p={2}
 						>
 							<Card className={styles.card} sx={{ backgroundColor: '#F9F871' }}>
 								<CardActionArea
