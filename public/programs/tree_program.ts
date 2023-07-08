@@ -2186,6 +2186,10 @@ export type TreeProgram = {
           {
             "name": "period",
             "type": "u64"
+          },
+          {
+            "name": "consumed",
+            "type": "bool"
           }
         ]
       }
@@ -2214,18 +2218,28 @@ export type TreeProgram = {
     },
     {
       "code": 6004,
-      "name": "ClockError"
+      "name": "CalculateAgeError",
+      "msg": "The Age factor is negetive value"
     },
     {
       "code": 6005,
-      "name": "CalculateRequired"
+      "name": "ReductoinGreaterThanOne",
+      "msg": "The reduction factor is greater than Zero"
     },
     {
       "code": 6006,
-      "name": "ConsumeNutrients"
+      "name": "ClockError"
     },
     {
       "code": 6007,
+      "name": "CalculateRequired"
+    },
+    {
+      "code": 6008,
+      "name": "ConsumeNutrients"
+    },
+    {
+      "code": 6009,
       "name": "FailedToPlant"
     }
   ]
@@ -4419,6 +4433,10 @@ export const IDL: TreeProgram = {
           {
             "name": "period",
             "type": "u64"
+          },
+          {
+            "name": "consumed",
+            "type": "bool"
           }
         ]
       }
@@ -4447,18 +4465,28 @@ export const IDL: TreeProgram = {
     },
     {
       "code": 6004,
-      "name": "ClockError"
+      "name": "CalculateAgeError",
+      "msg": "The Age factor is negetive value"
     },
     {
       "code": 6005,
-      "name": "CalculateRequired"
+      "name": "ReductoinGreaterThanOne",
+      "msg": "The reduction factor is greater than Zero"
     },
     {
       "code": 6006,
-      "name": "ConsumeNutrients"
+      "name": "ClockError"
     },
     {
       "code": 6007,
+      "name": "CalculateRequired"
+    },
+    {
+      "code": 6008,
+      "name": "ConsumeNutrients"
+    },
+    {
+      "code": 6009,
       "name": "FailedToPlant"
     }
   ]
