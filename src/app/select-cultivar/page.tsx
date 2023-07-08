@@ -133,7 +133,7 @@ const SelectCultivar = () => {
 			animate={{ x: '0' }}
 			transition={{ delay: 1 }}
 		>
-			<Grid container spacing={2} className={styles.grid} >
+			<Grid container spacing={2} className={styles.grid} m={2} p={2}>
 				{ready ? (
 					cultivars.map((c: cultivar, i) => (
 						<Grid
