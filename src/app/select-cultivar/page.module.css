@@ -24,6 +24,7 @@
 .card:hover, .card:active {
   text-decoration: none;
   color: #e84855;
+  cursor: pointer;
 }
 
 
