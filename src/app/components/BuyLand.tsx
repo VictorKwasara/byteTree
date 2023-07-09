@@ -5,11 +5,10 @@ import { FarmProgram, IDL as fIDL } from '../../../public/programs/farm_program'
 import { Connection, PublicKey } from '@solana/web3.js';
 import { Box, Button, Card, Stack, Typography, Grid ,CardActionArea,Link} from '@mui/material';
 import styles from './styles/buyland.module.css';
-import NextLink from "next/link"
+import NextLink from "next/link";
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import {motion} from 'framer-motion';
-
 
 const BuyLand = (props: {
 	landCount: anchor.BN;
@@ -134,8 +133,28 @@ const BuyLand = (props: {
 					onClick={handleClick}
 					className={styles.cardArea}
 				>
-					<Typography variant='h5' className={styles.type}>
+					<Typography
+						variant='h5'
+						textAlign='center'
+						fontFamily='Oswald'
+						fontWeight={700}
+						className={styles.header}
+						color='#d2d376'
+					>
 						Buy Land
+					</Typography>
+					<Typography
+						variant='body1'
+						textAlign='center'
+						fontFamily='Glook'
+						fontWeight={500}
+						className={styles.body}
+						alignSelf='center'
+						align='justify'
+						color='#989c5a'
+					>
+						Buy a land piece on the digital farm where you want to plant your
+						tree. Each land piece is unique on the virtual farm
 					</Typography>
 				</CardActionArea>
 			</Card>

@@ -3,7 +3,7 @@
   top: 0 ;
   left: 0 ;
   width: 98vw;
-  height: 100vh;
+  height: 80vh;
   /* background-color: red ; */
   display: flex;
   align-items: center;
@@ -14,7 +14,17 @@
   width: 100% ;
 }
 
+.card {
+  width: 400px;
+  height: 200px ;
+}
+.header {
+  margin-top: 10px;
+  
+}
 
-.type {
+.body {
+  margin: 20px auto ;
+  width: 60%;
   
 }
