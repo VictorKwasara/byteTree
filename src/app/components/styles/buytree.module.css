@@ -3,16 +3,7 @@
   top: 0 ;
   left: 0 ;
   width: 98vw;
-  height: 100vh;
-  /* background-color: red ; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card {
-  min-width: 240px;
-  width: auto ;
+  height: 80vh;
   /* background-color: red ; */
   display: flex;
   align-items: center;
@@ -23,7 +14,18 @@
   width: 100% ;
 }
 
+.card {
+  width: 400px;
+  min-height: 200px ;
+  padding: 5px ;
+}
+.header {
+  margin-top: 10px;
+  
+}
 
-.type {
+.body {
+  margin: 20px auto ;
+  width: 60%;
   
 }

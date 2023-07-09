@@ -90,13 +90,8 @@ const CreateFarmer = (props: {
 					}]);
 					console.log("Land Piece Account Is now: ", landP) ;		
 					let count = 0  ;
-					landP.map(x => {
-
-						if(x.account.isPlanted != true) {
-							 count ++
-						}
-
-					})				   
+					let freeland = landP.filter((l) => !l.account.isPlanted);
+					count = freeland.length					   
 
 					  // tree = await treeProgram.account.tree.all([
 						// 	{

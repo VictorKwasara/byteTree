@@ -14,6 +14,7 @@ const BuyLand = (props: {
 	landCount: anchor.BN;
 	setLandPiece: (tree: anchor.web3.PublicKey) => void;
 }) => {
+	const [land,setLand] = useState(props.landCount);
 	const w = useAnchorWallet();
 	// const { connection } = useConnection();
 
@@ -54,13 +55,16 @@ const BuyLand = (props: {
 				]);
 
 				console.log('Land Piece Account Is now: ', landP);
+
+				let freeLand = landP.filter((l) => l.account.isPlanted == false) ;
 				
-				props.setLandPiece(landP[0].publicKey);
+				props.setLandPiece(freeLand[0].publicKey);
 			}
 		})();
 	}, [payer.publicKey]);
 
 	const handleClick = async () => {
+
 		if (payer.publicKey) {
 			console.log('Inside if satement');
 			let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
@@ -72,6 +76,19 @@ const BuyLand = (props: {
 				[Buffer.from('farmer'), payer.publicKey.toBuffer()],
 				program.programId
 			);
+
+			// trees_meta
+			let [treesMeta] = anchor.web3.PublicKey.findProgramAddressSync(
+				[Buffer.from('treesmeta'), farm.toBuffer()],
+				farmProgramID
+			);
+				console.log('farm', farm.toString());
+
+				// cultivar_meta
+				let [cultivarMeta] = anchor.web3.PublicKey.findProgramAddressSync(
+					[Buffer.from('cultivarmeta'), farm.toBuffer()],
+					farmProgramID
+				);
 
 			let [landMeta] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('landmeta'), farm.toBuffer()],
@@ -93,7 +110,7 @@ const BuyLand = (props: {
 			let [vault] = anchor.web3.PublicKey.findProgramAddressSync(
 				[Buffer.from('carbonvault')],
 				farmProgramID
-			);		
+			);
 
 			const tx = await program.methods
 				.buyLand()
@@ -102,13 +119,18 @@ const BuyLand = (props: {
 					farmer,
 					landMeta,
 					landPiece,
+					treesMeta,
 					vault,
+					cultivarMeta,
 					farmProgram: farmProgramID,
 				})
 				.rpc();
 
 			console.log('Your transaction signature', tx);
 			alert('success!!');
+
+			props.setLandPiece(landPiece);
+			setLand(new anchor.BN(1));
 
 			// setData({
 			// 	farmer: farmer,
@@ -122,7 +144,7 @@ const BuyLand = (props: {
 		<motion.div
 			className={styles.container}
 			animate={{
-				x: props.landCount > new anchor.BN(0) ? '103vw' : '0px',
+				x: land > new anchor.BN(0) ? '103vw' : '0px',
 				transition: { duration: 2, delay: 1 },
 			}}
 			initial={{ x: '0px' }}

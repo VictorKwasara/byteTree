@@ -162,8 +162,28 @@ const Plant = (props: {
 					onClick={handleClick}
 					className={styles.cardArea}
 				>
-					<Typography variant='h5' className={styles.type}>
+					<Typography
+						variant='h5'
+						textAlign='center'
+						fontFamily='Oswald'
+						fontWeight={700}
+						className={styles.header}
+						color='#d2d376'
+					>
 						Plant The Tree
+					</Typography>
+					<Typography
+						variant='body1'
+						textAlign='center'
+						fontFamily='Glook'
+						fontWeight={500}
+						className={styles.body}
+						alignSelf='center'
+						align='justify'
+						color='#989c5a'
+					>
+						Now  Plant your {props.cultivarName} tree. Once planted the {props.cultivarName} , and as many
+						tree will need to be watered, and fed nutrients for it to stay alive.
 					</Typography>
 				</CardActionArea>
 			</Card>

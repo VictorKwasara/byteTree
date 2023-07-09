@@ -238,8 +238,30 @@ const BuyTree = (props: {
 					component={Button}
 					onClick={handleClick}
 					className={styles.cardArea}
-				><Typography variant='h5' className={styles.type}>
+				>
+					<Typography
+						variant='h5'
+						textAlign='center'
+						fontFamily='Oswald'
+						fontWeight={700}
+						className={styles.header}
+						color='#d2d376'
+					>
 						Buy Tree
+					</Typography>
+					<Typography
+						variant='body1'
+						textAlign='center'
+						fontFamily='Glook'
+						fontWeight={500}
+						className={styles.body}
+						alignSelf='center'
+						align='justify'
+						color='#989c5a'
+					>
+						Buy a {props.cultivarName} tree to plant on the land.Each tree is
+						unique you can have multiple {props.cultivarName} , and as many trees
+						as you want.
 					</Typography>
 				</CardActionArea>
 			</Card>
