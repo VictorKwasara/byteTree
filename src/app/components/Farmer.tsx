@@ -15,7 +15,6 @@ const Farmer = (props: {
 	cultivarName: String | null;
 	profileNft: string;
 }) => {
-
 	// const [data, setData] = useState<{
 	// 	payer: PublicKey;
 	// 	farmer: PublicKey;
@@ -61,20 +60,24 @@ const Farmer = (props: {
 					>
 						Welcome {props.name}
 					</Typography>
-					<Typography
-						className={styles.text2}
-						variant='body1'
-						color='secondary.main'
-					>
-						You have {props.landCount.toString()} pieces of land
-					</Typography>
-					<Typography
-						color='secondary.main'
-						className={styles.text2}
-						variant='body1'
-					>
-						You have planted {props.treeCount.toString()} trees
-					</Typography>
+					<Grid container m={2} p={1}>
+						<Grid item>
+							<Typography
+								className={styles.text2}
+								variant='body1'
+								color='secondary.main'
+							>
+								You have {props.landCount.toString()} pieces of land
+							</Typography>
+							<Typography
+								color='secondary.main'
+								className={styles.text2}
+								variant='body1'
+							>
+								You have planted {props.treeCount.toString()} trees
+							</Typography>
+						</Grid>
+					</Grid>
 				</Card>
 			</div>
 			{/* <Card className={styles.dv}>
