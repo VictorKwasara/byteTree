@@ -237,9 +237,10 @@ const BuyTree = (props: {
 			className={styles.container}
 			animate={{
 				x: trees > 0 ? '102vw' : '0px',
-				transition: { duration: 1, delay: 3 },
+				opacity: 1 ,
+				transition: { duration: 1, delay: 2 },
 			}}
-			initial={{ x: '0px' }}
+			initial={{ x: '0px', opacity: 0 }}
 		>
 			<Card className={styles.card}>
 				<CardActionArea
@@ -254,6 +255,7 @@ const BuyTree = (props: {
 						fontWeight={700}
 						className={styles.header}
 						color='#d2d376'
+						mt={1}
 					>
 						Buy {props.cultivarName} Tree
 					</Typography>
@@ -266,6 +268,9 @@ const BuyTree = (props: {
 						alignSelf='center'
 						align='justify'
 						color='#989c5a'
+						pl={4}
+						pr={4}
+						mt={2}
 					>
 						Buy a {props.cultivarName} tree to plant on the land.Each tree is
 						unique you can have multiple {props.cultivarName} , and as many

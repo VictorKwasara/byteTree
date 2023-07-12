@@ -152,10 +152,10 @@ const Plant = (props: {
 		<motion.div
 			className={styles.container}
 			animate={{
-				x: '0px',
+				opacity: 1,
 				transition: { duration: 2, delay: 1 },
 			}}
-			initial={{ x: '102vw' }}
+			initial={{ opacity: 0 }}
 		>
 			<Card className={styles.card}>
 				<CardActionArea
@@ -170,6 +170,7 @@ const Plant = (props: {
 						fontWeight={700}
 						className={styles.header}
 						color='#d2d376'
+						mt={1}
 					>
 						Plant The Tree
 					</Typography>
@@ -182,6 +183,9 @@ const Plant = (props: {
 						alignSelf='center'
 						align='justify'
 						color='#989c5a'
+						pl={4}
+						pr={4}
+						mt={2}
 					>
 						Now Plant your {props.cultivarName} tree. Once planted the{' '}
 						{props.cultivarName} , and as many tree will need to be watered, and
