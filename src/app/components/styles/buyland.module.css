@@ -12,12 +12,7 @@
 
 .cardArea {
   width: 390px ;
-  height: 190px;
-  display: flex;
-  flex-direction: column;
-  margin: 5px;
-  padding: 5px;
-    
+  height: 190px;   
 }
 
 .card {
@@ -26,15 +21,8 @@
   padding: 5px ;
   margin: 20px;
   display: flex;
-}
-.header {
-  margin-top: 10px;  
-  margin-bottom: 10px;
-}
-
-.body {
-  /* width: 60%;  */
-  background-color: aqua; 
+  align-items: center;
+  justify-content: center;
 }
 
 .img {

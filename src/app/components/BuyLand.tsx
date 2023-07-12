@@ -164,6 +164,7 @@ const BuyLand = (props: {
 						fontWeight={700}
 						className={styles.header}
 						color='#d2d376'
+						mt={1}
 					>
 						Buy Land
 					</Typography>
@@ -177,6 +178,7 @@ const BuyLand = (props: {
 						color='#989c5a'
 						pl={4}
 						pr={4}
+						mt={2}
 					>
 						Buy a land piece on the digital farm where you want to plant your
 						tree. Each land piece is unique on the virtual farm
