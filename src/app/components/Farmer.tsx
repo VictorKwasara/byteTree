@@ -63,7 +63,7 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 								variant='body1'
 								color='secondary.main'
 								p={1}
-								m={1}
+								ml={2}
 							>
 								You have {props.landCount.toString()} pieces of land unplanted!
 							</Typography>
@@ -72,7 +72,7 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 								className={styles.text2}
 								variant='body1'
 								p={1}
-								m={1}
+								ml={2}
 							>
 								You have planted {props.treeCount.toString()} trees
 							</Typography>
