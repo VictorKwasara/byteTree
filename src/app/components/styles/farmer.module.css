@@ -14,6 +14,7 @@
 }
 
 .text1{
+  margin: 5px;
   /* color:#f7f669; */
 }
 .text2{
@@ -21,13 +22,10 @@
 }
 
 .card {
-  width: 400px;
+  width: 568px;
   height: 180px;
-  border: 1px solid #1D3C2F;
+  border: 2px solid #1D3C2F;
   display: flex ;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;  
   margin-top: -10px;
   padding: 10px;
 }
@@ -53,14 +51,7 @@
   border: none;
 }
 
-.dv {
-  margin-left: 100px ;
-  margin-top:  93px;
-  width: 550px ;
-  height: 200px;  
-  background-color: #1D3C2F;
-  /* border-radius: 5%; */
-}
+
 
 .content {
   display: flex;
@@ -79,4 +70,17 @@
   align-items: center;
   z-index: 100000000;
   margin-top: 30px;
+}
+
+.grid {
+/* 
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  */
+  /* background-color: brown;  */
+}
+
+.item {
+  /* background-color: rgb(42, 165, 95);  */
+  margin: auto;
 }

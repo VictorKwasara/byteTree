@@ -51,21 +51,25 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 					</div>
 				</div>
 				<Card className={styles.card}>
-					<Typography
-						variant='h4'
-						color='text.secondary'
-						className={styles.text1}
-					>
-						Welcome {props.name}
-					</Typography>
-					<Grid container m={2} p={1}>
-						<Grid item>
+					<Grid container mt={4} m={2} p={1} className={styles.grid}>
+						<Grid item className={styles.item} mt={1}>
+							<Typography
+								variant='h4'
+								color='text.secondary'
+								className={styles.text1}
+								fontFamily='Oswald'
+								fontWeight='700'
+							>
+								Welcome {props.name}
+							</Typography>
+						</Grid>
+						<Grid item className={styles.item}>
 							<Typography
 								className={styles.text2}
 								variant='body1'
 								color='secondary.main'
 							>
-								You have {props.landCount.toString()} pieces of land
+								You have {props.landCount.toString()} pieces of land unplanted!
 							</Typography>
 							<Typography
 								color='secondary.main'
@@ -78,9 +82,6 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 					</Grid>
 				</Card>
 			</div>
-			{/* <Card className={styles.dv}>
-				<Actions cultivarName={props.cultivarName} setSeeds={setSeeds} />
-			</Card> */}
 		</Box>
 	);
 };

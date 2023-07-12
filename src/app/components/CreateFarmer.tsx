@@ -78,11 +78,6 @@ const CreateFarmer = (props: {
 					farmProgram
 				);
 
-			let [landPiece] = anchor.web3.PublicKey.findProgramAddressSync(
-				[Buffer.from('landpiece'), landMeta.toBuffer(), farmer.toBuffer()],
-				program.programId
-			);		
-
 			let landP;
 	        landP = await program.account.landPiece.all([{					  
 						memcmp : {
@@ -111,6 +106,8 @@ const CreateFarmer = (props: {
 							payer: payer.publicKey,
 							landPieces: count,
 						});
+
+						console.log('landPieces', data?.landPieces);
 					}			
 			})() ;		
 		
@@ -127,7 +124,7 @@ const CreateFarmer = (props: {
 					props.searchFarmer({
 						name: farmerState.name,
 						address: farmerState.address,
-						landCount: farmerState.landCount,
+						landCount: new anchor.BN(data.landPieces),
 						treeCount: farmerState.treeCount,
 						profileNft: farmerState.profileNft,
 					});
