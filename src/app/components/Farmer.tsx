@@ -45,7 +45,7 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 					</div>
 				</div>
 				<Card className={styles.card}>
-					<Grid container  className={styles.grid}>
+					<Grid container className={styles.grid}>
 						<Grid item className={styles.item} mt={1}>
 							<Typography
 								variant='h4'
@@ -62,6 +62,8 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 								className={styles.text2}
 								variant='body1'
 								color='secondary.main'
+								p={1}
+								m={1}
 							>
 								You have {props.landCount.toString()} pieces of land unplanted!
 							</Typography>
@@ -69,6 +71,8 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 								color='secondary.main'
 								className={styles.text2}
 								variant='body1'
+								p={1}
+								m={1}
 							>
 								You have planted {props.treeCount.toString()} trees
 							</Typography>
