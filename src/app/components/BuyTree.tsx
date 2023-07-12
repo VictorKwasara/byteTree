@@ -18,9 +18,11 @@ import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import * as token from '@solana/spl-token';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const BuyTree = (props: {
 	cultivarName: String;
+	cultivarUrl: string ;
 	setSeeds: (amount: anchor.BN) => void;
 	setKey: (tree: anchor.web3.PublicKey) => void;
 	land: anchor.web3.PublicKey
@@ -39,15 +41,15 @@ const BuyTree = (props: {
 	});
 
 	const farmerProgram = new PublicKey(
-		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
+		'9CWoSJWQZaNiZ83cqEer79u4MtZdfo8RRnspJcDnsZcu'
 	);
 
 	const farmProgram = new PublicKey(
-		'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
+		'xFUDB75wmPfzua8VgnSLrnNH18Ve4xztakzfBVyURob'
 	);
 
 	const programID = new PublicKey(
-		'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
+		'8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -66,7 +68,14 @@ const BuyTree = (props: {
 				]);
 
 				console.log('the trees you own ==> ', t);
-				let unplanted = t.filter((t) => t.account.isPlanted == false && t.account.name == props.cultivarName);
+				console.log(' props.cultivarName', props.cultivarName);
+				console.log(' t.account.cultivarName', t[0].account.cultivarName);
+
+				let unplanted = t.filter(
+					(t) =>
+						t.account.isPlanted == false &&
+						t.account.cultivarName == props.cultivarName
+				);
 
 				console.log('Unplanted trees! ', unplanted);
 
@@ -75,7 +84,6 @@ const BuyTree = (props: {
 				props.setKey(unplanted[0].publicKey);
 			}
 		})();
-
 	}, [payer.publicKey]);
 
 	const handleClick = async () => {
@@ -229,7 +237,7 @@ const BuyTree = (props: {
 			className={styles.container}
 			animate={{
 				x: trees > 0 ? '102vw' : '0px',
-				transition: { duration: 2, delay: 1 },
+				transition: { duration: 1, delay: 3 },
 			}}
 			initial={{ x: '0px' }}
 		>
@@ -247,7 +255,7 @@ const BuyTree = (props: {
 						className={styles.header}
 						color='#d2d376'
 					>
-						Buy Tree
+						Buy {props.cultivarName} Tree
 					</Typography>
 					<Typography
 						variant='body1'
@@ -260,11 +268,18 @@ const BuyTree = (props: {
 						color='#989c5a'
 					>
 						Buy a {props.cultivarName} tree to plant on the land.Each tree is
-						unique you can have multiple {props.cultivarName} , and as many trees
-						as you want.
+						unique you can have multiple {props.cultivarName} , and as many
+						trees as you want.
 					</Typography>
 				</CardActionArea>
 			</Card>
+			<Image
+				className={styles.img}
+				alt='land'
+				src={props.cultivarUrl}
+				width='300'
+				height='300'
+			/>
 		</motion.div>
 	);
 };

@@ -5,7 +5,8 @@ import { FarmProgram, IDL as fIDL } from '../../../public/programs/farm_program'
 import { Connection, PublicKey } from '@solana/web3.js';
 import { Box, Button, Card, Stack, Typography, Grid ,CardActionArea,Link} from '@mui/material';
 import styles from './styles/buyland.module.css';
-import NextLink from "next/link";
+// import NextLink from "next/link";
+import Image from "next/image" ;
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
 import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import {motion} from 'framer-motion';
@@ -24,13 +25,14 @@ const BuyLand = (props: {
 		commitment: 'confirmed',
 	});
 
-	const farmProgramID = new PublicKey(
-		'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
+	const programID = new PublicKey(
+		'9CWoSJWQZaNiZ83cqEer79u4MtZdfo8RRnspJcDnsZcu'
 	);
 
-	const programID = new PublicKey(
-		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
+	const farmProgramID = new PublicKey(
+		'xFUDB75wmPfzua8VgnSLrnNH18Ve4xztakzfBVyURob'
 	);
+
 
 	const program = new Program(IDL, programID, provider);
 	const fp = new Program(fIDL, farmProgramID, provider);
@@ -171,7 +173,6 @@ const BuyLand = (props: {
 						fontFamily='Glook'
 						fontWeight={500}
 						className={styles.body}
-						alignSelf='center'
 						align='justify'
 						color='#989c5a'
 					>
@@ -180,6 +181,13 @@ const BuyLand = (props: {
 					</Typography>
 				</CardActionArea>
 			</Card>
+			<Image
+				className={styles.img}
+				alt='land'
+				src='/land.jpg'
+				width='300'
+				height='300'
+			/>
 		</motion.div>
 	);
 };

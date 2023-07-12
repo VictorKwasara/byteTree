@@ -56,6 +56,7 @@ const PlantTree = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const name = searchParams.get('name');
+	const uri = searchParams.get('uri');
 
 	const [cultivars, setCultivars] = useState<cultivar[]>([]);
 
@@ -73,18 +74,17 @@ const PlantTree = () => {
 	const provider = new AnchorProvider(connection, w as Wallet, {
 		commitment: 'confirmed',
 	});
-	const farmerProgram = new PublicKey(
-		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
-	);
+		const farmerProgram = new PublicKey(
+			'9CWoSJWQZaNiZ83cqEer79u4MtZdfo8RRnspJcDnsZcu'
+		);
 
-	const farmProgram = new PublicKey(
-		'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
-	);
+		const farmProgram = new PublicKey(
+			'xFUDB75wmPfzua8VgnSLrnNH18Ve4xztakzfBVyURob'
+		);
 
-	const programID = new PublicKey(
-		'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
-	);
-
+		const programID = new PublicKey(
+			'8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic'
+		);
 	const program = new Program(IDL, programID, provider);
 	let payer = program.provider;
 
@@ -161,7 +161,7 @@ const PlantTree = () => {
 	return (
 		<div>
 			<CreateFarmer searchFarmer={searchFarmer} />
-			{farmer && name ? (
+			{farmer && name && uri ? (
 				// <FarmerComponent
 				// 	name={farmer?.name}
 				// 	treeCount={farmer?.treeCount}
@@ -175,6 +175,7 @@ const PlantTree = () => {
 						{land != null ?	<BuyTree
 							setSeeds={setSeeds}
 							cultivarName={name}
+							cultivarUrl={uri}
 							land={land}
 							setKey={setKey}
 						/>:<></>

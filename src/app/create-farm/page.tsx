@@ -46,7 +46,7 @@ const CreateFarmer = () => {
 		commitment: 'confirmed',
 	});
 	const programID = new PublicKey(
-		'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
+		'xFUDB75wmPfzua8VgnSLrnNH18Ve4xztakzfBVyURob'
 	);
 	const program = new Program(IDL, programID, provider);
 	const handleCreate = async () => {

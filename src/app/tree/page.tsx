@@ -13,7 +13,6 @@ import {
 	CardMedia,
 } from '@mui/material';
 import Image from "next/image";
-import TreeActions from  '../components/TreeActions';
 import styles from './page.module.css';
 import * as anchor from '@project-serum/anchor';
 import { useAnchorWallet } from '@solana/wallet-adapter-react';
@@ -62,17 +61,17 @@ const TreeComponent = () => {
 		const provider = new AnchorProvider(connection, w as Wallet, {
 			commitment: 'confirmed',
 		});
-		const farmerProgram = new PublicKey(
-			'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
-		);
+			const farmerProgram = new PublicKey(
+				'9CWoSJWQZaNiZ83cqEer79u4MtZdfo8RRnspJcDnsZcu'
+			);
 
-		const farmProgram = new PublicKey(
-			'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
-		);
+			const farmProgram = new PublicKey(
+				'xFUDB75wmPfzua8VgnSLrnNH18Ve4xztakzfBVyURob'
+			);
 
-		const programID = new PublicKey(
-			'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
-		);
+			const programID = new PublicKey(
+				'8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic'
+			);
 
 		const program = new Program(IDL, programID, provider);
 		let payer = program.provider;
@@ -197,7 +196,6 @@ const TreeComponent = () => {
 					</Grid>
 					<Grid item xs={8} md={6}>
 						<Stack direction='column' spacing={1}>
-							{name ? <TreeActions cultivarName={name} /> : <></>}
 							<motion.div
 								animate={{
 									opacity: 1,

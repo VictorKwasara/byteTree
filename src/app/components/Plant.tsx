@@ -20,6 +20,7 @@ import { Program, Wallet, AnchorProvider } from '@project-serum/anchor';
 import * as token from '@solana/spl-token';
 import {motion} from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const Plant = (props: {
 	cultivarName: String;
@@ -38,16 +39,17 @@ const Plant = (props: {
 		commitment: 'confirmed',
 	});
 
+	//farmer program
+	const programID = new PublicKey(
+		'9CWoSJWQZaNiZ83cqEer79u4MtZdfo8RRnspJcDnsZcu'
+	);
+
 	const farmProgram = new PublicKey(
-		'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
+		'xFUDB75wmPfzua8VgnSLrnNH18Ve4xztakzfBVyURob'
 	);
 
 	const treeProgramID = new PublicKey(
-		'CUJ8TCeGSKKhqYtZYiBZRghTJvRRRpm9qR2ykX91N1ns'
-	);
-	//farmer program
-	const programID = new PublicKey(
-		'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
+		'8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic'
 	);
 
 	const program = new Program(IDL, programID, provider);
@@ -71,7 +73,6 @@ const Plant = (props: {
 				[Buffer.from('landmeta'), farm.toBuffer()],
 				farmProgram
 			);
-
 
 			console.log('farm', farm.toString());
 
@@ -124,8 +125,8 @@ const Plant = (props: {
 				[Buffer.from('treesmeta'), farm.toBuffer()],
 				farmProgram
 			);
-			console.log("The tree key is => , ", props.tree.toString() );
-			console.log("The farmer key is => , ", farmer );
+			console.log('The tree key is => , ', props.tree.toString());
+			console.log('The farmer key is => , ', farmer);
 
 			const tx = await program.methods
 				.plant()
@@ -182,11 +183,19 @@ const Plant = (props: {
 						align='justify'
 						color='#989c5a'
 					>
-						Now  Plant your {props.cultivarName} tree. Once planted the {props.cultivarName} , and as many
-						tree will need to be watered, and fed nutrients for it to stay alive.
+						Now Plant your {props.cultivarName} tree. Once planted the{' '}
+						{props.cultivarName} , and as many tree will need to be watered, and
+						fed nutrients for it to stay alive.
 					</Typography>
 				</CardActionArea>
 			</Card>
+			<Image
+				className={styles.img}
+				alt='land'
+				src='/plant.jpg'
+				width='300'
+				height='300'
+			/>
 		</motion.div>
 	);
 };

@@ -46,17 +46,17 @@ const SelectCultivar = () => {
 	const provider = new AnchorProvider(connection, w as Wallet, {
 		commitment: 'confirmed',
 	});
-	const farmerProgram = new PublicKey(
-		'5TNiwQX4cLvYtRp4vwhukHTrNt6MsK8URs6P98vsznQX'
-	);
+		const farmerProgram = new PublicKey(
+			'9CWoSJWQZaNiZ83cqEer79u4MtZdfo8RRnspJcDnsZcu'
+		);
 
-	const farmProgram = new PublicKey(
-		'JDAMcZJRfuXdNywQEdincd6ud5v8zfuEqeFeBmoHo3Tn'
-	);
+		const farmProgram = new PublicKey(
+			'xFUDB75wmPfzua8VgnSLrnNH18Ve4xztakzfBVyURob'
+		);
 
-	const programID = new PublicKey(
-		'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
-	);
+		const programID = new PublicKey(
+			'8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic'
+		);
 
 	const program = new Program(IDL, programID, provider);
 	let payer = program.provider;

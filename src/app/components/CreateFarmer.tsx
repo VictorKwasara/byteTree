@@ -43,12 +43,14 @@ const CreateFarmer = (props: {
 	});
 
 		const programID = new PublicKey(
-			'3pEgxEH8RhxKtdx3qsvcmrZQUMxeyQisiiBAJ52FmtMx'
+			'9CWoSJWQZaNiZ83cqEer79u4MtZdfo8RRnspJcDnsZcu'
 		);
 
 		const farmProgram = new PublicKey(
-			'CrYtrU5xK6S98iGQVnyag1XKG9vSYzw2M3Mq4JNHLGSA'
+			'xFUDB75wmPfzua8VgnSLrnNH18Ve4xztakzfBVyURob'
 		);
+
+	
 
 		// const programID = new PublicKey(
 		// 	'GKUYrzV8pu6ZNvKG4KmEMMbMeqeSJGH1vQYgk9RuoYSR'
@@ -91,6 +93,8 @@ const CreateFarmer = (props: {
 					console.log("Land Piece Account Is now: ", landP) ;		
 					let count = 0  ;
 					let freeland = landP.filter((l) => !l.account.isPlanted);
+					console.log('freeland : ', freeland);	
+
 					count = freeland.length					   
 
 					  // tree = await treeProgram.account.tree.all([
