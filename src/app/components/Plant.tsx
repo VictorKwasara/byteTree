@@ -153,7 +153,7 @@ const Plant = (props: {
 			className={styles.container}
 			animate={{
 				opacity: 1,
-				transition: { duration: 2, delay: 1 },
+				transition: { duration: 1, delay: 3 },
 			}}
 			initial={{ opacity: 0 }}
 		>
@@ -188,8 +188,8 @@ const Plant = (props: {
 						mt={2}
 					>
 						Now Plant your {props.cultivarName} tree. Once planted the{' '}
-						{props.cultivarName} , and as many tree will need to be watered, and
-						fed nutrients for it to stay alive.
+						{props.cultivarName} tree will need to be watered, and
+						fed nutrients for it to stay alive. You can plant as many mutohwe trees as you like.
 					</Typography>
 				</CardActionArea>
 			</Card>

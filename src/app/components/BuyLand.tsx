@@ -147,6 +147,7 @@ const BuyLand = (props: {
 			className={styles.container}
 			animate={{
 				x: land > new anchor.BN(0) ? '103vw' : '0px',
+				opacity: land > new anchor.BN(0) ?  0 :  1 ,
 				transition: { duration: 1, },
 			}}
 			initial={{ x: '0px' }}
