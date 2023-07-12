@@ -191,7 +191,6 @@ const CalculateRequired = (props: { cultivarName: String, tree: string }) => {
 					program.programId
 				);
 
-			console.log('w=jwjjwjwjwjwwwwiwiwwiwiwiwwww');
 			const tx = await program.methods
 				.calculateRequired()
 				.accounts({
@@ -221,7 +220,7 @@ const CalculateRequired = (props: { cultivarName: String, tree: string }) => {
 				.rpc();
 			console.log(`The transaction signature is ${tx.toString()}`);
 			alert('success ' + tx);
-			 setCalculated(true);
+			setCalculated(true);
 		}
 	};
 

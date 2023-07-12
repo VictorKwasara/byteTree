@@ -4,9 +4,11 @@
  left: 0px ;
  height: 101vh;
  width: 101vw ;
- background-image: radial-gradient(circle, #6b9a59, #7aa65c, #89b25f, #9abe62, #abca65);
- z-index: 1000000;
+ /* background-image: radial-gradient(circle, #6b9a59, #7aa65c, #89b25f, #9abe62, #abca65);
+ z-index: 1000000; */
+background-image: radial-gradient(circle, #f1f085, #d2d376, #b4b768, #989c5a, #7d814c);
  display: flex ;
  align-items: center;
  justify-content: center; 
+  z-index: 1000001;
 }

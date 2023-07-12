@@ -221,7 +221,11 @@ const BasalApplication = (props: { cultivarName: String, tree: string }) => {
 
 	const loaded = () => {
 		 setAdded(!added);
-		 router.refresh();
+		 setTimeout(()=> {
+			console.log("refreshing")
+			router.refresh();		
+		 }, 2000)
+		 
 	}
 
 	return amount[0] > new anchor.BN(0) &&

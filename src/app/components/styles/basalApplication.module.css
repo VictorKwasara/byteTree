@@ -4,7 +4,7 @@
  left: 0px ;
  height: 101vh;
  width: 101vw ;
- background-color: rgb(0, 0, 0);
+ background-image: radial-gradient(circle, #08110f 30%, #11221e,#11221e, #15332c, #18443a, #1b5749);
  z-index: 1000000;
  display: flex ;
  align-items: center;
