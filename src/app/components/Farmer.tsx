@@ -36,12 +36,6 @@ const farmProgram = new PublicKey(
 
 const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 
-	// const setSeeds = (amount: anchor.BN) => {
-	// 	console.log('Setting seeds amount');
-	// 	setAmount(amount);
-	//   console.log('The amount is now');
-	// };
-
 	return (
 		<Box className={styles.box}>
 			<div className={styles.content}>
@@ -51,7 +45,7 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 					</div>
 				</div>
 				<Card className={styles.card}>
-					<Grid container  className={styles.grid}>
+					<Grid container  className={styles.grid} m={1} p={2}>
 						<Grid item className={styles.item} mt={1}>
 							<Typography
 								variant='h4'
