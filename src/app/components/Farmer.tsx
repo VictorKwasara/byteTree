@@ -45,7 +45,7 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 					</div>
 				</div>
 				<Card className={styles.card}>
-					<Grid container  className={styles.grid} m={1} p={2}>
+					<Grid container  className={styles.grid}>
 						<Grid item className={styles.item} mt={1}>
 							<Typography
 								variant='h4'
