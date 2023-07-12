@@ -11,26 +11,28 @@
 }
 
 .cardArea {
-  width: 100% ;
+  width: 390px ;
+  height: 190px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 5px;
+  padding: 5px;
+    align-items: center;
 }
 
 .card {
   width: 400px;
-  min-height: 200px ;
+  height: 200px ;
   padding: 5px ;
   margin: 20px;
+  display: flex;
 }
 .header {
   margin-top: 10px;  
+  margin-bottom: 10px;
 }
 
 .body {
-  margin: auto ;
-  margin-top: 20px;
-  margin-bottom: 20px;
   width: 60%; 
   background-color: aqua; 
 }
