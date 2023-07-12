@@ -145,7 +145,6 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 
 				try {
 					await getAccounts();
-
 					if (nb.amount > new anchor.BN(0) &&
 					kb.amount > new anchor.BN(0) &&
 					pb.amount > new anchor.BN(0) &&
