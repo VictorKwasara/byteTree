@@ -31,7 +31,8 @@
   margin: auto ;
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 60%;  
+  width: 60%; 
+  background-color: aqua; 
 }
 
 .img {
