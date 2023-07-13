@@ -654,12 +654,7 @@ export type TreeProgram = {
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "waterTree",
@@ -2533,12 +2528,7 @@ export const IDL: TreeProgram = {
           "isSigner": false
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     },
     {
       "name": "waterTree",

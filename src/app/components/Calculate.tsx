@@ -185,13 +185,33 @@ const CalculateRequired = (props: { cultivarName: String, tree: string }) => {
 
 			// nutrient_mint_authority
 
-			let [nutrientMintAuthority] =
+			 let [nutrientMintAuthority] =
 				anchor.web3.PublicKey.findProgramAddressSync(
 					[Buffer.from('nutrientmintauthority')],
 					program.programId
+				);				
+		
+				let rn = await program.account.requiredNutrients.fetchNullable(
+					requiredNutrients
 				);
+				console.log(
+					'The rn Nitrogen ==> ',
+					rn?.percentAvailableNitrogen.toString()
+				);
+				console.log('The rn Nitrogen ==> ', rn?.nitrogen.toString());
+				console.log(
+					'The rn Phosphorus% ==> ',
+					rn?.percentAvailablePhosphorus.toString()
+				);
+				console.log('The rn Phosphorus ==> ', rn?.phosphorus.toString());
+				console.log(
+					'The rn Potassium % ==> ',
+					rn?.percentAvailablePotassium.toString()
+				);
+				console.log('The bloody energy is ==> ', rn?.energy);
+				console.log('The period is ==> ', rn?.period.toString());
 
-			const tx = await program.methods
+				const tx = await program.methods
 				.calculateRequired()
 				.accounts({
 					farm,
@@ -219,8 +239,34 @@ const CalculateRequired = (props: { cultivarName: String, tree: string }) => {
 				})
 				.rpc();
 			console.log(`The transaction signature is ${tx.toString()}`);
-			alert('success ' + tx);
+			alert('success ' + tx);			
+
 			setCalculated(true);
+
+			 setTimeout(()=> {
+					console.log('in the timeout');
+						(async () => {
+								let rn = await  program.account.requiredNutrients.fetchNullable(requiredNutrients);
+								console.log("The rn Nitrogen ==> ", rn?.percentAvailableNitrogen.toString());
+								console.log(
+									'The rn Nitrogen ==> ',
+									rn?.nitrogen.toString()
+								);
+								console.log(
+									'The rn Phosphorus% ==> ',
+									rn?.percentAvailablePhosphorus.toString()
+								);
+								console.log(
+									'The rn Phosphorus ==> ',
+									rn?.phosphorus.toString()
+								);
+								console.log(
+									'The rn Potassium % ==> ',
+									rn?.percentAvailablePotassium.toString()
+								);
+								console.log("The bloody energy is ==> ", rn?.energy);
+						})();						 
+			 }, 10000)
 		}
 	};
 

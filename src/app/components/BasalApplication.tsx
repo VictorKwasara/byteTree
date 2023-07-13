@@ -247,7 +247,7 @@ const BasalApplication = (props: { cultivarName: String, tree: string }) => {
 				<AddNutrients
 					cultivarName={props.cultivarName}
 					nutrient='addPotassium'
-					amount={new anchor.BN(50000)}
+					amount={new anchor.BN(5000000000)}
 					tree={props.tree}
 					setReload={loaded}
 				/>
@@ -265,7 +265,7 @@ const BasalApplication = (props: { cultivarName: String, tree: string }) => {
 				<AddNutrients
 					cultivarName={props.cultivarName}
 					nutrient='addNitrogen'
-					amount={new anchor.BN(50000)}
+					amount={new anchor.BN(5000000000)}
 					tree={props.tree}
 					setReload={loaded}
 				/>
@@ -283,7 +283,7 @@ const BasalApplication = (props: { cultivarName: String, tree: string }) => {
 				<AddNutrients
 					cultivarName={props.cultivarName}
 					nutrient='addPhosphorus'
-					amount={new anchor.BN(50000)}
+					amount={new anchor.BN(5000000000)}
 					tree={props.tree}
 					setReload={loaded}
 				/>
@@ -301,7 +301,7 @@ const BasalApplication = (props: { cultivarName: String, tree: string }) => {
 				<AddNutrients
 					cultivarName={props.cultivarName}
 					nutrient='waterTree'
-					amount={new anchor.BN(50000)}
+					amount={new anchor.BN(5000000000)}
 					tree={props.tree}
 					setReload={loaded}
 				/>

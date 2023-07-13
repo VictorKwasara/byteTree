@@ -51,7 +51,6 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 	let payer = program.provider;
 
 	useEffect(() => {
-		console.log('Are we in here getting? huh');
 		(async () => {
 			if (payer.publicKey && name != null) {
 				let [farm] = anchor.web3.PublicKey.findProgramAddressSync(
@@ -199,7 +198,7 @@ const programID = new PublicKey('8qxZgcFjdoJSwJYnvMMgR1ACyH24oFTBcaw8LSrAkiic');
 			 {newPlant ? (
 				<BasalApplication cultivarName={props.name} tree={props.tree} />
 			) : (
-				<> </>
+				<></>
 			)}
 		</>
 	);
