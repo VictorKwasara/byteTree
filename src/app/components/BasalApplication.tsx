@@ -200,21 +200,17 @@ const BasalApplication = (props: { cultivarName: String, tree: string }) => {
 						 let a = amount;
 							a[1] = pb.amount;
 							setAmount(a);
-				}
-				
+				}			
 				if (kb.amount > 0){
 							 let a = amount;
 								a[2] = kb.amount;
 								setAmount(a);
-				}
-
-				
+				}				
 				if (wt.amount > 0) {
 					 let a = amount ;
 					a[3] = wt.amount;
 					setAmount(a);
 				}
-
 			}
 		})();
 	}, [payer.publicKey, added]);

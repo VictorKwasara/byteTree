@@ -33,6 +33,7 @@ import InitializeTreeAccounts from '../components/InitializeTreeAccounts';
 type TreeType = {
 	authority: PublicKey;
 	cultivarName: String;
+	nftUri: String,
 	landNumber: anchor.BN;
 	height: anchor.BN;
 	girth: anchor.BN;
@@ -122,7 +123,7 @@ const TreeComponent = () => {
 						<Card className={styles.card}>
 							<CardMedia className={styles.cardMedia}>
 								<Image
-									src='/d.jpg'
+									src={tree.nftUri as string}
 									alt='A tree image'
 									width='400'
 									height='190'
